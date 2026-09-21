@@ -45,9 +45,9 @@ import { SEmpty } from '@kundancool/simple-ui'
 import { SNewsletter } from '@kundancool/simple-ui'
 
 const posts = [
-    { title: 'Channel sync in 60 seconds', excerpt: 'How inventory pushes stay consistent across every OTA.', author: 'Priya Nair', date: 'Aug 2026', readingTime: '6 min read', tag: 'Engineering' },
+    { title: 'Channel sync in 60 seconds', excerpt: 'How inventory stays in sync across every channel.', author: 'Priya Nair', date: 'Aug 2026', readingTime: '6 min read', tag: 'Engineering' },
     { title: 'Forms that line up', excerpt: 'One control height across inputs, selects and buttons.', author: 'Kundan', date: 'Aug 2026', readingTime: '3 min read', tag: 'Design' },
-    { title: 'GST e-invoices, explained', excerpt: 'What changes for properties this quarter.', author: 'Rahul Das', date: 'Jul 2026', readingTime: '5 min read', tag: 'Billing' },
+    { title: 'E-invoicing, explained', excerpt: 'What changes for finance teams this quarter.', author: 'Rahul Das', date: 'Jul 2026', readingTime: '5 min read', tag: 'Billing' },
     { title: 'Rating widgets that convert', excerpt: 'Why we ask after checkout, never during.', author: 'Kundan', date: 'Jul 2026', readingTime: '4 min read', tag: 'Design' },
     { title: 'Webhook retries done right', excerpt: 'Backoff, dead letters and the dashboard that shows both.', author: 'Priya Nair', date: 'Jun 2026', readingTime: '7 min read', tag: 'Engineering' },
 ]

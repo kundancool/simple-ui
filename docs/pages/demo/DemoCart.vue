@@ -17,7 +17,7 @@
                 <s-card title="Summary">
                     <div class="space-y-1.5 text-sm">
                         <p class="flex justify-between s-text-secondary"><span>Subtotal</span><span class="s-text-primary font-medium">₹{{ subtotal.toLocaleString('en-IN') }}</span></p>
-                        <p v-if="discount" class="flex justify-between s-text-success"><span>Coupon MONSOON10</span><span class="font-medium">−₹{{ discount.toLocaleString('en-IN') }}</span></p>
+                        <p v-if="discount" class="flex justify-between s-text-success"><span>Coupon SAVE10</span><span class="font-medium">−₹{{ discount.toLocaleString('en-IN') }}</span></p>
                         <p class="flex justify-between s-text-secondary"><span>Delivery</span><span class="s-text-success font-medium">Free</span></p>
                         <p class="flex justify-between s-text-secondary"><span>Tax (18%)</span><span class="s-text-primary font-medium">₹{{ tax.toLocaleString('en-IN') }}</span></p>
                     </div>
@@ -25,7 +25,7 @@
                         <span class="text-sm font-semibold s-text-primary">Total</span>
                         <span class="text-lg font-bold s-text-primary">₹{{ total.toLocaleString('en-IN') }}</span>
                     </div>
-                    <s-input v-model="coupon" placeholder="Coupon code (try MONSOON10)" inline class="mt-3" />
+                    <s-input v-model="coupon" placeholder="Coupon code (try SAVE10)" inline class="mt-3" />
                     <s-button class="w-full mt-2" variant="secondary" @click="applyCoupon">Apply coupon</s-button>
                     <s-button class="w-full mt-2" :disabled="!cart.length" @click="placed = true">Place order</s-button>
                     <s-alert v-if="placed" variant="success" title="Order placed" class="mt-3">Confirmation sent to your email.</s-alert>
@@ -48,9 +48,9 @@ import { SButton } from '@kundancool/simple-ui'
 import { SAlert } from '@kundancool/simple-ui'
 
 const cart = ref([
-    { id: 1, name: 'Deluxe room — 2 nights', price: 8400, qty: 1 },
-    { id: 2, name: 'Airport transfer', price: 1200, qty: 2 },
-    { id: 3, name: 'Spa voucher', price: 2500, qty: 1 },
+    { id: 1, name: 'Basic item — 2 days', price: 8400, qty: 1 },
+    { id: 2, name: 'Priority delivery', price: 1200, qty: 2 },
+    { id: 3, name: 'Extended warranty', price: 2500, qty: 1 },
 ])
 const coupon = ref('')
 const couponError = ref('')

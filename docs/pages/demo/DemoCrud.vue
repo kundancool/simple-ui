@@ -75,13 +75,13 @@ const { success } = useToast()
 const roles = [
     { value: 'Admin', label: 'Admin' },
     { value: 'Manager', label: 'Manager' },
-    { value: 'Front desk', label: 'Front desk' },
+    { value: 'Support', label: 'Support' },
 ]
 
 const members = ref([
     { id: 1, name: 'Kundan Kumar', email: 'kundan@acme.test', role: 'Admin', active: true },
     { id: 2, name: 'Priya Nair', email: 'priya@acme.test', role: 'Manager', active: true },
-    { id: 3, name: 'Rahul Das', email: 'rahul@acme.test', role: 'Front desk', active: false },
+    { id: 3, name: 'Rahul Das', email: 'rahul@acme.test', role: 'Support', active: false },
 ])
 
 const dialog = ref(false)
@@ -89,12 +89,12 @@ const editing = ref(null)
 const saving = ref(false)
 const confirmDelete = ref(false)
 const target = ref(null)
-const form = ref({ name: '', email: '', role: 'Front desk', active: true })
+const form = ref({ name: '', email: '', role: 'Support', active: true })
 const errors = ref({ name: '', email: '' })
 
 function openCreate() {
     editing.value = null
-    form.value = { name: '', email: '', role: 'Front desk', active: true }
+    form.value = { name: '', email: '', role: 'Support', active: true }
     errors.value = { name: '', email: '' }
     dialog.value = true
 }

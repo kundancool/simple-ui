@@ -28,5 +28,5 @@
             "description": "Panel content."
         }
     ],
-    "example": "<s-hover-popover>\n  <s-tag type=\"info\">12 guests</s-tag>\n  <template #content><p class=\"text-sm\">Adults: 8, children: 4</p></template>\n</s-hover-popover>"
+    "example": "<s-hover-popover>\n  <s-tag type=\"info\">12 items</s-tag>\n  <template #content><p class=\"text-sm\">Active: 8, pending: 4</p></template>\n</s-hover-popover>"
 }

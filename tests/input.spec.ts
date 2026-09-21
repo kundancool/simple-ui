@@ -74,7 +74,7 @@ describe('SInput events and attrs', () => {
     })
 
     it('uses the form item id so the label points at the control', () => {
-        const wrapper = mount(SFormItem, { props: { label: 'Guest' }, slots: { default: SInput } })
+        const wrapper = mount(SFormItem, { props: { label: 'Customer' }, slots: { default: SInput } })
         expect(wrapper.find('label').attributes('for')).toBe(wrapper.find('input').attributes('id'))
     })
 })

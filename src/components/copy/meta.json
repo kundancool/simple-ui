@@ -42,5 +42,5 @@
             "description": "Custom trigger (default: clipboard icon)."
         }
     ],
-    "example": "<s-copy :value=\"booking.guest_phone\" />"
+    "example": "<s-copy :value=\"order.customer_phone\" />"
 }

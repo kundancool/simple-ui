@@ -36,5 +36,5 @@
             "description": "Shown when labels are empty."
         }
     ],
-    "example": "<s-bar-chart :labels=\"otas\" :datasets=\"[{ label: 'Bookings', data: counts, backgroundColor: '#0c7076' }]\" />"
+    "example": "<s-bar-chart :labels=\"channels\" :datasets=\"[{ label: 'Orders', data: counts, backgroundColor: '#0c7076' }]\" />"
 }

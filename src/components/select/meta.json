@@ -94,5 +94,5 @@
         }
     ],
     "slots": [],
-    "example": "<s-select v-model=\"ota\" label=\"OTA\" :options=\"otas\" filterable clearable />"
+    "example": "<s-select v-model=\"channel\" label=\"Channel\" :options=\"channels\" filterable clearable />"
 }

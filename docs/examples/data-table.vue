@@ -1,7 +1,7 @@
 <template>
     <s-data-table :data="rows">
-        <s-data-table-column prop="no" label="Booking" width="110px" />
-        <s-data-table-column prop="guest" label="Guest" />
+        <s-data-table-column prop="no" label="Order" width="110px" />
+        <s-data-table-column prop="customer" label="Customer" />
         <s-data-table-column label="Status">
             <template #default="{ row }">
                 <s-tag :type="row.paid ? 'success' : 'warning'">{{ row.paid ? 'Paid' : 'Due' }}</s-tag>
@@ -18,7 +18,7 @@ import { SDataTableColumn } from '@kundancool/simple-ui'
 import { STag } from '@kundancool/simple-ui'
 
 const rows = ref([
-    { no: 'TMZ-001', guest: 'Aarav Sharma', paid: true, total: '₹4,200' },
-    { no: 'TMZ-002', guest: 'Diya Patel', paid: false, total: '₹2,800' },
+    { no: 'ORD-001', customer: 'Aarav Sharma', paid: true, total: '₹4,200' },
+    { no: 'ORD-002', customer: 'Diya Patel', paid: false, total: '₹2,800' },
 ])
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live file manager">
-            <s-page-header title="Files" subtitle="Property documents and guest uploads.">
+            <s-page-header title="Files" subtitle="Workspace documents and customer uploads.">
                 <s-button size="sm" variant="secondary" @click="notify('Upload dialog opening (demo).')">Upload</s-button>
             </s-page-header>
             <s-tabs v-model="view" :tabs="[{ key: 'grid', label: 'Grid' }, { key: 'list', label: 'List' }]" />
@@ -52,7 +52,7 @@ const view = ref('grid')
 const selected = ref('')
 const files = ref([
     { name: 'gst-certificate.pdf', size: '184 KB', modified: '2 days ago', icon: FileText, fg: 's-text-icon-blue' },
-    { name: 'pool-evening.jpg', size: '2.4 MB', modified: '5 days ago', icon: Image, fg: 's-text-icon-purple' },
+    { name: 'team-offsite.jpg', size: '2.4 MB', modified: '5 days ago', icon: Image, fg: 's-text-icon-purple' },
     { name: 'august-revenue.xlsx', size: '96 KB', modified: '1 week ago', icon: FileSpreadsheet, fg: 's-text-icon-green' },
     { name: 'backup-01.zip', size: '48 MB', modified: '2 weeks ago', icon: FileArchive, fg: 's-text-icon-yellow' },
 ])

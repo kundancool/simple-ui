@@ -18,5 +18,5 @@
         }
     ],
     "slots": [],
-    "example": "<s-toast-container />\n\nimport { useToast } from '@kundancool/simple-ui'\nconst { success, error } = useToast()\nsuccess('Booking confirmed')\n\n// anywhere, no setup needed:\nimport { toast } from '@kundancool/simple-ui'\ntoast.error('Payment failed')"
+    "example": "<s-toast-container />\n\nimport { useToast } from '@kundancool/simple-ui'\nconst { success, error } = useToast()\nsuccess('Order confirmed')\n\n// anywhere, no setup needed:\nimport { toast } from '@kundancool/simple-ui'\ntoast.error('Payment failed')"
 }

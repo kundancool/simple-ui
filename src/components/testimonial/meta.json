@@ -13,5 +13,5 @@
     ],
     "events": [],
     "slots": [],
-    "example": "<s-testimonial quote=\"Check-in took two minutes.\" name=\"Aarav Sharma\" role=\"Stayed in August\" :rating=\"5\" />"
+    "example": "<s-testimonial quote=\"Setup took two minutes.\" name=\"Aarav Sharma\" role=\"Customer since August\" :rating=\"5\" />"
 }

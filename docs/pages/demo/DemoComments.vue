@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live comments">
-            <s-card title="Guest notes · TMZ-101 (3)">
+            <s-card title="Customer notes · ORD-101 (3)">
                 <div class="space-y-4">
                     <div v-for="c in comments" :key="c.id" class="flex gap-2.5">
                         <s-avatar :name="c.name" size="sm" />
@@ -46,10 +46,10 @@ import { SAvatar } from '@kundancool/simple-ui'
 
 const now = Date.now()
 const comments = ref([
-    { id: 1, who: 'FD', name: 'Front desk', at: now - 1000 * 60 * 50, text: 'Guest asked for a quiet room away from the elevator.', likes: 2, replies: [
+    { id: 1, who: 'FD', name: 'Support', at: now - 1000 * 60 * 50, text: 'Customer asked for an update on their refund request.', likes: 2, replies: [
         { id: 11, who: 'MG', name: 'Manager', text: 'Moved to 204 — noted for next time.' },
     ] },
-    { id: 2, who: 'HK', name: 'Housekeeping', at: now - 1000 * 60 * 60 * 3, text: 'Extra towels placed as requested.', likes: 0, replies: [] },
+    { id: 2, who: 'HK', name: 'Operations', at: now - 1000 * 60 * 60 * 3, text: 'Extra towels placed as requested.', likes: 0, replies: [] },
 ])
 const draft = ref('')
 const reply = ref('')
@@ -59,7 +59,7 @@ function post() {
     if (!draft.value.trim()) {
         return
     }
-    comments.value.push({ id: Date.now(), who: 'FD', name: 'Front desk', at: Date.now(), text: draft.value.trim(), likes: 0, replies: [] })
+    comments.value.push({ id: Date.now(), who: 'FD', name: 'Support', at: Date.now(), text: draft.value.trim(), likes: 0, replies: [] })
     draft.value = ''
 }
 
@@ -71,7 +71,7 @@ function sendReply(c) {
     if (!reply.value.trim()) {
         return
     }
-    c.replies.push({ id: Date.now(), who: 'FD', name: 'Front desk', text: reply.value.trim() })
+    c.replies.push({ id: Date.now(), who: 'FD', name: 'Support', text: reply.value.trim() })
     reply.value = ''
     replyTo.value = null
 }

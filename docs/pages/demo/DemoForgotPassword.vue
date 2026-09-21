@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live password reset">
-            <s-auth-layout title="Acme Stays" subtitle="Reset your password">
+            <s-auth-layout title="Acme Inc" subtitle="Reset your password">
                 <s-card>
                     <s-steps v-model="step" :steps="[{ key: 'email', label: 'Email' }, { key: 'code', label: 'Code' }, { key: 'new', label: 'New password' }]" />
                     <div class="mt-4">

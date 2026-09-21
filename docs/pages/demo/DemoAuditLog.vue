@@ -37,7 +37,7 @@ import { SRelativeTime } from '@kundancool/simple-ui'
 
 const now = Date.now()
 const events = [
-    { sev: 'info', action: 'Priya updated rate plan “Monsoon”', actor: 'priya@acme.test', at: now - 1000 * 60 * 9 },
+    { sev: 'info', action: 'Priya updated pricing plan “Launch”', actor: 'priya@acme.test', at: now - 1000 * 60 * 9 },
     { sev: 'warning', action: '3 failed sign-in attempts for admin@acme.test', actor: 'system', at: now - 1000 * 60 * 41 },
     { sev: 'critical', action: 'API key “Legacy” used after revocation', actor: 'system', at: now - 1000 * 60 * 60 * 2 },
     { sev: 'info', action: 'Rahul exported July revenue report', actor: 'rahul@acme.test', at: now - 1000 * 60 * 60 * 5 },

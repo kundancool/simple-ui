@@ -39,5 +39,5 @@
             "description": "Extra filter controls beside the search box."
         }
     ],
-    "example": "<s-filter v-model=\"query\" placeholder=\"Search bookings...\" @search=\"fetchRows\">\n  <s-select v-model=\"status\" :options=\"statuses\" />\n  <s-date-picker v-model=\"from\" />\n</s-filter>"
+    "example": "<s-filter v-model=\"query\" placeholder=\"Search orders...\" @search=\"fetchRows\">\n  <s-select v-model=\"status\" :options=\"statuses\" />\n  <s-date-picker v-model=\"from\" />\n</s-filter>"
 }

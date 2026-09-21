@@ -37,7 +37,7 @@ const releases = [
     { version: '2.4.0', major: true, at: now - 1000 * 60 * 60 * 26, changes: ['Two-up range calendar across every date picker', 'Spotlight palette (⌘K) in the docs shell'] },
     { version: '2.3.1', major: false, at: now - 1000 * 60 * 60 * 24 * 4, changes: ['Fixed pagination resetting on filter change', 'Faster toast stacking on mobile'] },
     { version: '2.3.0', major: true, at: now - 1000 * 60 * 60 * 24 * 11, changes: ['Roles & permissions matrix', 'API key rotation with one click'] },
-    { version: '2.2.4', major: false, at: now - 1000 * 60 * 60 * 24 * 18, changes: ['Corrected GST rounding on split payments'] },
+    { version: '2.2.4', major: false, at: now - 1000 * 60 * 60 * 24 * 18, changes: ['Corrected tax rounding on split payments'] },
 ]
 const channel = ref('all')
 const visible = computed(() => {

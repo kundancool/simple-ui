@@ -87,5 +87,5 @@
             "description": "Footer action bar."
         }
     ],
-    "example": "<s-dialog v-model=\"open\" title=\"New booking\" width=\"lg\">\n  <s-input v-model=\"name\" label=\"Guest name\" />\n  <template #footer>\n    <s-button variant=\"secondary\" @click=\"open = false\">Cancel</s-button>\n    <s-button @click=\"save\">Save</s-button>\n  </template>\n</s-dialog>"
+    "example": "<s-dialog v-model=\"open\" title=\"New order\" width=\"lg\">\n  <s-input v-model=\"name\" label=\"Customer name\" />\n  <template #footer>\n    <s-button variant=\"secondary\" @click=\"open = false\">Cancel</s-button>\n    <s-button @click=\"save\">Save</s-button>\n  </template>\n</s-dialog>"
 }

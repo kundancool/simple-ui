@@ -31,13 +31,13 @@ import { SToastContainer } from '@kundancool/simple-ui'
 import { useToast } from '@kundancool/simple-ui'
 
 const { info } = useToast()
-const roles = ['Admin', 'Manager', 'Front desk']
+const roles = ['Admin', 'Manager', 'Support']
 const matrix = ref([
-    { ability: 'View bookings', Admin: true, Manager: true, 'Front desk': true },
-    { ability: 'Create bookings', Admin: true, Manager: true, 'Front desk': true },
-    { ability: 'Refund payments', Admin: true, Manager: true, 'Front desk': false },
-    { ability: 'Manage rates', Admin: true, Manager: false, 'Front desk': false },
-    { ability: 'Manage team', Admin: true, Manager: false, 'Front desk': false },
+    { ability: 'View orders', Admin: true, Manager: true, 'Support': true },
+    { ability: 'Create orders', Admin: true, Manager: true, 'Support': true },
+    { ability: 'Refund payments', Admin: true, Manager: true, 'Support': false },
+    { ability: 'Manage rates', Admin: true, Manager: false, 'Support': false },
+    { ability: 'Manage team', Admin: true, Manager: false, 'Support': false },
 ])
 
 function flip(row, role) {

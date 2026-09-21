@@ -51,5 +51,5 @@
             "description": "Extra action buttons beside add/refresh."
         }
     ],
-    "example": "<s-page-header title=\"Bookings\" subtitle=\"Today's arrivals\" add-text=\"New booking\" refreshable @add=\"openCreate\" @refresh=\"reload\" />"
+    "example": "<s-page-header title=\"Orders\" subtitle=\"Today's activity\" add-text=\"New order\" refreshable @add=\"openCreate\" @refresh=\"reload\" />"
 }

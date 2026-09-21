@@ -19,7 +19,7 @@
                     <s-button size="sm" variant="secondary" class="mt-3" @click="notify('Card form opening (demo).')">Update card</s-button>
                 </s-card>
                 <s-card title="Usage">
-                    <p class="text-lg font-bold s-text-primary">7 <span class="text-xs font-medium s-text-muted">/ 10 properties</span></p>
+                    <p class="text-lg font-bold s-text-primary">7 <span class="text-xs font-medium s-text-muted">/ 10 workspaces</span></p>
                     <s-progress :value="70" class="mt-2" />
                     <p class="text-xs s-text-muted mt-2">3 slots left on Growth</p>
                 </s-card>

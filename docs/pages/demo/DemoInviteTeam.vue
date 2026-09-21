@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live team invite">
-            <s-auth-layout title="Acme Stays" subtitle="You've been invited to join">
+            <s-auth-layout title="Acme Inc" subtitle="You've been invited to join">
                 <s-card>
                     <div class="flex items-center gap-3">
                         <s-avatar name="Priya K" tone="purple" size="lg" />

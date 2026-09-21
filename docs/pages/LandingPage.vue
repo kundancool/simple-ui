@@ -61,29 +61,29 @@
                             <span class="w-2.5 h-2.5 rounded-full s-demo-dot-y" />
                             <span class="w-2.5 h-2.5 rounded-full s-demo-dot-g" />
                         </span>
-                        <span class="flex-1 mx-4 hidden sm:block text-center font-mono text-[11px] s-text-muted truncate">app.acme.test/bookings</span>
+                        <span class="flex-1 mx-4 hidden sm:block text-center font-mono text-[11px] s-text-muted truncate">app.acme.test/orders</span>
                         <span class="w-10" aria-hidden="true" />
                     </div>
                     <div class="p-3 md:p-5 s-bg-app">
                         <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
                             <div>
-                                <p class="text-base md:text-lg font-semibold s-text-primary">Bookings</p>
+                                <p class="text-base md:text-lg font-semibold s-text-primary">Orders</p>
                                 <p class="text-xs s-text-muted">Today at a glance</p>
                             </div>
                             <div class="flex gap-2">
-                                <s-button size="sm">+ New booking</s-button>
+                                <s-button size="sm">+ New order</s-button>
                                 <s-button size="sm" variant="secondary">Export</s-button>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
                             <s-stat-card :icon="Wallet" bg-color="s-bg-icon-green" icon-color="s-text-icon-green" value="₹48,210" label="Revenue" />
-                            <s-stat-card :icon="CalendarCheck" bg-color="s-bg-icon-blue" icon-color="s-text-icon-blue" value="128" label="Check-ins" />
+                            <s-stat-card :icon="CalendarCheck" bg-color="s-bg-icon-blue" icon-color="s-text-icon-blue" value="128" label="New orders" />
                             <s-stat-card :icon="Hourglass" bg-color="s-bg-icon-yellow" icon-color="s-text-icon-yellow" value="23" label="Pending" />
                             <s-stat-card :icon="Star" bg-color="s-bg-icon-purple" icon-color="s-text-icon-purple" value="4.8" label="Rating" />
                         </div>
                         <s-data-table :data="shotRows" :stripe="false" size="small" class="mt-2.5">
-                            <s-data-table-column prop="no" label="Booking" width="100px" />
-                            <s-data-table-column prop="guest" label="Guest" />
+                            <s-data-table-column prop="no" label="Order" width="100px" />
+                            <s-data-table-column prop="customer" label="Customer" />
                             <s-data-table-column label="Status" width="130px">
                                 <template #default="{ row }"><s-tag :type="row.status === 'CONFIRMED' ? 'success' : 'warning'" size="sm">{{ row.status }}</s-tag></template>
                             </s-data-table-column>
@@ -141,15 +141,15 @@
                 </div>
                 <div class="md:order-1 rounded-xl border s-border-theme s-bg-surface p-4">
                     <div class="flex items-center gap-2">
-                        <s-input v-model="demoName" placeholder="Guest name" inline class="flex-1" />
+                        <s-input v-model="demoName" placeholder="Customer name" inline class="flex-1" />
                         <s-button>Save</s-button>
                     </div>
                     <div class="flex items-center gap-2 mt-2.5">
-                        <s-select v-model="demoOta" :options="demoOtas" inline class="flex-1" />
+                        <s-select v-model="demoChannel" :options="demoChannels" inline class="flex-1" />
                         <s-date-picker v-model="demoDay" class="flex-1" />
                     </div>
                     <s-data-table :data="shotRows.slice(0, 2)" :stripe="false" size="small" class="mt-2.5">
-                        <s-data-table-column prop="guest" label="Guest" />
+                        <s-data-table-column prop="customer" label="Customer" />
                         <s-data-table-column prop="total" label="Total" align="right" width="90px" />
                     </s-data-table>
                 </div>
@@ -169,7 +169,7 @@
                         <p class="font-mono text-[11px] s-text-muted">agent — 2 prompts</p>
                     </div>
                     <div class="p-4 font-mono text-xs leading-relaxed">
-                        <p><span class="s-text-success">❯</span> <span class="s-text-primary">dashboard with bookings table + KPIs</span></p>
+                        <p><span class="s-text-success">❯</span> <span class="s-text-primary">dashboard with orders table + KPIs</span></p>
                         <p class="s-text-muted mt-1">✓ scaffold · ✓ s-data-table · ✓ s-stat-card</p>
                         <p class="mt-2"><span class="s-text-success">❯</span> <span class="s-text-primary">add revenue chart + dark toggle</span></p>
                         <p class="s-text-muted mt-1">✓ s-line-chart · ✓ useDark()</p>
@@ -219,7 +219,7 @@ const props = defineProps({ registry: { type: Object, default: () => ({}) } })
 
 const copied = ref(false)
 const demoName = ref('')
-const demoOta = ref('')
+const demoChannel = ref('')
 const demoDay = ref('')
 const version = computed(() => props.registry.version ?? '0.1.0')
 const installCmd = computed(() => `npm install ${props.registry.package ?? '@kundancool/simple-ui'}`)
@@ -253,15 +253,15 @@ onMounted(() => {
 })
 
 const shotRows = [
-    { no: 'TMZ-101', guest: 'Aarav Sharma', status: 'CONFIRMED', total: '₹4,200' },
-    { no: 'TMZ-102', guest: 'Diya Patel', status: 'PENDING', total: '₹2,800' },
-    { no: 'TMZ-103', guest: 'Kabir Singh', status: 'CONFIRMED', total: '₹6,100' },
+    { no: 'ORD-101', customer: 'Aarav Sharma', status: 'CONFIRMED', total: '₹4,200' },
+    { no: 'ORD-102', customer: 'Diya Patel', status: 'PENDING', total: '₹2,800' },
+    { no: 'ORD-103', customer: 'Kabir Singh', status: 'CONFIRMED', total: '₹6,100' },
 ]
 
-const demoOtas = [
+const demoChannels = [
     { id: '', name: 'All channels' },
     { id: 'direct', name: 'Direct' },
-    { id: 'mmt', name: 'MakeMyTrip' },
+    { id: 'marketplace', name: 'Marketplace' },
 ]
 
 const footerCols = [

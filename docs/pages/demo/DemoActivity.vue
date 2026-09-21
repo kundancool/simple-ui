@@ -31,16 +31,16 @@ import { SAlert } from '@kundancool/simple-ui'
 
 const now = Date.now()
 const events = ref([
-    { id: 1, kind: 'Booking', tone: 'success', text: 'TMZ-104 confirmed for Meera Iyer', actor: 'Direct', at: now - 1000 * 60 * 4 },
-    { id: 2, kind: 'Payment', tone: 'success', text: '₹6,100 received via virtual card', actor: 'MakeMyTrip', at: now - 1000 * 60 * 26 },
-    { id: 3, kind: 'Alert', tone: 'warning', text: 'Room 204 overbooked for tonight', actor: 'System', at: now - 1000 * 60 * 58 },
-    { id: 4, kind: 'User', tone: 'info', text: 'Priya Nair updated rate plan “Monsoon”', actor: 'Priya Nair', at: now - 1000 * 60 * 60 * 3 },
-    { id: 5, kind: 'Sync', tone: 'danger', text: 'Goibibo sync failed — retrying', actor: 'System', at: now - 1000 * 60 * 60 * 7 },
-    { id: 6, kind: 'Review', tone: 'info', text: 'New 5★ review from Kabir Singh', actor: 'Booking.com', at: now - 1000 * 60 * 60 * 26 },
+    { id: 1, kind: 'Order', tone: 'success', text: 'ORD-104 confirmed for Meera Iyer', actor: 'Direct', at: now - 1000 * 60 * 4 },
+    { id: 2, kind: 'Payment', tone: 'success', text: '₹6,100 received via virtual card', actor: 'Marketplace', at: now - 1000 * 60 * 26 },
+    { id: 3, kind: 'Alert', tone: 'warning', text: 'Item 204 conflicting for tonight', actor: 'System', at: now - 1000 * 60 * 58 },
+    { id: 4, kind: 'User', tone: 'info', text: 'Priya Nair updated pricing plan “Launch”', actor: 'Priya Nair', at: now - 1000 * 60 * 60 * 3 },
+    { id: 5, kind: 'Sync', tone: 'danger', text: 'Reseller sync failed — retrying', actor: 'System', at: now - 1000 * 60 * 60 * 7 },
+    { id: 6, kind: 'Review', tone: 'info', text: 'New 5★ review from Kabir Singh', actor: 'Partner', at: now - 1000 * 60 * 60 * 26 },
 ])
 
 const kinds = [
-    { value: 'Booking', label: 'Bookings' },
+    { value: 'Order', label: 'Orders' },
     { value: 'Payment', label: 'Payments' },
     { value: 'Alert', label: 'Alerts' },
     { value: 'User', label: 'Users' },

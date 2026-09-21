@@ -56,5 +56,5 @@
             "description": "Footer bar."
         }
     ],
-    "example": "<s-card title=\"Bookings\" :loading=\"loading\">\n  <s-data-table :data=\"rows\">…</s-data-table>\n</s-card>"
+    "example": "<s-card title=\"Orders\" :loading=\"loading\">\n  <s-data-table :data=\"rows\">…</s-data-table>\n</s-card>"
 }

@@ -1,7 +1,7 @@
 <template>
     <s-footer
-        brand-name="Acme Stays"
-        tagline="Stays, minus the chaos."
+        brand-name="Acme Inc"
+        tagline="Periods, minus the chaos."
         :columns="[
             { heading: 'Docs', links: [{ label: 'Install' }, { label: 'Components' }] },
             { heading: 'Demo', links: [{ label: 'Dashboard' }, { label: 'Pricing' }] },

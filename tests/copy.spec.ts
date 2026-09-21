@@ -16,7 +16,7 @@ describe('SCopy', () => {
         Object.defineProperty(window, 'isSecureContext', { value: true, configurable: true })
         vi.useFakeTimers()
 
-        const wrapper = mount(SCopy, { props: { value: 'TMZ-1' }, attachTo: document.body })
+        const wrapper = mount(SCopy, { props: { value: 'ORD-1' }, attachTo: document.body })
         await wrapper.find('button').trigger('click')
         await wrapper.vm.$nextTick()
         expect(wrapper.text()).toContain('Copied')

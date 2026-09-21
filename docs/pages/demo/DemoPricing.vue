@@ -3,7 +3,7 @@
         <DemoStage title="Live pricing page">
         <div class="text-center max-w-xl mx-auto">
             <h1 class="text-2xl md:text-3xl font-bold s-text-primary tracking-tight">Simple pricing, no surprises</h1>
-            <p class="text-sm s-text-muted mt-2">Start free. Upgrade when your properties grow.</p>
+            <p class="text-sm s-text-muted mt-2">Start free. Upgrade when your workspaces grow.</p>
             <div class="mt-4">
                 <s-segmented v-model="billing" :options="[{ label: 'Monthly', value: 'Monthly' }, { label: 'Yearly', value: 'Yearly' }]" aria-label="Billing cycle" />
             </div>
@@ -53,9 +53,9 @@ const { success } = useToast()
 const billing = ref('Monthly')
 
 const plans = [
-    { name: 'Starter', monthly: 0, yearly: 0, blurb: 'For a single property finding its feet.', features: ['1 property', '50 bookings / month', 'Email support'], footnote: 'Free forever' },
-    { name: 'Growth', monthly: 1499, yearly: 1249, blurb: 'For growing portfolios that live in reports.', features: ['Up to 10 properties', 'Unlimited bookings', 'Channel manager sync', 'Priority support'], footnote: 'Cancel anytime', popular: true },
-    { name: 'Scale', monthly: 4999, yearly: 4169, blurb: 'For chains with custom needs.', features: ['Unlimited properties', 'API access', 'Dedicated manager', 'SLA + onboarding'], footnote: 'Annual billing available' },
+    { name: 'Starter', monthly: 0, yearly: 0, blurb: 'For a single workspace finding its feet.', features: ['1 workspace', '50 orders / month', 'Email support'], footnote: 'Free forever' },
+    { name: 'Growth', monthly: 1499, yearly: 1249, blurb: 'For growing portfolios that live in reports.', features: ['Up to 10 workspaces', 'Unlimited orders', 'Channel manager sync', 'Priority support'], footnote: 'Cancel anytime', popular: true },
+    { name: 'Scale', monthly: 4999, yearly: 4169, blurb: 'For chains with custom needs.', features: ['Unlimited workspaces', 'API access', 'Dedicated manager', 'SLA + onboarding'], footnote: 'Annual billing available' },
 ]
 
 function price(plan) {

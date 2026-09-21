@@ -10,7 +10,7 @@ import { STabs } from '@kundancool/simple-ui'
 const tab = ref('overview')
 const tabs = [
     { key: 'overview', label: 'Overview' },
-    { key: 'bookings', label: 'Bookings', count: 12 },
+    { key: 'orders', label: 'Orders', count: 12 },
     { key: 'reports', label: 'Reports' },
 ]
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DemoStage title="Live guest survey">
+        <DemoStage title="Live customer survey">
             <div class="max-w-xl mx-auto">
                 <s-progress :value="progress" size="sm" />
                 <p class="text-xs s-text-muted mt-1 mb-3">Question {{ index + 1 }} of {{ questions.length }}</p>
@@ -12,7 +12,7 @@
                         <s-button v-if="current.kind !== 'scale'" size="sm" @click="answer(text)">Continue</s-button>
                     </div>
                 </s-card>
-                <s-alert v-if="finished" variant="success" title="Thanks!" class="mt-3">Your feedback helps every stay get better.</s-alert>
+                <s-alert v-if="finished" variant="success" title="Thanks!" class="mt-3">Your feedback helps us get better.</s-alert>
             </div>
         </DemoStage>
         <DemoSource file="DemoSurvey.vue" />
@@ -31,7 +31,7 @@ import { SButton } from '@kundancool/simple-ui'
 import { SAlert } from '@kundancool/simple-ui'
 
 const questions = [
-    { id: 'clean', q: 'How clean was your room?', kind: 'scale' },
+    { id: 'service', q: 'How satisfied are you with the service?', kind: 'scale' },
     { id: 'staff', q: 'How helpful was the staff?', kind: 'scale' },
     { id: 'note', q: 'Anything we should know?', kind: 'text' },
 ]

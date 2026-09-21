@@ -1,5 +1,5 @@
 <template>
-    <s-empty title="No bookings yet" description="New reservations will appear here as guests book." />
+    <s-empty title="No orders yet" description="New orders will appear here as they come in." />
     <s-empty title="All caught up" description="Nothing needs your attention right now." />
 </template>
 

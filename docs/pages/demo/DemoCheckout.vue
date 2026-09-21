@@ -17,10 +17,10 @@
                     </div>
                 </s-card>
                 <s-card title="Order">
-                    <p class="flex justify-between text-sm s-text-secondary"><span>2 nights + extras</span><span class="s-text-primary font-medium">₹14,278</span></p>
+                    <p class="flex justify-between text-sm s-text-secondary"><span>2 days + extras</span><span class="s-text-primary font-medium">₹14,278</span></p>
                     <p class="flex justify-between text-sm font-bold s-text-primary mt-2 pt-2 border-t s-border-theme"><span>Due today</span><span>₹14,278</span></p>
                     <s-button class="w-full mt-3" :loading="paying" @click="pay">Pay ₹14,278</s-button>
-                    <s-alert v-if="done" variant="success" title="Payment successful" class="mt-3">Booking TMZ-105 is confirmed.</s-alert>
+                    <s-alert v-if="done" variant="success" title="Payment successful" class="mt-3">Order ORD-105 is confirmed.</s-alert>
                 </s-card>
             </div>
         </DemoStage>

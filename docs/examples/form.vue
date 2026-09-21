@@ -1,12 +1,12 @@
 <template>
     <s-form ref="formRef" label-position="left" label-width="150px" :disabled="saving" @submit="save">
-        <s-form-item label="Guest name" required :error="errors.name">
+        <s-form-item label="Customer name" required :error="errors.name">
             <s-input v-model="values.name" placeholder="Full name" autocomplete="name" />
         </s-form-item>
         <s-form-item label="Email" required :error="errors.email">
             <s-input v-model="values.email" type="email" placeholder="you@example.test" autocomplete="email" />
         </s-form-item>
-        <s-form-item label="Notes" helper="Visible to the front desk only.">
+        <s-form-item label="Notes" helper="Visible to the support only.">
             <s-input v-model="values.notes" type="textarea" :rows="2" />
         </s-form-item>
         <div class="flex gap-2">

@@ -13,5 +13,5 @@
     ],
     "events": [],
     "slots": [],
-    "example": "<s-relative-time :value=\"booking.created_at\" />"
+    "example": "<s-relative-time :value=\"order.created_at\" />"
 }

@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+- **New components (65 → 69):** `SOption`, `SRadio`, `SRadioGroup`, `SUpload`.
+- **`SSelect` rewritten** around `<s-option>` children (array options still work):
+  `empty-text`, `clear` / `visible-change` emits, size inheritance, and correct
+  coercion of bare boolean attributes such as `<s-option disabled />`.
+- **`SInput` extensions:** `input` / `change` / `blur` / `focus` / `clear` /
+  `toggle-visibility` events, attribute forwarding to the real control,
+  `size`, `clearable`, `readonly`, word-limit counter and prefix/suffix slots.
+- **Domain-neutral copy.** Every example, demo, `meta.json` entry and MCP
+  scaffold now uses general-purpose vocabulary (orders, customers, items,
+  workspaces) instead of hospitality/PMS terms (rooms, guests, bookings,
+  nights, OTAs). Added `tests/vocabulary.spec.ts` so that vocabulary cannot
+  regress.
+
 ## 0.1.1
 
 Fixes two defects that made the published 0.1.0 unusable for most consumers.
@@ -26,4 +41,4 @@ Fixes two defects that made the published 0.1.0 unusable for most consumers.
   landing/blog kit, charts).
 - Theme engine: `--s-*` tokens, light/dark palettes, `setTheme`/`useDark` helpers.
 - Per-component ESM imports, subpath exports, `SimpleUIResolver` for on-demand loading.
-- Docs SPA, generated component registry, `llms.txt`, MCP server (`@kundancool/simple-ui-mcp`).
+- Docs SERVICES, generated component registry, `llms.txt`, MCP server (`@kundancool/simple-ui-mcp`).

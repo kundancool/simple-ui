@@ -82,5 +82,5 @@
         }
     ],
     "slots": [],
-    "example": "<s-multi-select v-model=\"otaIds\" label=\"OTAs\" :options=\"otas\" />"
+    "example": "<s-multi-select v-model=\"otaIds\" label=\"Channels\" :options=\"channels\" />"
 }

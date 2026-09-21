@@ -1,11 +1,11 @@
 <template>
     <div>
         <DemoStage title="Live sign-in form" max-height="80vh">
-        <s-auth-layout title="Acme Stays" subtitle="Property admin console">
+        <s-auth-layout title="Acme Inc" subtitle="Workspace admin console">
             <s-card>
                 <s-tabs v-model="mode" :tabs="[{ key: 'login', label: 'Sign in' }, { key: 'register', label: 'Register' }]" />
                 <div class="mt-4">
-                    <s-input v-model="name" label="Property name" placeholder="Seaside Villa" v-if="mode === 'register'" />
+                    <s-input v-model="name" label="Workspace name" placeholder="Acme Inc" v-if="mode === 'register'" />
                     <s-input v-model="email" label="Email" placeholder="you@acme.test" :error="emailError" />
                     <s-input v-model="password" label="Password" type="password" placeholder="••••••••" :error="passwordError" hint="Minimum 8 characters." />
                     <s-checkbox v-model="remember" label="Keep me signed in" v-if="mode === 'login'" />

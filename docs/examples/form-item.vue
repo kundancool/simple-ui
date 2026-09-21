@@ -1,5 +1,5 @@
 <template>
-    <s-form-item label="Guest name" required :error="error">
+    <s-form-item label="Customer name" required :error="error">
         <s-input v-model="name" />
     </s-form-item>
     <s-form-item label="Confirmation" success success-message="Address verified">

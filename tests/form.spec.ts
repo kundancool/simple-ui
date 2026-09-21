@@ -13,7 +13,7 @@ function mountForm(props = {}, error = '') {
             props: ['formProps', 'error'],
             template: `
                 <SForm v-bind="formProps" @submit="$emit('submitted')">
-                    <SFormItem label="Guest name" required :error="error">
+                    <SFormItem label="Customer name" required :error="error">
                         <SInput v-model="name" />
                     </SFormItem>
                     <SFormItem label="Notes" success success-message="Saved">

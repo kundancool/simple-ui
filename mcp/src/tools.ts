@@ -34,7 +34,7 @@ async function fetchRows() {
   loading.value = true
   try {
     const params = new URLSearchParams({ page: String(page.value), q: query.value, tab: tab.value })
-    const res = await fetch('/api/bookings?' + params)
+    const res = await fetch('/api/orders?' + params)
     const json = await res.json()
     rows.value = json.data ?? []
     total.value = json.total ?? 0
@@ -48,16 +48,16 @@ onMounted(fetchRows)
 <\/script>
 
 <template>
-  <s-page-header title="Bookings" subtitle="Today at a glance" add-text="New booking" refreshable :loading="loading" @refresh="fetchRows" />
+  <s-page-header title="Orders" subtitle="Today at a glance" add-text="New order" refreshable :loading="loading" @refresh="fetchRows" />
   <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
     <s-stat-card v-for="kpi in kpis" :key="kpi.label" v-bind="kpi" />
   </div>
   <s-tabs v-model="tab" :tabs="tabs" />
   <s-card>
-    <s-filter v-model="query" placeholder="Search bookings..." @search="fetchRows" />
+    <s-filter v-model="query" placeholder="Search orders..." @search="fetchRows" />
     <s-data-table :data="rows" :loading="loading">
-      <s-data-table-column prop="booking_no" label="Booking" />
-      <s-data-table-column prop="guest_name" label="Guest" />
+      <s-data-table-column prop="order_no" label="Order" />
+      <s-data-table-column prop="customer_name" label="Customer" />
       <s-data-table-column label="Status">
         <template #default="{ row }">
           <s-tag :type="row.status === 'CONFIRMED' ? 'success' : 'warning'">{{ row.status }}</s-tag>

@@ -76,5 +76,5 @@
             "description": "Custom empty state."
         }
     ],
-    "example": "<s-data-table :data=\"bookings\" :loading=\"loading\">\n  <s-data-table-column prop=\"booking_no\" label=\"Booking\" />\n  <s-data-table-column label=\"Status\">\n    <template #default=\"{ row }\"><s-tag :type=\"row.status === 'CONFIRMED' ? 'success' : 'warning'\">{{ row.status }}</s-tag></template>\n  </s-data-table-column>\n</s-data-table>"
+    "example": "<s-data-table :data=\"orders\" :loading=\"loading\">\n  <s-data-table-column prop=\"order_no\" label=\"Order\" />\n  <s-data-table-column label=\"Status\">\n    <template #default=\"{ row }\"><s-tag :type=\"row.status === 'CONFIRMED' ? 'success' : 'warning'\">{{ row.status }}</s-tag></template>\n  </s-data-table-column>\n</s-data-table>"
 }

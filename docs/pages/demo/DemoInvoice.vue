@@ -13,7 +13,7 @@
                     class="mt-4"
                     :items="[
                         { label: 'Billed to', value: 'Aarav Sharma · aarav@example.test' },
-                        { label: 'From', value: 'Acme Stays · billing@acme.test' },
+                        { label: 'From', value: 'Acme Inc · billing@acme.test' },
                     ]"
                 />
                 <s-data-table :data="lines" :stripe="false" size="small" class="mt-4">
@@ -59,9 +59,9 @@ import { useToast } from '@kundancool/simple-ui'
 const { info } = useToast()
 const paid = ref(false)
 const lines = [
-    { desc: 'Deluxe room × 2 nights', qty: 1, amount: '₹8,400' },
-    { desc: 'Airport transfer × 2', qty: 2, amount: '₹2,400' },
-    { desc: 'Spa voucher', qty: 1, amount: '₹1,300' },
+    { desc: 'Basic item × 2 days', qty: 1, amount: '₹8,400' },
+    { desc: 'Priority delivery × 2', qty: 2, amount: '₹2,400' },
+    { desc: 'Extended warranty', qty: 1, amount: '₹1,300' },
 ]
 
 function notify(message) {

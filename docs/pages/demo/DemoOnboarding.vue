@@ -3,7 +3,7 @@
         <DemoStage title="Live onboarding checklist">
             <div class="max-w-xl mx-auto">
                 <div class="text-center">
-                    <h1 class="text-xl font-bold s-text-primary">Get Acme Stays live</h1>
+                    <h1 class="text-xl font-bold s-text-primary">Get Acme Inc live</h1>
                     <p class="text-sm s-text-muted mt-1">{{ doneCount }} of {{ steps.length }} complete</p>
                     <s-progress :value="(doneCount / steps.length) * 100" tone="success" class="mt-3" />
                 </div>
@@ -27,7 +27,7 @@
                         </span>
                     </button>
                 </div>
-                <s-alert v-if="doneCount === steps.length" variant="success" title="You're live!" class="mt-4">Bookings can now flow into Acme Stays.</s-alert>
+                <s-alert v-if="doneCount === steps.length" variant="success" title="You're live!" class="mt-4">Orders can now flow into Acme Inc.</s-alert>
             </div>
         </DemoStage>
         <DemoSource file="DemoOnboarding.vue" />
@@ -43,10 +43,10 @@ import { SAlert } from '@kundancool/simple-ui'
 import { SProgress } from '@kundancool/simple-ui'
 
 const steps = ref([
-    { n: 1, title: 'Add your first property', hint: 'Name, address and 3 photos minimum.', done: true },
-    { n: 2, title: 'Create room types', hint: 'Deluxe, Suite… with nightly rates.', done: true },
-    { n: 3, title: 'Connect a channel', hint: 'MMT, Booking.com or Goibibo.', done: false },
-    { n: 4, title: 'Invite your team', hint: 'Front desk gets in free.', done: false },
+    { n: 1, title: 'Add your first workspace', hint: 'Name, address and 3 photos minimum.', done: true },
+    { n: 2, title: 'Create categories', hint: 'Basic, Premium… with daily rates.', done: true },
+    { n: 3, title: 'Connect a channel', hint: 'Marketplace, Partner or Reseller.', done: false },
+    { n: 4, title: 'Invite your team', hint: 'Support gets in free.', done: false },
 ])
 const doneCount = computed(() => steps.value.filter((s) => s.done).length)
 </script>

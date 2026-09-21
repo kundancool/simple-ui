@@ -82,5 +82,5 @@
         }
     ],
     "slots": [],
-    "example": "<s-number-input v-model=\"adults\" label=\"Adults\" :min=\"1\" :max=\"6\" />"
+    "example": "<s-number-input v-model=\"quantity\" label=\"Quantity\" :min=\"1\" :max=\"6\" />"
 }

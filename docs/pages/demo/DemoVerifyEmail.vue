@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live email verification">
-            <s-auth-layout title="Acme Stays" subtitle="Verify your email to continue">
+            <s-auth-layout title="Acme Inc" subtitle="Verify your email to continue">
                 <s-card>
                     <div class="text-center">
                         <span class="inline-flex w-12 h-12 rounded-full s-bg-accent-subtle items-center justify-center"><MailCheck class="w-6 h-6 s-text-accent" /></span>

@@ -16,7 +16,7 @@ import { ref } from 'vue'
 import { LayoutDashboard, CalendarCheck, Wallet, Settings } from 'lucide-vue-next'
 import { SSidebarMenu } from '@kundancool/simple-ui'
 
-const active = ref('/bookings')
+const active = ref('/orders')
 const items = [
     { name: 'dash', label: 'Dashboard', to: '/dashboard', icon: LayoutDashboard },
     {
@@ -24,7 +24,7 @@ const items = [
         label: 'Sales',
         icon: Wallet,
         children: [
-            { name: 'bookings', label: 'Bookings', to: '/bookings', icon: CalendarCheck },
+            { name: 'orders', label: 'Orders', to: '/orders', icon: CalendarCheck },
             { name: 'settings', label: 'Settings', to: '/settings', icon: Settings },
         ],
     },

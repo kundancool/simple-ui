@@ -29,7 +29,7 @@
                 <s-card :title="active.subject" class="lg:col-span-2">
                     <div class="space-y-3">
                         <div v-for="m in active.messages" :key="m.id" class="flex gap-2" :class="m.mine ? 'flex-row-reverse' : ''">
-                            <s-avatar :name="m.mine ? 'Front Desk' : active.from" size="xs" />
+                            <s-avatar :name="m.mine ? 'Support' : active.from" size="xs" />
                             <div class="max-w-[75%] px-3 py-2 rounded-xl text-sm" :class="m.mine ? 's-bg-accent s-text-on-accent' : 's-bg-surface-raised s-text-primary'">{{ m.text }}</div>
                         </div>
                     </div>
@@ -56,12 +56,12 @@ import { SButton } from '@kundancool/simple-ui'
 import { SAvatar } from '@kundancool/simple-ui'
 
 const threads = ref([
-    { id: 1, from: 'Aarav Sharma', subject: 'Late checkout request', preview: 'Could we stay till 2pm on Sunday?', unread: true, messages: [
-        { id: 1, who: 'AS', text: 'Hi! Could we stay till 2pm on Sunday?', mine: false },
+    { id: 1, from: 'Aarav Sharma', subject: 'Late checkout request', preview: 'Could we check out at 2pm on Sunday?', unread: true, messages: [
+        { id: 1, who: 'AS', text: 'Hi! Could we check out at 2pm on Sunday?', mine: false },
         { id: 2, who: 'FD', text: 'Of course — late checkout is on us.', mine: true },
     ] },
-    { id: 2, from: 'Diya Patel', subject: 'Invoice for TMZ-102', preview: 'Please share the GST invoice.', unread: false, messages: [
-        { id: 1, who: 'DP', text: 'Please share the GST invoice for our stay.', mine: false },
+    { id: 2, from: 'Diya Patel', subject: 'Invoice for ORD-102', preview: 'Please share the tax invoice.', unread: false, messages: [
+        { id: 1, who: 'DP', text: 'Please share the tax invoice for our order.', mine: false },
     ] },
     { id: 3, from: 'Kabir Singh', subject: 'Airport pickup', preview: 'Flight lands at 11:40pm…', unread: true, messages: [
         { id: 1, who: 'KS', text: 'Flight lands at 11:40pm — will pickup be there?', mine: false },

@@ -66,9 +66,9 @@ describe('scrutiny fixes', () => {
 
     it('SDataTable renders a caption for screen readers', () => {
         const wrapper = mount(SDataTable, {
-            props: { data: [{ a: 'x' }], caption: 'Bookings' },
+            props: { data: [{ a: 'x' }], caption: 'Orders' },
         })
-        expect(wrapper.find('caption').text()).toBe('Bookings')
+        expect(wrapper.find('caption').text()).toBe('Orders')
     })
 
     it('SCheckbox shows errors and inline drops margin', () => {

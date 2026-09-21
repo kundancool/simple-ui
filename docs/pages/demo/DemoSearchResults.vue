@@ -2,7 +2,7 @@
     <div>
         <DemoStage title="Live site search">
             <div class="max-w-2xl mx-auto">
-                <s-filter v-model="query" placeholder="Search bookings, guests, invoices…" @search="noop" />
+                <s-filter v-model="query" placeholder="Search orders, customers, invoices…" @search="noop" />
                 <p class="text-xs s-text-muted mb-2">{{ results.length }} result{{ results.length === 1 ? '' : 's' }}{{ query ? ` for “${query}”` : '' }}</p>
                 <div class="space-y-2">
                     <button
@@ -19,7 +19,7 @@
                         <span class="block text-xs s-text-muted mt-1 truncate">{{ r.snippet }}</span>
                     </button>
                 </div>
-                <s-empty v-if="!results.length" title="No matches" description="Try “invoice”, “spa” or “204”." />
+                <s-empty v-if="!results.length" title="No matches" description="Try “invoice”, “services” or “204”." />
             </div>
         </DemoStage>
         <DemoSource file="DemoSearchResults.vue" />
@@ -39,11 +39,11 @@ import { useToast } from '@kundancool/simple-ui'
 
 const { info } = useToast()
 const index = [
-    { id: 1, kind: 'Booking', tone: 'success', title: 'TMZ-101 · Aarav Sharma', snippet: 'Deluxe room · 12–14 Sep · ₹4,200' },
+    { id: 1, kind: 'Order', tone: 'success', title: 'ORD-101 · Aarav Sharma', snippet: 'Basic item · 12–14 Sep · ₹4,200' },
     { id: 2, kind: 'Invoice', tone: 'warning', title: 'INV-2026-0841 · ₹14,278 unpaid', snippet: 'Due 26 Sep · Aarav Sharma' },
-    { id: 3, kind: 'Room', tone: 'info', title: 'Room 204 · Deluxe', snippet: 'Occupied till Sunday · late checkout approved' },
-    { id: 4, kind: 'Service', tone: 'info', title: 'Spa voucher · ₹2,500', snippet: 'Wellness add-on · 40 in stock' },
-    { id: 5, kind: 'Booking', tone: 'danger', title: 'TMZ-099 · Cancelled', snippet: 'Refunded ₹3,100 to virtual card' },
+    { id: 3, kind: 'Item', tone: 'info', title: 'SKU-204 · Basic', snippet: 'Back in stock Sunday · late delivery approved' },
+    { id: 4, kind: 'Service', tone: 'info', title: 'Extended warranty · ₹2,500', snippet: 'Service add-on · 40 in stock' },
+    { id: 5, kind: 'Order', tone: 'danger', title: 'ORD-099 · Cancelled', snippet: 'Refunded ₹3,100 to virtual card' },
 ]
 const query = ref('')
 

@@ -38,7 +38,7 @@ import { useToast } from '@kundancool/simple-ui'
 
 const { success } = useToast()
 const hooks = ref([
-    { id: 1, url: 'https://acme.test/hooks/bookings', events: ['booking.created', 'booking.cancelled'], on: true, failing: false, history: [1, 1, 1, 1, 1, 1, 1, 1] },
+    { id: 1, url: 'https://acme.test/hooks/orders', events: ['order.created', 'order.cancelled'], on: true, failing: false, history: [1, 1, 1, 1, 1, 1, 1, 1] },
     { id: 2, url: 'https://acme.test/hooks/payments', events: ['payment.received'], on: true, failing: true, fails: 3, history: [1, 1, 0, 1, 0, 1, 0, 1] },
 ])
 

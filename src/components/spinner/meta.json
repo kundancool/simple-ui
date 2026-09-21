@@ -9,5 +9,5 @@
     ],
     "events": [],
     "slots": [],
-    "example": "<s-spinner />\n<s-spinner size=\"lg\" label=\"Loading bookings\" />"
+    "example": "<s-spinner />\n<s-spinner size=\"lg\" label=\"Loading orders\" />"
 }

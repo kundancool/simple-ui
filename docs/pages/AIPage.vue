@@ -93,7 +93,7 @@ const capabilities = [
     { tool: 'scaffold_dashboard', does: 'Complete dashboard starter wired to a fetch function.' },
 ]
 
-const prompt1 = `Using @kundancool/simple-ui, scaffold a bookings dashboard page: page header with add + refresh, 4 stat cards, tabs (All/Confirmed/Pending), a filter row, a data table with a status tag column, and pagination wired to fetchRows().`
+const prompt1 = `Using @kundancool/simple-ui, scaffold a orders dashboard page: page header with add + refresh, 4 stat cards, tabs (All/Confirmed/Pending), a filter row, a data table with a status tag column, and pagination wired to fetchRows().`
 const prompt2 = `Add a revenue line chart above the table and a dark-mode toggle in the header using useDark().`
 </script>
 

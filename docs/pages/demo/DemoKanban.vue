@@ -1,7 +1,7 @@
 <template>
     <div>
-        <DemoStage title="Live housekeeping board">
-            <s-page-header title="Housekeeping" subtitle="Tap a card to move it across the board." />
+        <DemoStage title="Live support board">
+            <s-page-header title="Support board" subtitle="Tap a card to move it across the board." />
             <div class="grid sm:grid-cols-3 gap-3">
                 <s-card v-for="col in columns" :key="col.title" :title="`${col.title} (${col.tasks.length})`">
                     <div class="space-y-2 min-h-[120px]">
@@ -13,7 +13,7 @@
                             @click="advance(col, task)"
                         >
                             <span class="flex items-center gap-2">
-                                <s-tag :type="task.tone" size="sm">{{ task.room }}</s-tag>
+                                <s-tag :type="task.tone" size="sm">{{ task.item }}</s-tag>
                                 <span class="text-xs s-text-muted ml-auto">{{ task.time }}</span>
                             </span>
                             <span class="block text-sm s-text-primary mt-1">{{ task.title }}</span>
@@ -36,15 +36,15 @@ import { SCard } from '@kundancool/simple-ui'
 import { STag } from '@kundancool/simple-ui'
 
 const columns = ref([
-    { title: 'To clean', tasks: [
-        { id: 1, room: '204', tone: 'warning', time: '11:00', title: 'Checkout clean + linen change' },
-        { id: 2, room: '207', tone: 'info', time: '12:30', title: 'Deep clean after long stay' },
+    { title: 'To do', tasks: [
+        { id: 1, item: 'SD-204', tone: 'warning', time: '11:00', title: 'Refund for duplicate charge' },
+        { id: 2, item: 'SD-207', tone: 'info', time: '12:30', title: 'Reset account password' },
     ] },
     { title: 'In progress', tasks: [
-        { id: 3, room: '101', tone: 'info', time: '10:15', title: 'Bathroom regrout touch-up' },
+        { id: 3, item: 'SD-101', tone: 'info', time: '10:15', title: 'Update shipping address' },
     ] },
     { title: 'Done', tasks: [
-        { id: 4, room: '305', tone: 'success', time: '09:00', title: 'Turndown + minibar restock' },
+        { id: 4, item: 'SD-305', tone: 'success', time: '09:00', title: 'Replace damaged item' },
     ] },
 ])
 

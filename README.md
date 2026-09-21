@@ -2,10 +2,10 @@
 
 Lightweight Vue 3 component library for dashboards and admin apps.
 
-- 61 components: form, data display, feedback, navigation, layout, landing/blog kit, charts
+- 69 components: form, data display, feedback, navigation, layout, landing/blog kit, charts
 - Theme engine: `--s-*` tokens, light/dark palettes (persisted), runtime overrides
 - Per-component ESM + CSS, subpath exports, `SimpleUIResolver` for on-demand loading
-- 41 demo pages, docs SPA with live demos, generated registry, `llms.txt`, MCP server for AI agents
+- 41 demo pages, docs SERVICES with live demos, generated registry, `llms.txt`, MCP server for AI agents
 
 ## Install
 
@@ -22,9 +22,9 @@ app.use(SimpleUI) // <s-button>, <s-input>, …
 ```
 
 ```vue
-<s-page-header title="Bookings" add-text="New booking" refreshable @refresh="fetchRows" />
+<s-page-header title="Orders" add-text="New order" refreshable @refresh="fetchRows" />
 <s-data-table :data="rows" :loading="loading">
-  <s-data-table-column prop="booking_no" label="Booking" />
+  <s-data-table-column prop="order_no" label="Order" />
   <s-data-table-column label="Status">
     <template #default="{ row }">
       <s-tag :type="row.status === 'CONFIRMED' ? 'success' : 'warning'">{{ row.status }}</s-tag>

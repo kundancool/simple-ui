@@ -61,5 +61,5 @@
             "description": "Custom sidebar footer."
         }
     ],
-    "example": "<s-layout v-model:sidebar-open=\"sidebarOpen\">\n  <template #menu><s-sidebar-menu :items=\"nav\" :active-path=\"route.path\" @navigate=\"go\" /></template>\n  <template #header-right><s-button size=\"sm\">New booking</s-button></template>\n  <router-view />\n</s-layout>"
+    "example": "<s-layout v-model:sidebar-open=\"sidebarOpen\">\n  <template #menu><s-sidebar-menu :items=\"nav\" :active-path=\"route.path\" @navigate=\"go\" /></template>\n  <template #header-right><s-button size=\"sm\">New order</s-button></template>\n  <router-view />\n</s-layout>"
 }

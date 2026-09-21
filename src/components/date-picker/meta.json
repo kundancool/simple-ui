@@ -100,5 +100,5 @@
         }
     ],
     "slots": [],
-    "example": "<s-date-picker v-model=\"from\" label=\"From\" />\n<s-date-picker v-model=\"stay\" range label=\"Stay dates\" />"
+    "example": "<s-date-picker v-model=\"from\" label=\"From\" />\n<s-date-picker v-model=\"period\" range label=\"Date range\" />"
 }

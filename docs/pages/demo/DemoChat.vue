@@ -42,7 +42,7 @@ function clock() {
 }
 
 const messages = ref([
-    { id: 1, text: 'Hi! My keycard stopped working — room 204.', mine: false, time: clock() },
+    { id: 1, text: 'Hi! My keycard stopped working — item 204.', mine: false, time: clock() },
     { id: 2, text: 'Sorry about that! A new card is waiting at reception for you.', mine: true, time: clock() },
 ])
 const draft = ref('')

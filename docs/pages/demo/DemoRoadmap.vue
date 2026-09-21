@@ -41,11 +41,11 @@ import { SProgress } from '@kundancool/simple-ui'
 const columns = ref([
     { title: 'Now', bar: 's-bg-success', tone: 'success', items: [
         { title: 'UPI AutoPay', votes: 214, voted: false, progress: 80, eta: 'Sep 2026' },
-        { title: 'GST e-invoices', votes: 167, voted: true, progress: 65, eta: 'Oct 2026' },
+        { title: 'Tax e-invoices', votes: 167, voted: true, progress: 65, eta: 'Oct 2026' },
     ] },
     { title: 'Next', bar: 's-bg-warning', tone: 'warning', items: [
-        { title: 'Multi-property calendar', votes: 189, voted: false, progress: 30, eta: 'Q4 2026' },
-        { title: 'WhatsApp concierge', votes: 142, voted: false, progress: 15, eta: 'Q4 2026' },
+        { title: 'Multi-workspace calendar', votes: 189, voted: false, progress: 30, eta: 'Q4 2026' },
+        { title: 'WhatsApp support', votes: 142, voted: false, progress: 15, eta: 'Q4 2026' },
     ] },
     { title: 'Later', bar: 's-bg-icon-blue-solid', tone: 'info', items: [
         { title: 'Revenue forecasting', votes: 98, voted: false, progress: 5, eta: '2027' },

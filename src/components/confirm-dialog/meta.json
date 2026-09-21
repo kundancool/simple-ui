@@ -67,5 +67,5 @@
             "description": "Extra body content under the message."
         }
     ],
-    "example": "<s-confirm-dialog v-model=\"show\" title=\"Delete booking\" message=\"This cannot be undone.\" confirm-text=\"Delete\" @confirm=\"removeBooking\" />"
+    "example": "<s-confirm-dialog v-model=\"show\" title=\"Delete order\" message=\"This cannot be undone.\" confirm-text=\"Delete\" @confirm=\"removeOrder\" />"
 }

@@ -4,7 +4,7 @@
         <s-spinner size="sm" />
         <s-spinner />
         <s-spinner size="lg" />
-        <s-spinner size="lg" label="Loading bookings" />
+        <s-spinner size="lg" label="Loading orders" />
     </div>
 </template>
 

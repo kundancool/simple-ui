@@ -63,7 +63,7 @@
 
         <h3 class="text-sm font-semibold s-text-primary mt-6 mb-2">Spacing</h3>
         <DemoCard :code="spacingCode" title="Spacing.vue">
-            <s-input v-model="demo" label="Guest name" hint="Label 6px above, hint 4px below, 16px before the next field." />
+            <s-input v-model="demo" label="Customer name" hint="Label 6px above, hint 4px below, 16px before the next field." />
             <s-input v-model="demo2" label="Phone" error="Enter a valid phone number." />
         </DemoCard>
 
@@ -128,7 +128,7 @@
         <DemoCard :code="statesCode" title="States.vue">
             <div class="grid sm:grid-cols-3 gap-3">
                 <div><p class="text-xs font-medium s-text-secondary mb-1">Loading</p><s-skeleton :lines="2" /></div>
-                <div><p class="text-xs font-medium s-text-secondary mb-1">Empty</p><s-data-table :data="[]" empty-text="No bookings yet" /></div>
+                <div><p class="text-xs font-medium s-text-secondary mb-1">Empty</p><s-data-table :data="[]" empty-text="No orders yet" /></div>
                 <div><p class="text-xs font-medium s-text-secondary mb-1">Error</p><s-input v-model="demo4" label="Email" error="Enter a valid email." /></div>
             </div>
         </DemoCard>
@@ -166,7 +166,7 @@ const cssCode = `:root {\n  --s-accent: #7c3aed; /* everything accent-derived fo
 const scopedCode = `import { setTheme } from '${name.value}'\n\nsetTheme({ accent: '#0e7490' }, document.querySelector('#widget'))`
 const darkCode = `import { useDark } from '${name.value}'\n\nconst { toggle, init } = useDark()\ninit() // respect prefers-color-scheme\ntoggle()`
 
-const spacingCode = `<s-input v-model="name" label="Guest name" hint="…" />\n<s-input v-model="phone" label="Phone" error="…" />`
+const spacingCode = `<s-input v-model="name" label="Customer name" hint="…" />\n<s-input v-model="phone" label="Phone" error="…" />`
 const typeCode = `<h1 class="text-lg sm:text-xl font-semibold s-text-primary">Page title</h1>\n<p class="text-sm s-text-secondary">Subtitle.</p>\n<p class="text-xs font-medium uppercase tracking-wider s-text-muted">Eyebrow</p>`
 const radiusCode = `rounded → rounded-md → rounded-lg → rounded-xl → rounded-2xl → rounded-full\ncontrols   cards/popovers  dialogs   pills`
 const elevationCode = `s-shadow-xs-theme · s-shadow-sm-theme · s-shadow-md-theme · s-shadow-lg-theme\noverlays: dropdown 100 · dialog 200 · toast 300`

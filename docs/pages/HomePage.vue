@@ -92,7 +92,7 @@
             <div class="flex flex-col gap-3">
                 <div class="flex items-center gap-2">
                     <div class="flex-1 min-w-0">
-                        <s-input v-model="text" placeholder="Guest name — type here…" inline />
+                        <s-input v-model="text" placeholder="Customer name — type here…" inline />
                     </div>
                     <s-button>Save</s-button>
                     <s-button variant="secondary">Cancel</s-button>
@@ -193,7 +193,7 @@ function blurb(cat) {
 const name = computed(() => props.registry.package ?? '@kundancool/simple-ui')
 const installCmd = computed(() => `npm install ${name.value}`)
 const setupCode = computed(() => `import SimpleUI from '${name.value}'\nimport '${name.value}/dist/simple-ui.css'\n\nconst app = createApp(App)\napp.use(SimpleUI)`)
-const usageCode = computed(() => `<s-input v-model="name" label="Guest name" />\n<s-button @click="save">Save</s-button>`)
+const usageCode = computed(() => `<s-input v-model="name" label="Customer name" />\n<s-button @click="save">Save</s-button>`)
 const singleCode = computed(() => `import { SButton } from '${name.value}'\nimport '${name.value}/dist/simple-ui.css'\n\napp.component('SButton', SButton)`)
 const resolverCode = computed(() => `import Components from 'unplugin-vue-components/vite'\nimport { SimpleUIResolver } from '${name.value}/resolver'\n\nexport default {\n  plugins: [Components({ resolvers: [SimpleUIResolver()] })],\n}`)
 const prefixCode = computed(() => `app.use(SimpleUI, { prefix: 'Tmk' })\n// <tmk-button>, <tmk-input>, …`)
@@ -219,7 +219,7 @@ const toc = [
 
 const quickCode = `<div class="flex flex-col gap-3">
   <div class="flex items-center gap-2">
-    <s-input v-model="text" placeholder="Guest name" />
+    <s-input v-model="text" placeholder="Customer name" />
     <s-button>Save</s-button>
     <s-button variant="secondary">Cancel</s-button>
   </div>

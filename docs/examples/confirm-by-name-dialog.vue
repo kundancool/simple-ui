@@ -1,6 +1,6 @@
 <template>
-    <s-button size="sm" variant="danger" @click="show = true">Disable property</s-button>
-    <s-confirm-by-name-dialog v-model="show" title="Disable property" message="New bookings will be blocked immediately." expected="Seaside Villa" label="property" confirm-text="Disable property" @confirm="done" />
+    <s-button size="sm" variant="danger" @click="show = true">Disable workspace</s-button>
+    <s-confirm-by-name-dialog v-model="show" title="Disable workspace" message="New orders will be blocked immediately." expected="Acme Inc" label="workspace" confirm-text="Disable workspace" @confirm="done" />
     <p v-if="message" class="text-sm s-text-success mt-2">{{ message }}</p>
 </template>
 
@@ -14,6 +14,6 @@ const message = ref('')
 
 function done() {
     show.value = false
-    message.value = 'Property disabled.'
+    message.value = 'Workspace disabled.'
 }
 </script>

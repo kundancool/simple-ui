@@ -4,7 +4,7 @@
         <s-tag type="success">Confirmed</s-tag>
         <s-tag type="warning">Pending</s-tag>
         <s-tag type="danger">Cancelled</s-tag>
-        <s-tag type="info">OTA</s-tag>
+        <s-tag type="info">Channel</s-tag>
     </div>
     <div class="flex flex-wrap items-center gap-2 mt-2">
         <s-tag type="success" variant="solid">Paid</s-tag>

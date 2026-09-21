@@ -1,41 +1,41 @@
 <template>
     <div>
-        <DemoStage title="Live booking wizard">
-            <s-steps v-model="step" :steps="[{ key: 'stay', label: 'Stay' }, { key: 'room', label: 'Room' }, { key: 'guest', label: 'Guest' }, { key: 'done', label: 'Done' }]">
-                <template #stay>
+        <DemoStage title="Live order wizard">
+            <s-steps v-model="step" :steps="[{ key: 'schedule', label: 'Schedule' }, { key: 'product', label: 'Product' }, { key: 'customer', label: 'Customer' }, { key: 'done', label: 'Done' }]">
+                <template #schedule>
                     <div class="grid sm:grid-cols-2 gap-x-4 mt-4">
-                        <s-date-range-picker v-model="stay" label="Stay dates" />
-                        <s-number-input v-model="guests" label="Guests" :min="1" :max="6" />
+                        <s-date-range-picker v-model="schedule" label="Date range" />
+                        <s-number-input v-model="quantity" label="Quantity" :min="1" :max="6" />
                     </div>
                 </template>
-                <template #room>
+                <template #product>
                     <div class="grid sm:grid-cols-3 gap-2 mt-4">
                         <button
-                            v-for="r in rooms"
-                            :key="r.name"
+                            v-for="p in products"
+                            :key="p.name"
                             type="button"
                             class="s-focus-ring border rounded-xl p-3 text-left transition-colors"
-                            :class="room === r.name ? 's-border-accent s-bg-accent-subtle' : 's-border-theme s-bg-surface'"
-                            @click="room = r.name"
+                            :class="product === p.name ? 's-border-accent s-bg-accent-subtle' : 's-border-theme s-bg-surface'"
+                            @click="product = p.name"
                         >
-                            <p class="text-sm font-semibold s-text-primary">{{ r.name }}</p>
-                            <p class="text-xs s-text-muted">₹{{ r.price.toLocaleString('en-IN') }} / night</p>
+                            <p class="text-sm font-semibold s-text-primary">{{ p.name }}</p>
+                            <p class="text-xs s-text-muted">₹{{ p.price.toLocaleString('en-IN') }} / day</p>
                         </button>
                     </div>
                 </template>
-                <template #guest>
+                <template #customer>
                     <div class="grid sm:grid-cols-2 gap-x-4 mt-4">
-                        <s-input v-model="name" label="Guest name" :error="nameError" />
+                        <s-input v-model="name" label="Customer name" :error="nameError" />
                         <s-input v-model="phone" label="Phone" placeholder="+91…" />
                     </div>
                 </template>
                 <template #done>
-                    <s-alert variant="success" title="Booking confirmed" class="mt-4">{{ name || 'Guest' }} · {{ room }} · {{ stay.join(' → ') || 'dates TBD' }} · {{ guests }} guest(s).</s-alert>
+                    <s-alert variant="success" title="Order confirmed" class="mt-4">{{ name || 'Customer' }} · {{ product }} · {{ schedule.join(' → ') || 'dates TBD' }} · {{ quantity }} item(s).</s-alert>
                 </template>
             </s-steps>
             <div class="flex justify-between mt-4">
                 <s-button variant="secondary" :disabled="atFirst || atDone" @click="move(-1)">Back</s-button>
-                <s-button v-if="!atDone" @click="move(1)">{{ atLast ? 'Confirm booking' : 'Continue' }}</s-button>
+                <s-button v-if="!atDone" @click="move(1)">{{ atLast ? 'Confirm order' : 'Continue' }}</s-button>
             </div>
         </DemoStage>
         <DemoSource file="DemoWizard.vue" />
@@ -53,32 +53,32 @@ import { SInput } from '@kundancool/simple-ui'
 import { SButton } from '@kundancool/simple-ui'
 import { SAlert } from '@kundancool/simple-ui'
 
-const order = ['stay', 'room', 'guest', 'done']
-const step = ref('stay')
-const stay = ref([])
-const guests = ref(2)
-const room = ref('Deluxe')
+const steps = ['schedule', 'product', 'customer', 'done']
+const step = ref('schedule')
+const schedule = ref([])
+const quantity = ref(2)
+const product = ref('Basic')
 const name = ref('')
 const phone = ref('')
 const nameError = ref('')
 
-const rooms = [
-    { name: 'Standard', price: 2200 },
-    { name: 'Deluxe', price: 4200 },
-    { name: 'Suite', price: 7800 },
+const products = [
+    { name: 'Basic', price: 2200 },
+    { name: 'Standard', price: 4200 },
+    { name: 'Premium', price: 7800 },
 ]
-const atFirst = computed(() => step.value === 'stay')
-const atLast = computed(() => step.value === 'guest')
+const atFirst = computed(() => step.value === 'schedule')
+const atLast = computed(() => step.value === 'customer')
 const atDone = computed(() => step.value === 'done')
 
 function move(delta) {
-    if (delta > 0 && step.value === 'guest') {
-        nameError.value = name.value.trim() ? '' : 'Guest name is required.'
+    if (delta > 0 && step.value === 'customer') {
+        nameError.value = name.value.trim() ? '' : 'Customer name is required.'
         if (nameError.value) {
             return
         }
     }
-    const i = order.indexOf(step.value) + delta
-    step.value = order[Math.max(0, Math.min(order.length - 1, i))]
+    const i = steps.indexOf(step.value) + delta
+    step.value = steps[Math.max(0, Math.min(steps.length - 1, i))]
 }
 </script>

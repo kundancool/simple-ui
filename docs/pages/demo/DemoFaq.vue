@@ -20,10 +20,10 @@ import { SFilter } from '@kundancool/simple-ui'
 import { SAccordion } from '@kundancool/simple-ui'
 
 const faqs = [
-    { q: 'How do refunds work?', a: 'Full refunds up to 48 hours before check-in, automatic to the original payment method within 5–7 days.' },
-    { q: 'Can I change dates after booking?', a: 'Yes — modify dates from the booking detail page. Fare differences apply.' },
-    { q: 'Do you support GST invoices?', a: 'Every paid invoice includes GST details. Add your GSTIN under Settings → Billing.' },
-    { q: 'How does channel sync work?', a: 'Inventory pushes to all connected OTAs within 60 seconds of any change.' },
+    { q: 'How do refunds work?', a: 'Full refunds up to 48 hours before the start date, automatic to the original payment method within 5–7 days.' },
+    { q: 'Can I change dates after order?', a: 'Yes — modify dates from the order detail page. Fare differences apply.' },
+    { q: 'Do you support tax invoices?', a: 'Every paid invoice includes tax details. Add your tax ID under Settings → Billing.' },
+    { q: 'How does channel sync work?', a: 'Inventory pushes to all connected Channels within 60 seconds of any change.' },
 ]
 const query = ref('')
 const openKey = ref(null)

@@ -1,6 +1,6 @@
 <template>
     <div class="border s-border-theme rounded-xl overflow-hidden">
-        <s-auth-layout title="Acme Stays" subtitle="Sign in to continue">
+        <s-auth-layout title="Acme Inc" subtitle="Sign in to continue">
             <s-card>
                 <s-input v-model="email" label="Email" placeholder="you@acme.test" />
                 <s-input v-model="password" label="Password" type="password" placeholder="••••••••" />

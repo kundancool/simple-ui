@@ -10,7 +10,7 @@ import { SButton } from '@kundancool/simple-ui'
 
 const open = ref(false)
 const photos = [
-    { src: 'https://picsum.photos/seed/stay1/1200/800', alt: 'Pool at dusk', caption: 'Infinity pool' },
-    { src: 'https://picsum.photos/seed/stay2/1200/800', alt: 'Deluxe room', caption: 'Deluxe room' },
+    { src: 'https://picsum.photos/seed/preview1/1200/800', alt: 'Reception at dusk', caption: 'Reception' },
+    { src: 'https://picsum.photos/seed/preview2/1200/800', alt: 'Meeting room', caption: 'Meeting room' },
 ]
 </script>

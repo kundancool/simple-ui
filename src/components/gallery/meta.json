@@ -11,5 +11,5 @@
     ],
     "events": [],
     "slots": [],
-    "example": "<s-gallery :images=\"[{ src: '/pool.jpg', alt: 'Pool at dusk', caption: 'Infinity pool' }]\" />"
+    "example": "<s-gallery :images=\"[{ src: '/workspace.jpg', alt: 'Workspace at dusk', caption: 'Workspace' }]\" />"
 }

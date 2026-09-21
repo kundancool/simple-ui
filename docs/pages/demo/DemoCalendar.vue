@@ -55,10 +55,10 @@ const selected = ref([])
 const selectedLabel = ref('')
 
 const diary = {
-    '2026-09-03': ['3 check-ins', 'Deep clean 207'],
+    '2026-09-03': ['3 new orders', 'Design review'],
     '2026-09-07': ['Rate review'],
-    '2026-09-12': ['5 check-ins', 'VIP arrival', 'Plumbing check'],
-    '2026-09-18': ['OTA sync audit'],
+    '2026-09-12': ['5 new orders', 'Client visit', 'Maintenance check'],
+    '2026-09-18': ['Channel sync audit'],
     '2026-09-25': ['Festival block release'],
 }
 

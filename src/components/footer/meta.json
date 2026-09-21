@@ -18,5 +18,5 @@
         { "name": "social", "description": "Social buttons row." },
         { "name": "legal", "description": "Extra legal-bar content." }
     ],
-    "example": "<s-footer brand-name=\"Acme\" tagline=\"Stays, minus the chaos.\" :columns=\"[{ heading: 'Docs', links: [{ label: 'Install' }] }]\" bottom-note=\"© 2026 Acme · MIT\" />"
+    "example": "<s-footer brand-name=\"Acme\" tagline=\"Dashboards, minus the chaos.\" :columns=\"[{ heading: 'Docs', links: [{ label: 'Install' }] }]\" bottom-note=\"© 2026 Acme · MIT\" />"
 }

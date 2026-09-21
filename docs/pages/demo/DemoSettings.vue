@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live settings page">
-        <s-page-header title="Settings" subtitle="Workspace preferences for Acme Stays." />
+        <s-page-header title="Settings" subtitle="Workspace preferences for Acme Inc." />
         <s-tabs v-model="tab" :tabs="[{ key: 'profile', label: 'Profile' }, { key: 'prefs', label: 'Preferences' }, { key: 'danger', label: 'Danger zone' }]" />
         <div class="mt-4">
             <s-card v-if="tab === 'profile'" title="Profile">
@@ -21,11 +21,11 @@
                 </div>
             </s-card>
             <s-card v-if="tab === 'danger'" title="Danger zone">
-                <s-alert variant="danger" title="Delete workspace">Removes every property, booking and report. This cannot be undone.</s-alert>
+                <s-alert variant="danger" title="Delete workspace">Removes every workspace, order and report. This cannot be undone.</s-alert>
                 <s-button variant="danger" class="mt-3" @click="confirm = true">Delete workspace…</s-button>
             </s-card>
         </div>
-        <s-confirm-by-name-dialog v-model="confirm" title="Delete workspace" message="All data for Acme Stays will be permanently removed." expected="Acme Stays" label="workspace" confirm-text="Delete everything" @confirm="gone = true" />
+        <s-confirm-by-name-dialog v-model="confirm" title="Delete workspace" message="All data for Acme Inc will be permanently removed." expected="Acme Inc" label="workspace" confirm-text="Delete everything" @confirm="gone = true" />
         <s-alert v-if="gone" variant="danger" title="Workspace deleted" class="mt-3">Just kidding — demos never delete anything.</s-alert>
         </DemoStage>
         <DemoSource file="DemoSettings.vue" />
@@ -65,8 +65,8 @@ const zones = [
     { value: 'EST', label: 'EST (UTC−5)' },
 ]
 const prefs = ref([
-    { key: 'digest', label: 'Daily digest', hint: 'Occupancy summary every morning.', on: true },
-    { key: 'alerts', label: 'Overbooking alerts', hint: 'Instant notification on conflicts.', on: true },
+    { key: 'digest', label: 'Daily digest', hint: 'Utilization summary every morning.', on: true },
+    { key: 'alerts', label: 'Conflicts alerts', hint: 'Instant notification on conflicts.', on: true },
     { key: 'marketing', label: 'Product updates', hint: 'Occasional feature announcements.', on: false },
 ])
 

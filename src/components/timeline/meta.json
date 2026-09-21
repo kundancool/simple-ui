@@ -11,5 +11,5 @@
         { "name": "default", "params": "{ item, index }", "description": "Custom entry content." },
         { "name": "dot", "params": "{ item, index }", "description": "Custom dot marker." }
     ],
-    "example": "<s-timeline :items=\"[{ title: 'Booking confirmed', time: '2m ago', tag: 'Booking', tone: 'success' }]\" />"
+    "example": "<s-timeline :items=\"[{ title: 'Order confirmed', time: '2m ago', tag: 'Order', tone: 'success' }]\" />"
 }

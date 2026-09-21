@@ -89,5 +89,5 @@
             "description": "Action beside the label."
         }
     ],
-    "example": "<s-input v-model=\"name\" label=\"Guest name\" placeholder=\"Full name\" :error=\"errors.name\" required />"
+    "example": "<s-input v-model=\"name\" label=\"Customer name\" placeholder=\"Full name\" :error=\"errors.name\" required />"
 }

@@ -1,7 +1,7 @@
 <template>
     <s-steps v-model="step" :steps="steps">
-        <template #details><p class="text-sm s-text-secondary">Pick dates and rooms.</p></template>
-        <template #guest><p class="text-sm s-text-secondary">Guest details form goes here.</p></template>
+        <template #details><p class="text-sm s-text-secondary">Pick dates and items.</p></template>
+        <template #customer><p class="text-sm s-text-secondary">Customer details form goes here.</p></template>
         <template #confirm><p class="text-sm s-text-secondary">Review and confirm.</p></template>
     </s-steps>
     <div class="flex gap-2 mt-3">
@@ -17,7 +17,7 @@ import { SButton } from '@kundancool/simple-ui'
 
 const steps = [
     { key: 'details', label: 'Details' },
-    { key: 'guest', label: 'Guest' },
+    { key: 'customer', label: 'Customer' },
     { key: 'confirm', label: 'Confirm' },
 ]
 const step = ref('details')

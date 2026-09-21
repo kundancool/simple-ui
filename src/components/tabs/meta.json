@@ -30,5 +30,5 @@
         }
     ],
     "slots": [],
-    "example": "<s-tabs v-model=\"tab\" :tabs=\"[{ key: 'overview', label: 'Overview' }, { key: 'bookings', label: 'Bookings', count: 12 }]\" />"
+    "example": "<s-tabs v-model=\"tab\" :tabs=\"[{ key: 'overview', label: 'Overview' }, { key: 'orders', label: 'Orders', count: 12 }]\" />"
 }

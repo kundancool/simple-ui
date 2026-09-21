@@ -12,9 +12,9 @@ import { SDropdownMenu } from '@kundancool/simple-ui'
 
 const picked = ref('')
 const items = [
-    { key: 'edit', label: 'Edit booking' },
+    { key: 'edit', label: 'Edit order' },
     { key: 'invoice', label: 'Download invoice' },
     { type: 'separator' },
-    { key: 'cancel', label: 'Cancel booking', danger: true },
+    { key: 'cancel', label: 'Cancel order', danger: true },
 ]
 </script>

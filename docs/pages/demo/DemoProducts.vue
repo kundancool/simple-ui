@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live product catalogue">
-            <s-page-header title="Products" subtitle="Add-ons guests can buy with a booking." add-text="New product" @add="openCreate" />
+            <s-page-header title="Products" subtitle="Add-ons customers can buy with an order." add-text="New product" @add="openCreate" />
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 <s-card v-for="p in products" :key="p.id">
                     <div class="flex items-start justify-between gap-2">
@@ -55,19 +55,19 @@ import { useToast } from '@kundancool/simple-ui'
 
 const { success } = useToast()
 const categories = [
-    { value: 'Food', label: 'Food' },
-    { value: 'Transport', label: 'Transport' },
-    { value: 'Wellness', label: 'Wellness' },
+    { value: 'Accessories', label: 'Accessories' },
+    { value: 'Delivery', label: 'Delivery' },
+    { value: 'Protection', label: 'Protection' },
 ]
 const products = ref([
-    { id: 1, name: 'Breakfast buffet', category: 'Food', price: 499, stock: 40, listed: true },
-    { id: 2, name: 'Airport transfer', category: 'Transport', price: 1200, stock: 12, listed: true },
-    { id: 3, name: 'Spa voucher', category: 'Wellness', price: 2500, stock: 0, listed: false },
+    { id: 1, name: 'Welcome bundle', category: 'Accessories', price: 499, stock: 40, listed: true },
+    { id: 2, name: 'Priority delivery', category: 'Delivery', price: 1200, stock: 12, listed: true },
+    { id: 3, name: 'Extended warranty', category: 'Protection', price: 2500, stock: 0, listed: false },
 ])
 
 const dialog = ref(false)
 const editing = ref(null)
-const form = ref({ name: '', price: 0, stock: 0, category: 'Food' })
+const form = ref({ name: '', price: 0, stock: 0, category: 'Accessories' })
 const errors = ref({ name: '' })
 
 function openCreate() {

@@ -1,7 +1,7 @@
 <template>
     <s-button @click="open = true">Open dialog</s-button>
-    <s-dialog v-model="open" title="Confirm checkout" width="sm">
-        <p class="text-sm s-text-secondary">Check out Aarav Sharma from Room 204?</p>
+    <s-dialog v-model="open" title="Confirm action" width="sm">
+        <p class="text-sm s-text-secondary">Check out Aarav Sharma from Item 204?</p>
         <template #footer>
             <s-button variant="secondary" @click="open = false">Cancel</s-button>
             <s-button @click="open = false">Check out</s-button>

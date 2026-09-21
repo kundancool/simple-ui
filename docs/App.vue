@@ -246,7 +246,7 @@ const demoLinks = [
     { hash: '#/demo/notifications', label: 'Notifications', icon: Bell, category: 'Engage' },
     { hash: '#/demo/testimonials', label: 'Testimonials', icon: Star, category: 'Engage' },
     // Organize
-    { hash: '#/demo/listing', label: 'Bookings', icon: List, category: 'Organize' },
+    { hash: '#/demo/listing', label: 'Orders', icon: List, category: 'Organize' },
     { hash: '#/demo/activity', label: 'Activity', icon: Bell, category: 'Organize' },
     { hash: '#/demo/kanban', label: 'Kanban', icon: KanbanSquare, category: 'Organize' },
     { hash: '#/demo/calendar', label: 'Calendar', icon: CalendarDays, category: 'Organize' },
@@ -260,7 +260,7 @@ const demoLinks = [
     { hash: '#/demo/webhooks', label: 'Webhooks', icon: Webhook, category: 'Configure' },
     { hash: '#/demo/integrations', label: 'Integrations', icon: Blocks, category: 'Configure' },
     // Build
-    { hash: '#/demo/wizard', label: 'Booking wizard', icon: ClipboardList, category: 'Build' },
+    { hash: '#/demo/wizard', label: 'Order wizard', icon: ClipboardList, category: 'Build' },
     { hash: '#/demo/survey', label: 'Survey', icon: ClipboardCheck, category: 'Build' },
     { hash: '#/demo/profile-editor', label: 'Profile editor', icon: UserCog, category: 'Build' },
     { hash: '#/demo/onboarding', label: 'Onboarding', icon: GraduationCap, category: 'Build' },

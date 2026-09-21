@@ -1,16 +1,16 @@
 <template>
     <div>
         <DemoStage title="Live listing">
-        <s-page-header title="Bookings" subtitle="Search, filter and page through reservations." add-text="New booking" refreshable :loading="loading" @refresh="reload" />
+        <s-page-header title="Orders" subtitle="Search, filter and page through orders." add-text="New order" refreshable :loading="loading" @refresh="reload" />
         <s-card>
-            <s-filter v-model="query" placeholder="Search guest, booking no…" @search="resetPage">
+            <s-filter v-model="query" placeholder="Search customer, order no…" @search="resetPage">
                 <s-select v-model="status" :options="statusOptions" option-label="label" option-value="value" placeholder="All statuses" clearable inline class="w-44" />
                 <s-date-range-picker v-model="range" :show-presets="false" class="w-64" />
             </s-filter>
-            <s-data-table :data="pageRows" :loading="loading" empty-text="No bookings match these filters">
-                <s-data-table-column prop="no" label="Booking" width="110px" />
-                <s-data-table-column prop="guest" label="Guest" />
-                <s-data-table-column prop="ota" label="Channel" width="130px" />
+            <s-data-table :data="pageRows" :loading="loading" empty-text="No orders match these filters">
+                <s-data-table-column prop="no" label="Order" width="110px" />
+                <s-data-table-column prop="customer" label="Customer" />
+                <s-data-table-column prop="channel" label="Channel" width="130px" />
                 <s-data-table-column label="Status" width="130px">
                     <template #default="{ row }"><s-tag :type="tagType(row.status)">{{ row.status }}</s-tag></template>
                 </s-data-table-column>
@@ -49,14 +49,14 @@ import DemoStage from '../../DemoStage.vue'
 
 const { info } = useToast()
 
-const guests = ['Aarav Sharma', 'Diya Patel', 'Kabir Singh', 'Meera Iyer', 'Rohan Verma', 'Anaya Rao', 'Vikram Nair', 'Sara Khan', 'Arjun Menon', 'Ishita Bose', 'Aditya Rao', 'Neha Kulkarni']
-const otas = ['Direct', 'MMT', 'Booking.com', 'Goibibo']
+const customers = ['Aarav Sharma', 'Diya Patel', 'Kabir Singh', 'Meera Iyer', 'Rohan Verma', 'Anaya Rao', 'Vikram Nair', 'Sara Khan', 'Arjun Menon', 'Ishita Bose', 'Aditya Rao', 'Neha Kulkarni']
+const channels = ['Direct', 'Marketplace', 'Partner', 'Reseller']
 const statuses = ['CONFIRMED', 'PENDING', 'CANCELLED']
 
-const all = guests.map((guest, i) => ({
-    no: `TMZ-${String(101 + i).padStart(3, '0')}`,
-    guest,
-    ota: otas[i % otas.length],
+const all = customers.map((customer, i) => ({
+    no: `ORD-${String(101 + i).padStart(3, '0')}`,
+    customer,
+    channel: channels[i % channels.length],
     status: statuses[i % statuses.length],
     total: `₹${(1800 + i * 430).toLocaleString('en-IN')}`,
 }))
@@ -84,7 +84,7 @@ const filtered = computed(() => {
         if (status.value && r.status !== status.value) {
             return false
         }
-        if (q && !(r.guest.toLowerCase().includes(q) || r.no.toLowerCase().includes(q))) {
+        if (q && !(r.customer.toLowerCase().includes(q) || r.no.toLowerCase().includes(q))) {
             return false
         }
         return true
@@ -114,7 +114,7 @@ function rowActions(row) {
         { key: 'view', label: 'View details' },
         { key: 'invoice', label: 'Download invoice' },
         { type: 'separator' },
-        { key: 'cancel', label: 'Cancel booking', danger: true },
+        { key: 'cancel', label: 'Cancel order', danger: true },
     ]
 }
 

@@ -16,7 +16,7 @@
                         <s-input v-model="form.location" label="Location" placeholder="City" />
                     </div>
                     <s-select v-model="form.role" label="Role" :options="roles" option-label="label" option-value="value" />
-                    <s-input v-model="form.bio" label="Bio" type="textarea" :rows="3" hint="One or two sentences guests will read." />
+                    <s-input v-model="form.bio" label="Bio" type="textarea" :rows="3" hint="One or two sentences customers will read." />
                     <div class="flex gap-2">
                         <s-button :loading="saving" @click="save">Save profile</s-button>
                         <s-button variant="secondary" @click="reset">Reset</s-button>
@@ -44,12 +44,12 @@ import { useToast } from '@kundancool/simple-ui'
 
 const { success } = useToast()
 const blank = { name: '', location: '', role: 'Manager', bio: '', pronouns: '' }
-const form = ref({ name: 'Kundan Kumar', location: 'Bengaluru', role: 'Manager', bio: 'Runs a 12-room boutique stay.', pronouns: 'he/him' })
+const form = ref({ name: 'Kundan Kumar', location: 'Bengaluru', role: 'Manager', bio: 'Runs a 12-person boutique studio.', pronouns: 'he/him' })
 const saving = ref(false)
 const roles = [
     { value: 'Owner', label: 'Owner' },
     { value: 'Manager', label: 'Manager' },
-    { value: 'Front desk', label: 'Front desk' },
+    { value: 'Support', label: 'Support' },
 ]
 
 function save() {

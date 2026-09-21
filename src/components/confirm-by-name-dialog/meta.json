@@ -75,5 +75,5 @@
             "description": "Extra body content."
         }
     ],
-    "example": "<s-confirm-by-name-dialog v-model=\"show\" title=\"Disable property\" :expected=\"property.name\" label=\"property\" @confirm=\"disable\" />"
+    "example": "<s-confirm-by-name-dialog v-model=\"show\" title=\"Disable workspace\" :expected=\"workspace.name\" label=\"workspace\" @confirm=\"disable\" />"
 }
