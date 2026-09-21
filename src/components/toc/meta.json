@@ -1,0 +1,15 @@
+{
+    "name": "TOC",
+    "tag": "s-toc",
+    "category": "Navigation",
+    "description": "Table of contents with scroll-spy highlighting and smooth jumps.",
+    "props": [
+        { "name": "items", "type": "Array<{ id, label, depth? }>", "default": "required", "description": "Sections. Ids must exist in the page." },
+        { "name": "title", "type": "string", "default": "On this page", "description": "List caption." },
+        { "name": "spy", "type": "boolean", "default": "true", "description": "Highlight the section in view." },
+        { "name": "behavior", "type": "smooth | auto", "default": "smooth", "description": "Scroll behavior." }
+    ],
+    "events": [{ "name": "select", "description": "Emitted with the section id." }],
+    "slots": [],
+    "example": "<s-toc :items=\"[{ id: 'install', label: 'Install' }, { id: 'theming', label: 'Theming' }]\" />"
+}

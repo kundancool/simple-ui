@@ -1,0 +1,21 @@
+{
+    "name": "Carousel",
+    "tag": "s-carousel",
+    "category": "Data",
+    "description": "Slide deck with arrows, dots, autoplay, swipe and keyboard-friendly controls.",
+    "props": [
+        { "name": "modelValue", "type": "number", "default": "0", "description": "Active slide (v-model)." },
+        { "name": "interval", "type": "number", "default": "0", "description": "Autoplay ms. 0 disables; pauses on hover." },
+        { "name": "height", "type": "string", "default": "320px", "description": "Viewport height." },
+        { "name": "arrows", "type": "boolean", "default": "true", "description": "Prev/next buttons." },
+        { "name": "dots", "type": "boolean", "default": "true", "description": "Dot indicators." },
+        { "name": "loop", "type": "boolean", "default": "true", "description": "Wrap past the ends." },
+        { "name": "speed", "type": "number", "default": "300", "description": "Slide transition ms." }
+    ],
+    "events": [
+        { "name": "update:modelValue", "description": "v-model update." },
+        { "name": "change", "description": "Emitted with the new index." }
+    ],
+    "slots": [{ "name": "default", "description": "Slide panels (any content)." }],
+    "example": "<s-carousel height=\"280px\" :interval=\"5000\">\n  <div class=\"...\">Slide one</div>\n  <div class=\"...\">Slide two</div>\n</s-carousel>"
+}

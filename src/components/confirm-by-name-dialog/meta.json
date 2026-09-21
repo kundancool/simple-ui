@@ -1,0 +1,79 @@
+{
+    "name": "Confirm By Name Dialog",
+    "tag": "s-confirm-by-name-dialog",
+    "category": "Feedback",
+    "description": "Destructive-action confirmation gated on retyping the record name.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "boolean",
+            "default": "required",
+            "description": "Visibility (v-model)."
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "default": "required",
+            "description": "Dialog title."
+        },
+        {
+            "name": "message",
+            "type": "string",
+            "default": "''",
+            "description": "Explanation above the input."
+        },
+        {
+            "name": "expected",
+            "type": "string",
+            "default": "required",
+            "description": "Exact text the user must reproduce."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "record",
+            "description": "Noun for the mismatch message."
+        },
+        {
+            "name": "confirmText",
+            "type": "string",
+            "default": "Confirm",
+            "description": "Confirm button label."
+        },
+        {
+            "name": "cancelText",
+            "type": "string",
+            "default": "Cancel",
+            "description": "Cancel button label."
+        },
+        {
+            "name": "confirmVariant",
+            "type": "string",
+            "default": "danger",
+            "description": "Confirm button variant."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Spinner on confirm."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "confirm",
+            "description": "Confirmed with a matching name."
+        }
+    ],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Extra body content."
+        }
+    ],
+    "example": "<s-confirm-by-name-dialog v-model=\"show\" title=\"Disable property\" :expected=\"property.name\" label=\"property\" @confirm=\"disable\" />"
+}

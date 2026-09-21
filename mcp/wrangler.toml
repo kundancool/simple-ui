@@ -1,0 +1,4 @@
+# Worker entry for remote hosting (wrangler deploy)
+main = "dist/worker.js"
+name = "simple-ui-mcp"
+compatibility_date = "2026-01-01"

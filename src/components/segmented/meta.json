@@ -1,0 +1,17 @@
+{
+    "name": "Segmented",
+    "tag": "s-segmented",
+    "category": "Navigation",
+    "description": "Pill toggle group for exclusive choices like billing cycles.",
+    "props": [
+        { "name": "options", "type": "Array<{ label, value }>", "default": "required", "description": "Choices." },
+        { "name": "modelValue", "type": "string | number | boolean", "default": "null", "description": "Selected value (v-model)." },
+        { "name": "ariaLabel", "type": "string", "default": "''", "description": "Accessible group label." }
+    ],
+    "events": [
+        { "name": "update:modelValue", "description": "v-model update." },
+        { "name": "change", "description": "Emitted with the new value." }
+    ],
+    "slots": [],
+    "example": "<s-segmented v-model=\"billing\" :options=\"[{ label: 'Monthly', value: 'm' }, { label: 'Yearly', value: 'y' }]\" />"
+}

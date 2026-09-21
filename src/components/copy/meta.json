@@ -1,0 +1,46 @@
+{
+    "name": "Copy",
+    "tag": "s-copy",
+    "category": "Basic",
+    "description": "Copy-to-clipboard button with Clipboard API + fallback and toast feedback. The trigger swaps to a “Copied” label for 1s on success.",
+    "props": [
+        {
+            "name": "value",
+            "type": "string",
+            "default": "required",
+            "description": "Text to copy."
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "default": "Copy",
+            "description": "Button tooltip."
+        },
+        {
+            "name": "successMessage",
+            "type": "string",
+            "default": "Copied to clipboard",
+            "description": "Success toast text."
+        },
+        {
+            "name": "errorMessage",
+            "type": "string",
+            "default": "Failed to copy",
+            "description": "Failure toast text."
+        },
+        {
+            "name": "triggerClass",
+            "type": "string | Array | object",
+            "default": "''",
+            "description": "Extra trigger classes."
+        }
+    ],
+    "events": [],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Custom trigger (default: clipboard icon)."
+        }
+    ],
+    "example": "<s-copy :value=\"booking.guest_phone\" />"
+}

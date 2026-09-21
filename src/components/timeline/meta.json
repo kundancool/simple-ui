@@ -1,0 +1,15 @@
+{
+    "name": "Timeline",
+    "tag": "s-timeline",
+    "category": "Data",
+    "description": "Vertical event feed with tone dots, tags and time rows.",
+    "props": [
+        { "name": "items", "type": "Array<{ key?, title, description?, time?, tag?, tone? }>", "default": "required", "description": "Timeline entries." }
+    ],
+    "events": [],
+    "slots": [
+        { "name": "default", "params": "{ item, index }", "description": "Custom entry content." },
+        { "name": "dot", "params": "{ item, index }", "description": "Custom dot marker." }
+    ],
+    "example": "<s-timeline :items=\"[{ title: 'Booking confirmed', time: '2m ago', tag: 'Booking', tone: 'success' }]\" />"
+}

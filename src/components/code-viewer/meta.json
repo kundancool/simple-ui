@@ -1,0 +1,41 @@
+{
+    "name": "Code Viewer",
+    "tag": "s-code-viewer",
+    "category": "Data",
+    "description": "Read-only code/log block with header, copy button and JSON pretty-print. No heavy editor deps.",
+    "props": [
+        {
+            "name": "value",
+            "type": "string",
+            "default": "''",
+            "description": "Code text."
+        },
+        {
+            "name": "language",
+            "type": "string",
+            "default": "''",
+            "description": "Language label (json enables pretty-print)."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Header label (overrides language)."
+        },
+        {
+            "name": "prettify",
+            "type": "boolean",
+            "default": "true",
+            "description": "Pretty-print JSON."
+        },
+        {
+            "name": "maxHeight",
+            "type": "string",
+            "default": "24rem",
+            "description": "Scroll height cap."
+        }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-code-viewer :value=\"payload\" language=\"json\" label=\"Webhook payload\" />"
+}

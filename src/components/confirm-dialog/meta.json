@@ -1,0 +1,71 @@
+{
+    "name": "Confirm Dialog",
+    "tag": "s-confirm-dialog",
+    "category": "Feedback",
+    "description": "Yes/no confirmation dialog for actions worth pausing over.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "boolean",
+            "default": "required",
+            "description": "Visibility (v-model)."
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "default": "required",
+            "description": "Dialog title."
+        },
+        {
+            "name": "message",
+            "type": "string",
+            "default": "''",
+            "description": "Explanation above the slot."
+        },
+        {
+            "name": "confirmText",
+            "type": "string",
+            "default": "Confirm",
+            "description": "Confirm button label."
+        },
+        {
+            "name": "cancelText",
+            "type": "string",
+            "default": "Cancel",
+            "description": "Cancel button label."
+        },
+        {
+            "name": "confirmVariant",
+            "type": "string",
+            "default": "danger",
+            "description": "Confirm button variant."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Spinner on confirm, blocks cancel."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "confirm",
+            "description": "Confirm clicked."
+        },
+        {
+            "name": "cancel",
+            "description": "Cancelled."
+        }
+    ],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Extra body content under the message."
+        }
+    ],
+    "example": "<s-confirm-dialog v-model=\"show\" title=\"Delete booking\" message=\"This cannot be undone.\" confirm-text=\"Delete\" @confirm=\"removeBooking\" />"
+}

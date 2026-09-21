@@ -1,0 +1,38 @@
+{
+    "name": "Auth Layout",
+    "tag": "s-auth-layout",
+    "category": "Layout",
+    "description": "Centered auth shell: brand block above a max-width column (login, register, reset).",
+    "props": [
+        {
+            "name": "title",
+            "type": "string",
+            "default": "''",
+            "description": "Brand heading."
+        },
+        {
+            "name": "subtitle",
+            "type": "string",
+            "default": "''",
+            "description": "Brand subheading."
+        },
+        {
+            "name": "maxWidth",
+            "type": "string",
+            "default": "max-w-md",
+            "description": "Column width class."
+        }
+    ],
+    "events": [],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Auth card / form."
+        },
+        {
+            "name": "brand",
+            "description": "Custom brand block."
+        }
+    ],
+    "example": "<s-auth-layout title=\"Acme\" subtitle=\"Admin dashboard\">\n  <s-card><s-input v-model=\"email\" label=\"Email\" /></s-card>\n</s-auth-layout>"
+}

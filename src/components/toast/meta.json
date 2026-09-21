@@ -1,0 +1,22 @@
+{
+    "name": "Toast",
+    "tag": "s-toast",
+    "category": "Feedback",
+    "description": "Toast notifications: SToastContainer renders the stack, useToast()/toast.* triggers them.",
+    "props": [
+        {
+            "name": "toast",
+            "type": "{ id, variant, message, duration? }",
+            "default": "required",
+            "description": "Toast payload (SToast only)."
+        }
+    ],
+    "events": [
+        {
+            "name": "close",
+            "description": "SToast dismiss clicked."
+        }
+    ],
+    "slots": [],
+    "example": "<s-toast-container />\n\nimport { useToast } from '@kundancool/simple-ui'\nconst { success, error } = useToast()\nsuccess('Booking confirmed')\n\n// anywhere, no setup needed:\nimport { toast } from '@kundancool/simple-ui'\ntoast.error('Payment failed')"
+}

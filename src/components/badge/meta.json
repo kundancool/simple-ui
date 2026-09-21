@@ -1,0 +1,16 @@
+{
+    "name": "Badge",
+    "tag": "s-badge",
+    "category": "Data",
+    "description": "Count or dot marker pinned to wrapped content.",
+    "props": [
+        { "name": "value", "type": "number | string", "default": "null", "description": "Badge content." },
+        { "name": "max", "type": "number", "default": "99", "description": "Numeric cap (99 → 99+)." },
+        { "name": "dot", "type": "boolean", "default": "false", "description": "Plain dot, no value." },
+        { "name": "hidden", "type": "boolean", "default": "false", "description": "Hides the marker." },
+        { "name": "tone", "type": "danger | success | warning | info | default", "default": "danger", "description": "Marker fill." }
+    ],
+    "events": [],
+    "slots": [{ "name": "default", "description": "Wrapped content the marker pins to." }],
+    "example": "<s-badge :value=\"3\"><s-button size=\"sm\" variant=\"secondary\">Inbox</s-button></s-badge>\n<s-badge dot><span>Settings</span></s-badge>"
+}

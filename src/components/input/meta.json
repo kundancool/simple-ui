@@ -1,0 +1,93 @@
+{
+    "name": "Input",
+    "tag": "s-input",
+    "category": "Form",
+    "description": "Labelled text input / textarea with validation error, hint and a trailing action slot.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "string | number",
+            "default": "''",
+            "description": "Field value (v-model)."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Field label."
+        },
+        {
+            "name": "type",
+            "type": "string",
+            "default": "text",
+            "description": "Input type or textarea. Dates: use SDatePicker."
+        },
+        {
+            "name": "placeholder",
+            "type": "string",
+            "default": "''",
+            "description": "Placeholder text."
+        },
+        {
+            "name": "error",
+            "type": "string | Array",
+            "default": "''",
+            "description": "Error message(s); first wins."
+        },
+        {
+            "name": "hint",
+            "type": "string",
+            "default": "''",
+            "description": "Helper text when no error."
+        },
+        {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows the required asterisk."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables the field."
+        },
+        {
+            "name": "rows",
+            "type": "number",
+            "default": "4",
+            "description": "Textarea rows."
+        },
+        {
+            "name": "min",
+            "type": "string | number",
+            "default": "null",
+            "description": "Min attribute."
+        },
+        {
+            "name": "max",
+            "type": "string",
+            "default": "null",
+            "description": "Max attribute."
+        },
+        {
+            "name": "inline",
+            "type": "boolean",
+            "default": "false",
+            "description": "No bottom margin, for inputs in a centered row."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        }
+    ],
+    "slots": [
+        {
+            "name": "trailing",
+            "description": "Action beside the label."
+        }
+    ],
+    "example": "<s-input v-model=\"name\" label=\"Guest name\" placeholder=\"Full name\" :error=\"errors.name\" required />"
+}

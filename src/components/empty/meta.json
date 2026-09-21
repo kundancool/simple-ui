@@ -1,0 +1,17 @@
+{
+    "name": "Empty",
+    "tag": "s-empty",
+    "category": "Feedback",
+    "description": "Friendly empty state: icon, title, description and an action slot.",
+    "props": [
+        { "name": "title", "type": "string", "default": "''", "description": "Headline." },
+        { "name": "description", "type": "string", "default": "''", "description": "Supporting line." },
+        { "name": "icon", "type": "Component", "default": "null", "description": "Icon override." }
+    ],
+    "events": [],
+    "slots": [
+        { "name": "default", "description": "Action buttons." },
+        { "name": "icon", "description": "Custom artwork." }
+    ],
+    "example": "<s-empty title=\"No bookings yet\" description=\"New reservations will appear here.\">\n  <s-button size=\"sm\">New booking</s-button>\n</s-empty>"
+}

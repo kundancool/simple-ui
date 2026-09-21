@@ -1,0 +1,15 @@
+{
+    "name": "Gallery",
+    "tag": "s-gallery",
+    "category": "Data",
+    "description": "Responsive image grid with hover captions and a built-in lightbox.",
+    "props": [
+        { "name": "images", "type": "Array<{ src, alt?, caption? }>", "default": "[]", "description": "Image list." },
+        { "name": "columns", "type": "2 | 3 | 4", "default": "3", "description": "Grid columns (stack on mobile)." },
+        { "name": "emptyTitle", "type": "string", "default": "No images yet", "description": "Empty-state title." },
+        { "name": "emptyDescription", "type": "string", "default": "''", "description": "Empty-state text." }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-gallery :images=\"[{ src: '/pool.jpg', alt: 'Pool at dusk', caption: 'Infinity pool' }]\" />"
+}

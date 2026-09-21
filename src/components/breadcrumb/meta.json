@@ -1,0 +1,14 @@
+{
+    "name": "Breadcrumb",
+    "tag": "s-breadcrumb",
+    "category": "Navigation",
+    "description": "Breadcrumb trail with the current page marked via aria-current.",
+    "props": [
+        { "name": "items", "type": "Array<{ label, to? }>", "default": "required", "description": "Trail entries; the last renders as current page." },
+        { "name": "linkTag", "type": "string | Component", "default": "a", "description": "Link renderer — pass RouterLink in vue-router apps." },
+        { "name": "linkProps", "type": "Function", "default": "null", "description": "(item) => extra attrs for every link." }
+    ],
+    "events": [{ "name": "navigate", "description": "Emitted with the clicked (non-current) item." }],
+    "slots": [],
+    "example": "<s-breadcrumb :items=\"[{ label: 'Reports', to: '/reports' }, { label: 'Revenue' }]\" />"
+}

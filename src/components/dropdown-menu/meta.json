@@ -1,0 +1,64 @@
+{
+    "name": "Dropdown Menu",
+    "tag": "s-dropdown-menu",
+    "category": "Navigation",
+    "description": "Action menu with keyboard navigation, typeahead, separators and danger items.",
+    "props": [
+        {
+            "name": "items",
+            "type": "Array<{ key, label, icon?, danger?, keepOpen?, onClick? } | { type: 'separator' }>",
+            "default": "required",
+            "description": "Menu items."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skeleton placeholders in the panel."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "Actions",
+            "description": "Default trigger button label."
+        },
+        {
+            "name": "size",
+            "type": "string",
+            "default": "sm",
+            "description": "Default trigger size."
+        },
+        {
+            "name": "variant",
+            "type": "string",
+            "default": "secondary",
+            "description": "Default trigger variant."
+        },
+        {
+            "name": "width",
+            "type": "string",
+            "default": "w-48",
+            "description": "Panel width class."
+        },
+        {
+            "name": "align",
+            "type": "left | right",
+            "default": "right",
+            "description": "Panel alignment to trigger."
+        }
+    ],
+    "events": [
+        {
+            "name": "select",
+            "description": "Emitted with the chosen item."
+        }
+    ],
+    "slots": [
+        {
+            "name": "trigger",
+            "params": "{ open }",
+            "description": "Custom trigger (overrides the button)."
+        }
+    ],
+    "example": "<s-dropdown-menu :items=\"[{ key: 'edit', label: 'Edit' }, { type: 'separator' }, { key: 'delete', label: 'Delete', danger: true }]\" @select=\"onAction\" />"
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Marquee",
+    "tag": "s-marquee",
+    "category": "Layout",
+    "description": "Seamless logo/tag ticker with hover pause and reduced-motion support.",
+    "props": [
+        { "name": "speed", "type": "number", "default": "40", "description": "Seconds per loop." },
+        { "name": "pauseOnHover", "type": "boolean", "default": "true", "description": "Pauses while hovered." },
+        { "name": "ariaLabel", "type": "string", "default": "''", "description": "Accessible label." },
+        { "name": "gap", "type": "string", "default": "0.5rem", "description": "Gap between items." }
+    ],
+    "events": [],
+    "slots": [{ "name": "default", "description": "Ticker content (duplicated internally for the loop)." }],
+    "example": "<s-marquee>\n  <span class=\"font-mono\">&lt;s-input&gt;</span>\n  <span class=\"font-mono\">&lt;s-table&gt;</span>\n</s-marquee>"
+}

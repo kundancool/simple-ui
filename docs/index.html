@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple UI — docs</title>
+    <style>
+        #s-boot {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            background: #f4f4f6;
+            transition: opacity 300ms ease;
+        }
+        @media (prefers-color-scheme: dark) {
+            #s-boot { background: #111113; }
+        }
+        #s-boot.done {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .s-boot-tile {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: #0c7076;
+            color: #f8f8f8;
+            font: 700 24px/1 system-ui, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: s-boot-pop 1.6s ease-in-out infinite;
+        }
+        .s-boot-bar {
+            width: 148px;
+            height: 3px;
+            border-radius: 9999px;
+            background: rgba(128, 128, 128, 0.25);
+            overflow: hidden;
+        }
+        .s-boot-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            border-radius: inherit;
+            background: #0c7076;
+            animation: s-boot-slide 1.1s ease-in-out infinite;
+        }
+        .s-boot-text {
+            font: 500 12px/1 system-ui, sans-serif;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #6f7380;
+        }
+        @keyframes s-boot-pop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.07); }
+        }
+        @keyframes s-boot-slide {
+            0% { transform: translateX(-110%); }
+            100% { transform: translateX(380%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .s-boot-tile, .s-boot-bar::after { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="s-boot" role="status" aria-label="Loading Simple UI docs">
+        <div class="s-boot-tile">S</div>
+        <div class="s-boot-bar"></div>
+        <div class="s-boot-text">Simple UI</div>
+    </div>
+    <div id="app"></div>
+    <script type="module" src="./main.ts"></script>
+</body>
+</html>

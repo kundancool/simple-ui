@@ -1,0 +1,46 @@
+{
+    "name": "Sidebar Menu",
+    "tag": "s-sidebar-menu",
+    "category": "Navigation",
+    "description": "Router-agnostic sidebar navigation with collapsible sections and active-path highlighting.",
+    "props": [
+        {
+            "name": "items",
+            "type": "Array<{ name?, label, icon?, to?, children? }>",
+            "default": "required",
+            "description": "Sections; children render as expandable groups."
+        },
+        {
+            "name": "collapsed",
+            "type": "boolean",
+            "default": "false",
+            "description": "Icon-only mode."
+        },
+        {
+            "name": "activePath",
+            "type": "string",
+            "default": "''",
+            "description": "Current path for highlight + auto-expand."
+        },
+        {
+            "name": "linkTag",
+            "type": "string | Component",
+            "default": "a",
+            "description": "Link renderer — pass RouterLink in vue-router apps."
+        },
+        {
+            "name": "linkProps",
+            "type": "Function",
+            "default": "null",
+            "description": "(item) => extra attrs for every link."
+        }
+    ],
+    "events": [
+        {
+            "name": "navigate",
+            "description": "Emitted with the clicked item."
+        }
+    ],
+    "slots": [],
+    "example": "<s-sidebar-menu :items=\"nav\" :active-path=\"$route.path\" :link-tag=\"RouterLink\" @navigate=\"closeOnMobile\" />"
+}

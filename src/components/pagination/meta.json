@@ -1,0 +1,54 @@
+{
+    "name": "Pagination",
+    "tag": "s-pagination",
+    "category": "Data",
+    "description": "Table pagination: range readout, per-page select, numbered pages. Controlled via props or a Laravel-style paginator object — no store required.",
+    "props": [
+        {
+            "name": "page",
+            "type": "number",
+            "default": "1",
+            "description": "Current page (v-model:page)."
+        },
+        {
+            "name": "perPage",
+            "type": "number",
+            "default": "10",
+            "description": "Rows per page (v-model:perPage)."
+        },
+        {
+            "name": "total",
+            "type": "number",
+            "default": "0",
+            "description": "Total row count."
+        },
+        {
+            "name": "pageSizes",
+            "type": "Array",
+            "default": "[10, 20, 50, 100]",
+            "description": "Per-page options."
+        },
+        {
+            "name": "pagination",
+            "type": "object",
+            "default": "null",
+            "description": "Laravel paginator { current_page, per_page, total, last_page, from, to } — overrides the scalar props."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:page",
+            "description": "v-model:page update."
+        },
+        {
+            "name": "update:perPage",
+            "description": "v-model:perPage update."
+        },
+        {
+            "name": "change",
+            "description": "Any navigation with { page, perPage } — refetch on this."
+        }
+    ],
+    "slots": [],
+    "example": "<s-pagination v-model:page=\"page\" v-model:per-page=\"perPage\" :total=\"total\" @change=\"fetchRows\" />"
+}

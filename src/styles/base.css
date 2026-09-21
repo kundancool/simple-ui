@@ -1,0 +1,174 @@
+/* Simple UI base styles: transitions, skeleton, toast, fab, ansi viewer,
+   touch targets, markdown preview, data-table guards. All namespaced `s-`. */
+
+.s-fade-slide-enter-active,
+.s-fade-slide-leave-active {
+    transition: opacity 250ms ease, transform 250ms ease;
+    transform-origin: top center;
+}
+.s-fade-slide-enter-from,
+.s-fade-slide-leave-to {
+    opacity: 0;
+    transform: translateY(-6px);
+}
+.s-fade-slide-enter-to,
+.s-fade-slide-leave-from {
+    opacity: 1;
+    transform: none;
+}
+
+@keyframes s-row-expand-in {
+    from { opacity: 0; transform: translateY(-6px) scaleY(0.85); }
+    to { opacity: 1; transform: none; }
+}
+.s-animate-row-expand {
+    animation: s-row-expand-in 260ms cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+    transform-origin: top center;
+}
+
+.s-no-spinner::-webkit-inner-spin-button,
+.s-no-spinner::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.s-no-spinner {
+    -moz-appearance: textfield;
+}
+
+/* DataTable guards — scoped, never global. */
+.s-data-table table th,
+.s-data-table table td {
+    max-width: 500px;
+    overflow-wrap: break-word;
+}
+
+/* Named overlay transitions: <Transition name="s-fade|s-pop|s-slide-up"> */
+.s-fade-enter-active { transition: opacity var(--s-duration-base) var(--s-ease-out); }
+.s-fade-leave-active { transition: opacity var(--s-duration-fast) var(--s-ease-in); }
+.s-fade-enter-from,
+.s-fade-leave-to     { opacity: 0; }
+
+.s-pop-enter-active {
+    transition: opacity var(--s-duration-base) var(--s-ease-out),
+                transform var(--s-duration-base) var(--s-ease-out);
+}
+.s-pop-leave-active {
+    transition: opacity var(--s-duration-fast) var(--s-ease-in),
+                transform var(--s-duration-fast) var(--s-ease-in);
+}
+.s-pop-enter-from,
+.s-pop-leave-to {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+}
+
+.s-slide-up-enter-active {
+    transition: opacity var(--s-duration-base) var(--s-ease-out),
+                transform var(--s-duration-base) var(--s-ease-out);
+}
+.s-slide-up-leave-active {
+    transition: opacity var(--s-duration-fast) var(--s-ease-in),
+                transform var(--s-duration-fast) var(--s-ease-in);
+}
+.s-slide-up-enter-from,
+.s-slide-up-leave-to {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.s-slide-up-move,
+.s-pop-move { transition: transform var(--s-duration-base) var(--s-ease-in-out); }
+
+@media (prefers-reduced-motion: reduce) {
+    .s-fade-enter-active, .s-fade-leave-active,
+    .s-pop-enter-active, .s-pop-leave-active,
+    .s-slide-up-enter-active, .s-slide-up-leave-active {
+        transition-duration: 0.01ms !important;
+    }
+    .s-fade-enter-from, .s-fade-leave-to,
+    .s-pop-enter-from, .s-pop-leave-to,
+    .s-slide-up-enter-from, .s-slide-up-leave-to {
+        transform: none;
+    }
+}
+
+/* Toast stack motion */
+.s-toast-enter-active { transition: transform var(--s-duration-slow) cubic-bezier(0.34, 1.56, 0.64, 1), opacity var(--s-duration-slow) var(--s-ease-out); }
+.s-toast-leave-active { transition: transform var(--s-duration-base) var(--s-ease-in), opacity var(--s-duration-base) var(--s-ease-in); }
+.s-toast-enter-from,
+.s-toast-leave-to     { transform: translateX(110%); opacity: 0; }
+.s-toast-move         { transition: transform var(--s-duration-base) var(--s-ease-in-out); }
+
+@media (max-width: 767px) {
+    .s-toast-enter-from,
+    .s-toast-leave-to { transform: translateY(-16px); }
+}
+
+/* Skeleton sweep */
+.s-skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--s-surface-raised);
+}
+.s-skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg, transparent 0%, var(--s-border) 50%, transparent 100%);
+    animation: s-skeleton-sweep 1.4s ease-in-out infinite;
+}
+@keyframes s-skeleton-sweep {
+    100% { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .s-skeleton::after { animation: none; opacity: 0; }
+}
+
+/* ANSI log viewer — fixed terminal palette in both themes, on purpose. */
+.s-ansi-viewer {
+    background: #111827;
+    color: #e5e7eb;
+    font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow: auto;
+    max-height: 32rem;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+/* 24px grown hit area without moving a pixel on screen. */
+.s-touch-target {
+    position: relative;
+}
+.s-touch-target::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 24px;
+    min-height: 24px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Markdown preview typography */
+.s-prose-preview h1 { font-size: 1.25rem; font-weight: 700; margin-top: 0.75rem; margin-bottom: 0.375rem; color: var(--s-text-primary); }
+.s-prose-preview h2 { font-size: 1.125rem; font-weight: 700; margin-top: 0.75rem; margin-bottom: 0.375rem; color: var(--s-text-primary); }
+.s-prose-preview h3 { font-size: 1rem; font-weight: 600; margin-top: 0.625rem; margin-bottom: 0.25rem; color: var(--s-text-primary); }
+.s-prose-preview p { margin-bottom: 0.5rem; line-height: 1.625; color: var(--s-text-secondary); }
+.s-prose-preview ul { list-style: disc inside; margin-bottom: 0.5rem; color: var(--s-text-secondary); }
+.s-prose-preview ol { list-style: decimal inside; margin-bottom: 0.5rem; color: var(--s-text-secondary); }
+.s-prose-preview li { color: var(--s-text-secondary); }
+.s-prose-preview blockquote { border-left: 4px solid; border-color: var(--s-accent-border); padding-left: 0.75rem; font-style: italic; margin: 0.5rem 0; color: var(--s-text-muted); }
+.s-prose-preview code { padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-size: 0.75rem; font-family: monospace; background-color: var(--s-surface-raised); color: var(--s-accent-text); }
+.s-prose-preview pre { border-radius: 0.25rem; padding: 0.75rem; overflow-x: auto; margin-bottom: 0.5rem; background-color: var(--s-surface-raised); }
+.s-prose-preview pre code { background: transparent; padding: 0; }
+.s-prose-preview hr { margin: 0.75rem 0; border-color: var(--s-border); }
+.s-prose-preview strong { font-weight: 600; color: var(--s-text-primary); }
+.s-prose-preview em { font-style: italic; }
+.s-prose-preview a { text-decoration: underline; color: var(--s-accent-text); }

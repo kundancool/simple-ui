@@ -1,0 +1,91 @@
+{
+    "name": "Dialog",
+    "tag": "s-dialog",
+    "category": "Feedback",
+    "description": "Modal dialog with focus trap, stacking support, scroll lock and focus restore.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "boolean",
+            "default": "required",
+            "description": "Visibility (v-model)."
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "default": "''",
+            "description": "Header title."
+        },
+        {
+            "name": "width",
+            "type": "xs | sm | md | lg | xl | 2xl | 3xl | 4xl | default",
+            "default": "default",
+            "description": "Panel width."
+        },
+        {
+            "name": "size",
+            "type": "string",
+            "default": "null",
+            "description": "Alias for width."
+        },
+        {
+            "name": "fullscreen",
+            "type": "boolean",
+            "default": "false",
+            "description": "Fills the viewport."
+        },
+        {
+            "name": "closeOnClick",
+            "type": "boolean",
+            "default": "true",
+            "description": "Backdrop click dismisses."
+        },
+        {
+            "name": "closeOnEsc",
+            "type": "boolean",
+            "default": "true",
+            "description": "Escape dismisses."
+        },
+        {
+            "name": "ariaLabel",
+            "type": "string",
+            "default": "''",
+            "description": "Accessible name when the header slot replaces the title."
+        },
+        {
+            "name": "zIndex",
+            "type": "number",
+            "default": "200",
+            "description": "Overlay stacking level."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "close",
+            "description": "Emitted on any close."
+        },
+        {
+            "name": "cancel",
+            "description": "Emitted on user dismissal (Escape, backdrop, X)."
+        }
+    ],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Dialog body."
+        },
+        {
+            "name": "header",
+            "description": "Custom header (overrides title)."
+        },
+        {
+            "name": "footer",
+            "description": "Footer action bar."
+        }
+    ],
+    "example": "<s-dialog v-model=\"open\" title=\"New booking\" width=\"lg\">\n  <s-input v-model=\"name\" label=\"Guest name\" />\n  <template #footer>\n    <s-button variant=\"secondary\" @click=\"open = false\">Cancel</s-button>\n    <s-button @click=\"save\">Save</s-button>\n  </template>\n</s-dialog>"
+}

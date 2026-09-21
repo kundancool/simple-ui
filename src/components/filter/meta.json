@@ -1,0 +1,43 @@
+{
+    "name": "Filter",
+    "tag": "s-filter",
+    "category": "Form",
+    "description": "Debounced search input with a slot row for extra filter controls (selects, date pickers).",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "string",
+            "default": "''",
+            "description": "Search text (v-model)."
+        },
+        {
+            "name": "placeholder",
+            "type": "string",
+            "default": "Search...",
+            "description": "Input placeholder."
+        },
+        {
+            "name": "debounce",
+            "type": "number",
+            "default": "300",
+            "description": "Debounce ms before emitting."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update (debounced)."
+        },
+        {
+            "name": "search",
+            "description": "Debounced search term — refetch on this."
+        }
+    ],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Extra filter controls beside the search box."
+        }
+    ],
+    "example": "<s-filter v-model=\"query\" placeholder=\"Search bookings...\" @search=\"fetchRows\">\n  <s-select v-model=\"status\" :options=\"statuses\" />\n  <s-date-picker v-model=\"from\" />\n</s-filter>"
+}

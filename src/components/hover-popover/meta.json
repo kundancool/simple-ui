@@ -1,0 +1,32 @@
+{
+    "name": "Hover Popover",
+    "tag": "s-hover-popover",
+    "category": "Feedback",
+    "description": "Hover info panel that flips to stay on screen; keyboard-dismissable.",
+    "props": [
+        {
+            "name": "placement",
+            "type": "top | bottom",
+            "default": "top",
+            "description": "Preferred side."
+        },
+        {
+            "name": "delay",
+            "type": "number",
+            "default": "100",
+            "description": "Show delay ms."
+        }
+    ],
+    "events": [],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Hover trigger."
+        },
+        {
+            "name": "content",
+            "description": "Panel content."
+        }
+    ],
+    "example": "<s-hover-popover>\n  <s-tag type=\"info\">12 guests</s-tag>\n  <template #content><p class=\"text-sm\">Adults: 8, children: 4</p></template>\n</s-hover-popover>"
+}

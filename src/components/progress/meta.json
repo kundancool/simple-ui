@@ -1,0 +1,16 @@
+{
+    "name": "Progress",
+    "tag": "s-progress",
+    "category": "Feedback",
+    "description": "Determinate progress bar with tone and size options.",
+    "props": [
+        { "name": "value", "type": "number", "default": "0", "description": "Percent 0–100 (clamped)." },
+        { "name": "tone", "type": "accent | success | warning | danger | info", "default": "accent", "description": "Bar fill." },
+        { "name": "size", "type": "sm | md", "default": "md", "description": "Bar height." },
+        { "name": "duration", "type": "number", "default": "300", "description": "Transition ms on change." },
+        { "name": "ariaLabel", "type": "string", "default": "''", "description": "Accessible label." }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-progress :value=\"68\" tone=\"success\" />"
+}

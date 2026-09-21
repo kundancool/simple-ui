@@ -1,0 +1,34 @@
+{
+    "name": "Tabs",
+    "tag": "s-tabs",
+    "category": "Navigation",
+    "description": "WAI-ARIA tab strip with arrow-key navigation and count badges.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "string",
+            "default": "required",
+            "description": "Active tab key (v-model)."
+        },
+        {
+            "name": "tabs",
+            "type": "Array<{ key, label, icon?, count? }>",
+            "default": "required",
+            "description": "Tab definitions."
+        },
+        {
+            "name": "ariaLabel",
+            "type": "string",
+            "default": "''",
+            "description": "Names the strip when several share a page."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update with the new tab key."
+        }
+    ],
+    "slots": [],
+    "example": "<s-tabs v-model=\"tab\" :tabs=\"[{ key: 'overview', label: 'Overview' }, { key: 'bookings', label: 'Bookings', count: 12 }]\" />"
+}

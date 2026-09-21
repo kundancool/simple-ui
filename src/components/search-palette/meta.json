@@ -1,0 +1,27 @@
+{
+    "name": "Search Palette",
+    "tag": "s-search-palette",
+    "category": "Navigation",
+    "description": "Spotlight-style command palette: trigger button, Cmd/Ctrl+K shortcut, fuzzy filter, keyboard navigation.",
+    "props": [
+        { "name": "items", "type": "Array<{ label, hint?, keywords?, icon? }>", "default": "required", "description": "Searchable entries; extra fields pass through on select." },
+        { "name": "modelValue", "type": "boolean", "default": "false", "description": "Open state (v-model)." },
+        { "name": "placeholder", "type": "string", "default": "Search...", "description": "Input placeholder." },
+        { "name": "emptyText", "type": "string", "default": "No matches.", "description": "Empty-result text." },
+        { "name": "noResultsText", "type": "string", "default": "Type to search.", "description": "Initial empty text." },
+        { "name": "showTrigger", "type": "boolean", "default": "true", "description": "Built-in trigger button (desktop + mobile)." },
+        { "name": "triggerLabel", "type": "string", "default": "Search...", "description": "Trigger button text." },
+        { "name": "shortcut", "type": "boolean", "default": "true", "description": "Global Cmd/Ctrl+K toggle." },
+        { "name": "width", "type": "string", "default": "max-w-lg", "description": "Panel width class." },
+        { "name": "resultsHeight", "type": "string", "default": "max-h-[40vh]", "description": "Results scroll cap." },
+        { "name": "showFooter", "type": "boolean", "default": "true", "description": "Shortcut hint footer." },
+        { "name": "zIndex", "type": "number", "default": "300", "description": "Overlay level (above toasts)." },
+        { "name": "limit", "type": "number", "default": "50", "description": "Max visible results." }
+    ],
+    "events": [
+        { "name": "update:modelValue", "description": "v-model update." },
+        { "name": "select", "description": "Emitted with the chosen item." }
+    ],
+    "slots": [{ "name": "item", "params": "{ item, active }", "description": "Custom result row." }],
+    "example": "<s-search-palette v-model=\"palette\" :items=\"pages\" placeholder=\"Go to…\" @select=\"go\" />"
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Accordion",
+    "tag": "s-accordion",
+    "category": "Data",
+    "description": "Expandable sections, single or multiple open, with per-item body slots.",
+    "props": [
+        { "name": "items", "type": "Array<{ key?, title, text?, disabled? }>", "default": "required", "description": "Sections. Rich bodies via #body-{key} slots." },
+        { "name": "modelValue", "type": "string | number | Array", "default": "null", "description": "Open key(s) (v-model)." },
+        { "name": "defaultOpen", "type": "boolean", "default": "false", "description": "First item starts open." },
+        { "name": "multiple", "type": "boolean", "default": "false", "description": "Allow several open sections." }
+    ],
+    "events": [{ "name": "update:modelValue", "description": "v-model update." }],
+    "slots": [{ "name": "body-{key}", "params": "{ item }", "description": "Rich body per section." }],
+    "example": "<s-accordion :items=\"[{ key: 'refund', title: 'How do refunds work?', text: '…' }]\" default-open />"
+}

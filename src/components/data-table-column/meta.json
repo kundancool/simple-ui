@@ -1,0 +1,64 @@
+{
+    "name": "Data Table Column",
+    "tag": "s-data-table-column",
+    "category": "Data",
+    "description": "Column definition child for SDataTable. Renders nothing itself.",
+    "props": [
+        {
+            "name": "prop",
+            "type": "string",
+            "default": "null",
+            "description": "Row data key (dot-notation ok)."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Header label."
+        },
+        {
+            "name": "width",
+            "type": "string",
+            "default": "null",
+            "description": "Fixed width, e.g. 120px."
+        },
+        {
+            "name": "minWidth",
+            "type": "string",
+            "default": "null",
+            "description": "Minimum width."
+        },
+        {
+            "name": "align",
+            "type": "left | center | right",
+            "default": "left",
+            "description": "Cell alignment."
+        },
+        {
+            "name": "headerAlign",
+            "type": "left | center | right",
+            "default": "null",
+            "description": "Header alignment."
+        },
+        {
+            "name": "class",
+            "type": "string",
+            "default": "''",
+            "description": "Extra classes on header and cells."
+        }
+    ],
+    "events": [],
+    "slots": [
+        {
+            "name": "default",
+            "params": "{ row, $index }",
+            "description": "Custom cell content."
+        },
+        {
+            "name": "header",
+            "params": "{ column }",
+            "description": "Custom header content."
+        }
+    ],
+    "example": "<s-data-table-column prop=\"total_amount\" label=\"Total\" align=\"right\" />"
+}

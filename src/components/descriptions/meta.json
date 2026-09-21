@@ -1,0 +1,14 @@
+{
+    "name": "Descriptions",
+    "tag": "s-descriptions",
+    "category": "Data",
+    "description": "Label/value definition grid for detail views and invoices.",
+    "props": [
+        { "name": "items", "type": "Array<{ key?, label, value }>", "default": "required", "description": "Rows." },
+        { "name": "columns", "type": "1 | 2 | 3", "default": "2", "description": "Grid columns (stack on mobile)." },
+        { "name": "bordered", "type": "boolean", "default": "false", "description": "Card each row." }
+    ],
+    "events": [],
+    "slots": [{ "name": "value-{key}", "params": "{ item }", "description": "Custom value per row." }],
+    "example": "<s-descriptions :items=\"[{ label: 'Billed to', value: 'Aarav Sharma' }, { label: 'Due', value: '26 Sep 2026' }]\" />"
+}

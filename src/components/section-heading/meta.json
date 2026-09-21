@@ -1,0 +1,16 @@
+{
+    "name": "Section Heading",
+    "tag": "s-section-heading",
+    "category": "Layout",
+    "description": "Eyebrow, title, description and action row for landing and docs sections.",
+    "props": [
+        { "name": "eyebrow", "type": "string", "default": "''", "description": "Small pill above the title." },
+        { "name": "title", "type": "string", "default": "required", "description": "Section title." },
+        { "name": "description", "type": "string", "default": "''", "description": "Supporting line." },
+        { "name": "align", "type": "left | center", "default": "center", "description": "Text alignment." },
+        { "name": "size", "type": "md | lg", "default": "md", "description": "Title scale." }
+    ],
+    "events": [],
+    "slots": [{ "name": "default", "description": "Action buttons under the description." }],
+    "example": "<s-section-heading eyebrow=\"Features\" title=\"Everything a dashboard needs\" description=\"Six reasons teams reach for Simple UI.\" />"
+}

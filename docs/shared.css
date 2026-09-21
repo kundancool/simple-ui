@@ -1,0 +1,14 @@
+/* Shared docs-only helpers (never shipped in the library bundle). */
+.s-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background-color: var(--s-accent-subtle);
+    color: var(--s-accent-text);
+    flex-shrink: 0;
+}

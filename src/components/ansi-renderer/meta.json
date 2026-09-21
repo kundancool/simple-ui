@@ -1,0 +1,17 @@
+{
+    "name": "Ansi Renderer",
+    "tag": "s-ansi-renderer",
+    "category": "Data",
+    "description": "Terminal-style log viewer: renders ANSI escape codes as styled HTML.",
+    "props": [
+        {
+            "name": "value",
+            "type": "string",
+            "default": "''",
+            "description": "Raw log text with ANSI codes."
+        }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-ansi-renderer :value=\"job.output\" />"
+}

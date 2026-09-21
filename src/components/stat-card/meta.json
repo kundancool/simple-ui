@@ -1,0 +1,53 @@
+{
+    "name": "Stat Card",
+    "tag": "s-stat-card",
+    "category": "Data",
+    "description": "Dashboard KPI card: icon tile, big value, small label, optional link and loading state.",
+    "props": [
+        {
+            "name": "icon",
+            "type": "Component",
+            "default": "required",
+            "description": "Icon component in the tile."
+        },
+        {
+            "name": "bgColor",
+            "type": "string",
+            "default": "s-bg-icon-blue",
+            "description": "Tile background class (s-bg-icon-*)."
+        },
+        {
+            "name": "iconColor",
+            "type": "string",
+            "default": "s-text-icon-blue",
+            "description": "Icon color class (s-text-icon-*)."
+        },
+        {
+            "name": "value",
+            "type": "string | number",
+            "default": "0",
+            "description": "Headline metric."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "required",
+            "description": "Metric caption."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skeleton instead of value."
+        },
+        {
+            "name": "to",
+            "type": "string",
+            "default": "null",
+            "description": "Link href for the whole card."
+        }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-stat-card :icon=\"CurrencyIcon\" bg-color=\"s-bg-icon-green\" icon-color=\"s-text-icon-green\" :value=\"revenue\" label=\"Total revenue\" />"
+}

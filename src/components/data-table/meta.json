@@ -1,0 +1,80 @@
+{
+    "name": "Data Table",
+    "tag": "s-data-table",
+    "category": "Data",
+    "description": "Declarative data table (el-table-column style): columns via SDataTableColumn children, slots or prop paths.",
+    "props": [
+        {
+            "name": "data",
+            "type": "Array",
+            "default": "[]",
+            "description": "Row objects."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skeleton rows instead of the table."
+        },
+        {
+            "name": "rows",
+            "type": "number",
+            "default": "5",
+            "description": "Skeleton row count while loading."
+        },
+        {
+            "name": "emptyText",
+            "type": "string",
+            "default": "No data available",
+            "description": "Empty-state text."
+        },
+        {
+            "name": "size",
+            "type": "small | default | large",
+            "default": "default",
+            "description": "Cell density."
+        },
+        {
+            "name": "stripe",
+            "type": "boolean",
+            "default": "true",
+            "description": "Zebra rows."
+        },
+        {
+            "name": "border",
+            "type": "boolean",
+            "default": "false",
+            "description": "Outer + column borders."
+        },
+        {
+            "name": "rowClassName",
+            "type": "string | Function",
+            "default": "''",
+            "description": "Extra row class or (row, index) fn."
+        },
+        {
+            "name": "rowKey",
+            "type": "string | Function",
+            "default": "null",
+            "description": "Stable row key: dot-path or fn."
+        },
+        {
+            "name": "caption",
+            "type": "string",
+            "default": "''",
+            "description": "Screen-reader table caption."
+        }
+    ],
+    "events": [],
+    "slots": [
+        {
+            "name": "default",
+            "description": "SDataTableColumn definitions."
+        },
+        {
+            "name": "empty",
+            "description": "Custom empty state."
+        }
+    ],
+    "example": "<s-data-table :data=\"bookings\" :loading=\"loading\">\n  <s-data-table-column prop=\"booking_no\" label=\"Booking\" />\n  <s-data-table-column label=\"Status\">\n    <template #default=\"{ row }\"><s-tag :type=\"row.status === 'CONFIRMED' ? 'success' : 'warning'\">{{ row.status }}</s-tag></template>\n  </s-data-table-column>\n</s-data-table>"
+}

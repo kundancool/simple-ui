@@ -1,0 +1,17 @@
+{
+    "name": "Relative Time",
+    "tag": "s-relative-time",
+    "category": "Data",
+    "description": "Relative timestamp (5 Min ago) that toggles to absolute on click.",
+    "props": [
+        {
+            "name": "value",
+            "type": "string | number | Date",
+            "default": "null",
+            "description": "Timestamp."
+        }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-relative-time :value=\"booking.created_at\" />"
+}

@@ -1,0 +1,16 @@
+{
+    "name": "Avatar",
+    "tag": "s-avatar",
+    "category": "Data",
+    "description": "Identity tile: photo, icon or auto initials with tone tints.",
+    "props": [
+        { "name": "name", "type": "string", "default": "''", "description": "Full name — initials derived automatically." },
+        { "name": "src", "type": "string", "default": "''", "description": "Photo URL." },
+        { "name": "icon", "type": "Component", "default": "null", "description": "Icon override." },
+        { "name": "size", "type": "xs | sm | md | lg | xl", "default": "md", "description": "Tile size." },
+        { "name": "tone", "type": "blue | green | yellow | purple | orange", "default": "blue", "description": "Tint pair." }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-avatar name=\"Priya Nair\" />\n<s-avatar name=\"Rahul Das\" tone=\"green\" size=\"lg\" />"
+}

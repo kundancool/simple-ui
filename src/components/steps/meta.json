@@ -1,0 +1,33 @@
+{
+    "name": "Steps",
+    "tag": "s-steps",
+    "category": "Navigation",
+    "description": "Wizard step indicator with numbered circles, connecting lines and named content slots.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "string",
+            "default": "required",
+            "description": "Active step key (v-model)."
+        },
+        {
+            "name": "steps",
+            "type": "Array<{ key, label }>",
+            "default": "required",
+            "description": "Step definitions in order."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update. Future steps are not clickable."
+        }
+    ],
+    "slots": [
+        {
+            "name": "<step-key>",
+            "description": "Content for the active step, one named slot per key."
+        }
+    ],
+    "example": "<s-steps v-model=\"step\" :steps=\"[{ key: 'details', label: 'Details' }, { key: 'confirm', label: 'Confirm' }]\">\n  <template #details>…</template>\n  <template #confirm>…</template>\n</s-steps>"
+}

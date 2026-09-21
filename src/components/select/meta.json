@@ -1,0 +1,98 @@
+{
+    "name": "Select",
+    "tag": "s-select",
+    "category": "Form",
+    "description": "Single select: native dropdown by default, searchable combobox with filterable.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "string | number",
+            "default": "''",
+            "description": "Selected value (v-model)."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Field label."
+        },
+        {
+            "name": "options",
+            "type": "Array",
+            "default": "[]",
+            "description": "Option objects."
+        },
+        {
+            "name": "optionLabel",
+            "type": "string",
+            "default": "name",
+            "description": "Option text key."
+        },
+        {
+            "name": "optionValue",
+            "type": "string",
+            "default": "id",
+            "description": "Option value key."
+        },
+        {
+            "name": "placeholder",
+            "type": "string",
+            "default": "Select option",
+            "description": "Placeholder."
+        },
+        {
+            "name": "error",
+            "type": "string | Array",
+            "default": "''",
+            "description": "Error message(s)."
+        },
+        {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "Required asterisk."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables the field."
+        },
+        {
+            "name": "filterable",
+            "type": "boolean",
+            "default": "false",
+            "description": "Searchable combobox mode."
+        },
+        {
+            "name": "clearable",
+            "type": "boolean",
+            "default": "false",
+            "description": "Clear button."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skeleton options."
+        },
+        {
+            "name": "inline",
+            "type": "boolean",
+            "default": "false",
+            "description": "No bottom margin, for selects in a centered row."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "change",
+            "description": "Emitted with the new value."
+        }
+    ],
+    "slots": [],
+    "example": "<s-select v-model=\"ota\" label=\"OTA\" :options=\"otas\" filterable clearable />"
+}

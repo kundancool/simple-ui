@@ -1,0 +1,20 @@
+/* Code token colors — tuned for both themes. */
+.s-hl-kwd { color: #c41850; font-weight: 600; }
+.s-hl-str { color: #12853d; }
+.s-hl-num { color: #b45309; }
+.s-hl-com { color: #8a90a0; font-style: italic; }
+.s-hl-fn { color: #027ab7; }
+.s-hl-tag { color: #0c7076; font-weight: 600; }
+.s-hl-attr { color: #7c3aed; }
+.s-hl-punc { color: #5a6070; }
+.s-hl-tpl { color: #c2410c; font-weight: 600; }
+
+.dark .s-hl-kwd { color: #ff5c85; }
+.dark .s-hl-str { color: #4ade80; }
+.dark .s-hl-num { color: #fbbf24; }
+.dark .s-hl-com { color: #6e6e7a; }
+.dark .s-hl-fn { color: #38bdf8; }
+.dark .s-hl-tag { color: #ff5c85; }
+.dark .s-hl-attr { color: #a78bfa; }
+.dark .s-hl-punc { color: #9898a6; }
+.dark .s-hl-tpl { color: #fb923c; }

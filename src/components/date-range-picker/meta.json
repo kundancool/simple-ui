@@ -1,0 +1,98 @@
+{
+    "name": "Date Range Picker",
+    "tag": "s-date-range-picker",
+    "category": "Form",
+    "description": "Preset options (today, last 7/30 days, this/last month) plus a custom range calendar. No date library needed.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "Array",
+            "default": "[]",
+            "description": "[from, to] as YYYY-MM-DD (v-model)."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Field label."
+        },
+        {
+            "name": "presets",
+            "type": "Array",
+            "default": "null",
+            "description": "Custom [{ label, range }] — null uses the defaults."
+        },
+        {
+            "name": "showPresets",
+            "type": "boolean",
+            "default": "true",
+            "description": "Show the preset chips."
+        },
+        {
+            "name": "placeholder",
+            "type": "string",
+            "default": "Select dates",
+            "description": "Calendar placeholder."
+        },
+        {
+            "name": "min",
+            "type": "string",
+            "default": "''",
+            "description": "Earliest selectable date."
+        },
+        {
+            "name": "max",
+            "type": "string",
+            "default": "''",
+            "description": "Latest selectable date."
+        },
+        {
+            "name": "format",
+            "type": "string",
+            "default": "YYYY-MM-DD",
+            "description": "Trigger display format."
+        },
+        {
+            "name": "error",
+            "type": "string | Array",
+            "default": "''",
+            "description": "Error message(s)."
+        },
+        {
+            "name": "hint",
+            "type": "string",
+            "default": "''",
+            "description": "Helper text."
+        },
+        {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "Required asterisk."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables the field."
+        },
+        {
+            "name": "columns",
+            "type": "number",
+            "default": "2 via range",
+            "description": "Visible calendar columns."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "change",
+            "description": "Emitted with the new [from, to]."
+        }
+    ],
+    "slots": [],
+    "example": "<s-date-range-picker v-model=\"stay\" label=\"Stay dates\" @change=\"fetchRows\" />"
+}

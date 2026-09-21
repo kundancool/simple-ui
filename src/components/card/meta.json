@@ -1,0 +1,60 @@
+{
+    "name": "Card",
+    "tag": "s-card",
+    "category": "Layout",
+    "description": "Content panel with optional header, footer, shadow and loading skeleton.",
+    "props": [
+        {
+            "name": "title",
+            "type": "string",
+            "default": "''",
+            "description": "Header title text."
+        },
+        {
+            "name": "rounded",
+            "type": "boolean",
+            "default": "true",
+            "description": "Rounded corners."
+        },
+        {
+            "name": "shadow",
+            "type": "none | sm | md | lg | hover",
+            "default": "sm",
+            "description": "Shadow depth."
+        },
+        {
+            "name": "padding",
+            "type": "boolean",
+            "default": "true",
+            "description": "Body padding."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows skeleton placeholders instead of body."
+        },
+        {
+            "name": "skeletonLines",
+            "type": "number",
+            "default": "3",
+            "description": "Skeleton lines while loading."
+        }
+    ],
+    "events": [],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Card body."
+        },
+        {
+            "name": "header",
+            "description": "Custom header (overrides title)."
+        },
+        {
+            "name": "footer",
+            "description": "Footer bar."
+        }
+    ],
+    "example": "<s-card title=\"Bookings\" :loading=\"loading\">\n  <s-data-table :data=\"rows\">…</s-data-table>\n</s-card>"
+}

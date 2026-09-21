@@ -1,0 +1,44 @@
+{
+    "name": "Switch",
+    "tag": "s-switch",
+    "category": "Form",
+    "description": "Accessible toggle switch with loading and disabled states.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "boolean",
+            "default": "false",
+            "description": "On/off state (v-model)."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables interaction."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Spinner in the knob, blocks toggles."
+        },
+        {
+            "name": "ariaLabel",
+            "type": "string",
+            "default": "''",
+            "description": "Accessible name when no visible label."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "change",
+            "description": "Emitted with the new value."
+        }
+    ],
+    "slots": [],
+    "example": "<s-switch v-model=\"notifications\" aria-label=\"Email notifications\" />"
+}

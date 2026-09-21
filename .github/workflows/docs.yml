@@ -1,0 +1,27 @@
+name: docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: simple-ui/package-lock.json
+      - run: npm ci && npm run build:docs
+        working-directory: simple-ui
+      - run: cp simple-ui/llms.txt simple-ui/llms-full.txt simple-ui/docs-dist/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: simple-ui/docs-dist
+      - uses: actions/deploy-pages@v4

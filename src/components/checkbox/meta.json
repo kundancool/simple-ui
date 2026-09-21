@@ -1,0 +1,46 @@
+{
+    "name": "Checkbox",
+    "tag": "s-checkbox",
+    "category": "Form",
+    "description": "Labelled checkbox with accessible label binding.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "boolean",
+            "default": "false",
+            "description": "Checked state (v-model)."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Label text (click target)."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables the box."
+        },
+        {
+            "name": "error",
+            "type": "string | Array",
+            "default": "''",
+            "description": "Error message(s)."
+        },
+        {
+            "name": "inline",
+            "type": "boolean",
+            "default": "false",
+            "description": "No bottom margin."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        }
+    ],
+    "slots": [],
+    "example": "<s-checkbox v-model=\"agreed\" label=\"I agree to the terms\" />"
+}

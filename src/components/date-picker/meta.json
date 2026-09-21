@@ -1,0 +1,104 @@
+{
+    "name": "Date Picker",
+    "tag": "s-date-picker",
+    "category": "Form",
+    "description": "Themed calendar picker (single or range) built on native Date — no date library required.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "string | Array",
+            "default": "''",
+            "description": "YYYY-MM-DD, or [from, to] in range mode."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Field label."
+        },
+        {
+            "name": "placeholder",
+            "type": "string",
+            "default": "Select date",
+            "description": "Placeholder."
+        },
+        {
+            "name": "range",
+            "type": "boolean",
+            "default": "false",
+            "description": "Range mode."
+        },
+        {
+            "name": "min",
+            "type": "string",
+            "default": "''",
+            "description": "Earliest selectable date."
+        },
+        {
+            "name": "max",
+            "type": "string",
+            "default": "''",
+            "description": "Latest selectable date."
+        },
+        {
+            "name": "presets",
+            "type": "Array",
+            "default": "[]",
+            "description": "Quick picks: [{ label, value }] or [{ label, range }]."
+        },
+        {
+            "name": "error",
+            "type": "string | Array",
+            "default": "''",
+            "description": "Error message(s)."
+        },
+        {
+            "name": "hint",
+            "type": "string",
+            "default": "''",
+            "description": "Helper text."
+        },
+        {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "Required asterisk."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables the field."
+        },
+        {
+            "name": "format",
+            "type": "string",
+            "default": "YYYY-MM-DD",
+            "description": "Trigger display format."
+        },
+        {
+            "name": "columns",
+            "type": "number",
+            "default": "range ? 2 : 1",
+            "description": "Visible month columns; stacks on narrow screens."
+        },
+        {
+            "name": "inline",
+            "type": "boolean",
+            "default": "false",
+            "description": "No bottom margin."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "change",
+            "description": "Emitted with the new value."
+        }
+    ],
+    "slots": [],
+    "example": "<s-date-picker v-model=\"from\" label=\"From\" />\n<s-date-picker v-model=\"stay\" range label=\"Stay dates\" />"
+}

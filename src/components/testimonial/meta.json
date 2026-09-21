@@ -1,0 +1,17 @@
+{
+    "name": "Testimonial",
+    "tag": "s-testimonial",
+    "category": "Layout",
+    "description": "Review card: stars, quote and author with avatar.",
+    "props": [
+        { "name": "quote", "type": "string", "default": "required", "description": "Review text." },
+        { "name": "name", "type": "string", "default": "required", "description": "Author name." },
+        { "name": "role", "type": "string", "default": "''", "description": "Author role or context." },
+        { "name": "rating", "type": "number", "default": "5", "description": "Star rating." },
+        { "name": "avatar", "type": "string", "default": "''", "description": "Photo URL." },
+        { "name": "tone", "type": "string", "default": "purple", "description": "Avatar tint." }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-testimonial quote=\"Check-in took two minutes.\" name=\"Aarav Sharma\" role=\"Stayed in August\" :rating=\"5\" />"
+}

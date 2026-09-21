@@ -1,0 +1,18 @@
+{
+    "name": "Newsletter",
+    "tag": "s-newsletter",
+    "category": "Layout",
+    "description": "Email capture card with validation, loading and success states.",
+    "props": [
+        { "name": "title", "type": "string", "default": "Get product updates", "description": "Heading." },
+        { "name": "description", "type": "string", "default": "''", "description": "Supporting line." },
+        { "name": "placeholder", "type": "string", "default": "you@company.test", "description": "Email placeholder." },
+        { "name": "buttonText", "type": "string", "default": "Subscribe", "description": "Submit label." },
+        { "name": "successMessage", "type": "string", "default": "You are on the list — welcome!", "description": "Confirmation text." },
+        { "name": "hint", "type": "string", "default": "''", "description": "Small print under the form." },
+        { "name": "align", "type": "left | center", "default": "center", "description": "Text alignment." }
+    ],
+    "events": [{ "name": "submit", "description": "Emitted with the email on success." }],
+    "slots": [],
+    "example": "<s-newsletter title=\"Changelog in your inbox\" description=\"One email per release, never spam.\" />"
+}

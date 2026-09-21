@@ -1,0 +1,22 @@
+{
+    "name": "Blog Card",
+    "tag": "s-blog-card",
+    "category": "Layout",
+    "description": "Article teaser: cover, tag, title, excerpt and author byline.",
+    "props": [
+        { "name": "cover", "type": "string", "default": "''", "description": "Cover image URL." },
+        { "name": "tag", "type": "string", "default": "''", "description": "Topic pill." },
+        { "name": "tagTone", "type": "string", "default": "info", "description": "Pill tone." },
+        { "name": "title", "type": "string", "default": "required", "description": "Article title." },
+        { "name": "excerpt", "type": "string", "default": "''", "description": "Two-line teaser." },
+        { "name": "author", "type": "string", "default": "''", "description": "Author name (avatar derived)." },
+        { "name": "date", "type": "string", "default": "''", "description": "Publish date." },
+        { "name": "readingTime", "type": "string", "default": "''", "description": "e.g. 4 min read." },
+        { "name": "to", "type": "string | object", "default": "null", "description": "Link target. Omit for static." },
+        { "name": "linkTag", "type": "string | Component", "default": "a", "description": "Link renderer." },
+        { "name": "linkProps", "type": "Function", "default": "null", "description": "(to) => extra attrs." }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-blog-card title=\"Designing for dark mode\" excerpt=\"Tokens, contrast and focus rings.\" author=\"Kundan\" date=\"Sep 2026\" reading-time=\"4 min read\" tag=\"Design\" />"
+}

@@ -1,0 +1,28 @@
+{
+    "name": "Sidebar",
+    "tag": "s-sidebar",
+    "category": "Layout",
+    "description": "Dashboard app shell sidebar: collapsible, overlay on mobile, brand row, menu and footer slots.",
+    "props": [
+        { "name": "open", "type": "boolean", "default": "true", "description": "Expanded state (v-model:open), owned by the app." },
+        { "name": "width", "type": "number", "default": "288", "description": "Desktop width in px." },
+        { "name": "breakpoint", "type": "number", "default": "768", "description": "Viewport width below which it floats over an overlay." },
+        { "name": "fixed", "type": "boolean", "default": "true", "description": "Pin to the viewport (shell). False embeds in normal flow." },
+        { "name": "overlay", "type": "boolean", "default": "true", "description": "Dim the page behind it on small screens." },
+        { "name": "showClose", "type": "boolean", "default": "true", "description": "Collapse button in the brand row." },
+        { "name": "brandName", "type": "string", "default": "''", "description": "Default brand title." },
+        { "name": "brandInitial", "type": "string", "default": "S", "description": "Default brand tile letter." },
+        { "name": "brandSub", "type": "string", "default": "''", "description": "Small line under the brand." }
+    ],
+    "events": [
+        { "name": "update:open", "description": "v-model update." },
+        { "name": "open", "description": "Expanded via expose()." },
+        { "name": "close", "description": "Collapsed (button, overlay or Escape)." }
+    ],
+    "slots": [
+        { "name": "default", "description": "Menu content (usually SSidebarMenu)." },
+        { "name": "brand", "params": "{ close }", "description": "Custom brand row." },
+        { "name": "footer", "description": "Footer block." }
+    ],
+    "example": "<s-layout>\n  <template #menu><s-sidebar-menu :items=\"nav\" /></template>\n</s-layout>\n\n<s-sidebar v-model:open=\"open\" brand-name=\"Acme\" brand-sub=\"v2.4\">\n  <s-sidebar-menu :items=\"nav\" />\n  <template #footer>© 2026 Acme</template>\n</s-sidebar>"
+}

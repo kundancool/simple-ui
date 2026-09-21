@@ -1,0 +1,45 @@
+{
+    "name": "Alert",
+    "tag": "s-alert",
+    "category": "Feedback",
+    "description": "Inline banner message with semantic variants and optional dismiss.",
+    "props": [
+        {
+            "name": "variant",
+            "type": "info | success | warning | danger",
+            "default": "info",
+            "description": "Semantic style."
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "default": "''",
+            "description": "Bold heading line."
+        },
+        {
+            "name": "icon",
+            "type": "Component",
+            "default": "null",
+            "description": "Leading icon component."
+        },
+        {
+            "name": "dismissible",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows a dismiss button."
+        }
+    ],
+    "events": [
+        {
+            "name": "dismiss",
+            "description": "Emitted when the dismiss button is clicked."
+        }
+    ],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Alert body content."
+        }
+    ],
+    "example": "<s-alert variant=\"danger\" title=\"Payment pending\">₹2,000 is still due.</s-alert>"
+}

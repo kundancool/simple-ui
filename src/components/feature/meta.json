@@ -1,0 +1,19 @@
+{
+    "name": "Feature",
+    "tag": "s-feature",
+    "category": "Layout",
+    "description": "Icon tile, title, description and optional link for feature grids.",
+    "props": [
+        { "name": "icon", "type": "Component", "default": "null", "description": "Tile icon (or #icon slot)." },
+        { "name": "title", "type": "string", "default": "required", "description": "Feature title." },
+        { "name": "description", "type": "string", "default": "''", "description": "Feature text." },
+        { "name": "tone", "type": "blue | green | yellow | purple | orange", "default": "blue", "description": "Tile tint." },
+        { "name": "linkLabel", "type": "string", "default": "''", "description": "“Learn more”-style link emitting link." }
+    ],
+    "events": [{ "name": "link", "description": "Link clicked." }],
+    "slots": [
+        { "name": "default", "description": "Custom footer (overrides link)." },
+        { "name": "icon", "description": "Custom tile content." }
+    ],
+    "example": "<s-feature :icon=\"WalletIcon\" title=\"Billing\" description=\"Plans, cards and invoices.\" tone=\"green\" />"
+}

@@ -1,0 +1,86 @@
+{
+    "name": "Multi Select",
+    "tag": "s-multi-select",
+    "category": "Form",
+    "description": "Multi-select with chip summary, searchable option list and keyboard navigation.",
+    "props": [
+        {
+            "name": "modelValue",
+            "type": "Array",
+            "default": "[]",
+            "description": "Selected values (v-model)."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Field label."
+        },
+        {
+            "name": "options",
+            "type": "Array",
+            "default": "[]",
+            "description": "Option objects."
+        },
+        {
+            "name": "optionLabel",
+            "type": "string",
+            "default": "name",
+            "description": "Option text key."
+        },
+        {
+            "name": "optionValue",
+            "type": "string",
+            "default": "id",
+            "description": "Option value key."
+        },
+        {
+            "name": "placeholder",
+            "type": "string",
+            "default": "Select options",
+            "description": "Placeholder."
+        },
+        {
+            "name": "error",
+            "type": "string | Array",
+            "default": "''",
+            "description": "Error message(s)."
+        },
+        {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "Required asterisk."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables the field."
+        },
+        {
+            "name": "searchable",
+            "type": "boolean",
+            "default": "true",
+            "description": "Search box in the dropdown."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Skeleton options."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "change",
+            "description": "Emitted with the new array."
+        }
+    ],
+    "slots": [],
+    "example": "<s-multi-select v-model=\"otaIds\" label=\"OTAs\" :options=\"otas\" />"
+}

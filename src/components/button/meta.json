@@ -1,0 +1,63 @@
+{
+    "name": "Button",
+    "tag": "s-button",
+    "category": "Basic",
+    "description": "Clickable button with variants, sizes, loading state and icon support.",
+    "props": [
+        {
+            "name": "type",
+            "type": "button | submit | reset",
+            "default": "button",
+            "description": "HTML button type."
+        },
+        {
+            "name": "variant",
+            "type": "primary | secondary | danger | ghost | link",
+            "default": "primary",
+            "description": "Visual style."
+        },
+        {
+            "name": "size",
+            "type": "xs | sm | md | lg",
+            "default": "md",
+            "description": "Button size."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables interaction."
+        },
+        {
+            "name": "loading",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows a spinner and disables."
+        },
+        {
+            "name": "icon",
+            "type": "Component",
+            "default": "null",
+            "description": "Leading icon component."
+        },
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Accessible name for icon-only buttons."
+        }
+    ],
+    "events": [
+        {
+            "name": "click",
+            "description": "Emitted on click with the MouseEvent."
+        }
+    ],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Button label content."
+        }
+    ],
+    "example": "<s-button variant=\"primary\" @click=\"save\">Save</s-button>\n<s-button variant=\"secondary\" :loading=\"saving\">Cancel</s-button>"
+}

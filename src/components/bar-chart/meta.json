@@ -1,0 +1,40 @@
+{
+    "name": "Bar Chart",
+    "tag": "s-bar-chart",
+    "category": "Charts",
+    "description": "Responsive bar chart with themed defaults. Requires chart.js + vue-chartjs.",
+    "props": [
+        {
+            "name": "labels",
+            "type": "Array",
+            "default": "[]",
+            "description": "X-axis labels."
+        },
+        {
+            "name": "datasets",
+            "type": "Array",
+            "default": "[]",
+            "description": "Chart.js datasets."
+        },
+        {
+            "name": "options",
+            "type": "object",
+            "default": "{}",
+            "description": "Deep-overrides for the default options."
+        },
+        {
+            "name": "height",
+            "type": "number",
+            "default": "260",
+            "description": "Canvas height px."
+        }
+    ],
+    "events": [],
+    "slots": [
+        {
+            "name": "empty",
+            "description": "Shown when labels are empty."
+        }
+    ],
+    "example": "<s-bar-chart :labels=\"otas\" :datasets=\"[{ label: 'Bookings', data: counts, backgroundColor: '#0c7076' }]\" />"
+}

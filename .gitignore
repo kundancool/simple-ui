@@ -1,0 +1,19 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+docs-dist
+mcp/dist
+
+# Generated (rebuilt by npm run build / prepublishOnly)
+docs/public/registry.json
+llms.txt
+llms-full.txt
+
+# Local
+*.local
+.DS_Store
+.env
+.env.*
+npm-debug.log*

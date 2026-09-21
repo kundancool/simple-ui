@@ -1,0 +1,59 @@
+{
+    "name": "Skeleton",
+    "tag": "s-skeleton",
+    "category": "Feedback",
+    "description": "Loading placeholder that reserves content space so nothing jumps when data lands.",
+    "props": [
+        {
+            "name": "lines",
+            "type": "number",
+            "default": "1",
+            "description": "Stacked bars."
+        },
+        {
+            "name": "shape",
+            "type": "rect | circle | text",
+            "default": "rect",
+            "description": "Placeholder shape."
+        },
+        {
+            "name": "height",
+            "type": "string | number",
+            "default": "4",
+            "description": "Height step for bars."
+        },
+        {
+            "name": "size",
+            "type": "string | number",
+            "default": "10",
+            "description": "Size step for circles."
+        },
+        {
+            "name": "width",
+            "type": "string",
+            "default": "100%",
+            "description": "CSS width."
+        },
+        {
+            "name": "lastLineWidth",
+            "type": "string",
+            "default": "60%",
+            "description": "Final line width in multi-line blocks."
+        },
+        {
+            "name": "rounded",
+            "type": "string",
+            "default": "md",
+            "description": "Corner rounding."
+        },
+        {
+            "name": "ariaLabel",
+            "type": "string",
+            "default": "Loading",
+            "description": "Screen-reader announcement."
+        }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-skeleton v-if=\"loading\" :lines=\"3\" />\n<s-data-table v-else :data=\"rows\">…</s-data-table>"
+}

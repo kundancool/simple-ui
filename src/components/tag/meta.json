@@ -1,0 +1,40 @@
+{
+    "name": "Tag",
+    "tag": "s-tag",
+    "category": "Data",
+    "description": "Small status pill with semantic presets or a custom color.",
+    "props": [
+        {
+            "name": "type",
+            "type": "default | success | warning | danger | info",
+            "default": "default",
+            "description": "Semantic preset. Ignored when color is set."
+        },
+        {
+            "name": "variant",
+            "type": "subtle | solid | outline",
+            "default": "subtle",
+            "description": "Fill style."
+        },
+        {
+            "name": "size",
+            "type": "sm | md",
+            "default": "md",
+            "description": "Tag size."
+        },
+        {
+            "name": "color",
+            "type": "string",
+            "default": "null",
+            "description": "Custom hex color, bypasses presets."
+        }
+    ],
+    "events": [],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Tag text."
+        }
+    ],
+    "example": "<s-tag type=\"success\">Confirmed</s-tag>\n<s-tag type=\"danger\" variant=\"outline\">Cancelled</s-tag>"
+}

@@ -1,0 +1,22 @@
+{
+    "name": "Footer",
+    "tag": "s-footer",
+    "category": "Layout",
+    "description": "Site footer: brand block, link columns and a legal bar.",
+    "props": [
+        { "name": "brandName", "type": "string", "default": "''", "description": "Brand text." },
+        { "name": "brandInitial", "type": "string", "default": "S", "description": "Tile letter." },
+        { "name": "tagline", "type": "string", "default": "''", "description": "Line under the brand." },
+        { "name": "columns", "type": "Array<{ heading, links: [{ label, to? }] }>", "default": "[]", "description": "Link columns." },
+        { "name": "bottomNote", "type": "string", "default": "''", "description": "Legal bar text." },
+        { "name": "linkTag", "type": "string | Component", "default": "a", "description": "Link renderer." },
+        { "name": "linkProps", "type": "Function", "default": "null", "description": "(link) => extra attrs." }
+    ],
+    "events": [],
+    "slots": [
+        { "name": "brand", "description": "Custom brand block." },
+        { "name": "social", "description": "Social buttons row." },
+        { "name": "legal", "description": "Extra legal-bar content." }
+    ],
+    "example": "<s-footer brand-name=\"Acme\" tagline=\"Stays, minus the chaos.\" :columns=\"[{ heading: 'Docs', links: [{ label: 'Install' }] }]\" bottom-note=\"© 2026 Acme · MIT\" />"
+}

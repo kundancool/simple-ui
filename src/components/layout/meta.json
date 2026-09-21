@@ -1,0 +1,65 @@
+{
+    "name": "Layout",
+    "tag": "s-layout",
+    "category": "Layout",
+    "description": "App shell: collapsible sidebar, top header bar and scrollable main area. Slots for brand, menu, header actions and footer.",
+    "props": [
+        {
+            "name": "sidebarOpen",
+            "type": "boolean",
+            "default": "true",
+            "description": "Sidebar visibility (v-model:sidebarOpen)."
+        },
+        {
+            "name": "brandName",
+            "type": "string",
+            "default": "Simple UI",
+            "description": "Default brand text."
+        },
+        {
+            "name": "brandInitial",
+            "type": "string",
+            "default": "S",
+            "description": "Default brand tile letter."
+        },
+        {
+            "name": "footerText",
+            "type": "string",
+            "default": "''",
+            "description": "Default sidebar footer text."
+        }
+    ],
+    "events": [
+        {
+            "name": "update:sidebarOpen",
+            "description": "v-model update."
+        }
+    ],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Page content (main)."
+        },
+        {
+            "name": "brand",
+            "description": "Custom brand block."
+        },
+        {
+            "name": "menu",
+            "description": "Navigation — usually SSidebarMenu."
+        },
+        {
+            "name": "header-left",
+            "description": "Left header actions."
+        },
+        {
+            "name": "header-right",
+            "description": "Right header actions."
+        },
+        {
+            "name": "footer",
+            "description": "Custom sidebar footer."
+        }
+    ],
+    "example": "<s-layout v-model:sidebar-open=\"sidebarOpen\">\n  <template #menu><s-sidebar-menu :items=\"nav\" :active-path=\"route.path\" @navigate=\"go\" /></template>\n  <template #header-right><s-button size=\"sm\">New booking</s-button></template>\n  <router-view />\n</s-layout>"
+}

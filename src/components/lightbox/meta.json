@@ -1,0 +1,22 @@
+{
+    "name": "Lightbox",
+    "tag": "s-lightbox",
+    "category": "Data",
+    "description": "Fullscreen image viewer with keyboard navigation, counter and captions.",
+    "props": [
+        { "name": "images", "type": "Array<{ src, alt?, caption? }>", "default": "[]", "description": "Image list." },
+        { "name": "open", "type": "boolean", "default": "false", "description": "Visibility (v-model:open)." },
+        { "name": "index", "type": "number", "default": "0", "description": "Current image (v-model:index)." },
+        { "name": "loop", "type": "boolean", "default": "true", "description": "Wrap past the ends." },
+        { "name": "showCounter", "type": "boolean", "default": "true", "description": "“3 / 12” caption." },
+        { "name": "closeOnEsc", "type": "boolean", "default": "true", "description": "Escape closes." },
+        { "name": "zIndex", "type": "number", "default": "300", "description": "Overlay level." }
+    ],
+    "events": [
+        { "name": "update:open", "description": "v-model:open update." },
+        { "name": "update:index", "description": "v-model:index update." },
+        { "name": "close", "description": "Viewer dismissed." }
+    ],
+    "slots": [],
+    "example": "<s-gallery :images=\"photos\" />\n<!-- or manual -->\n<s-lightbox v-model:open=\"open\" v-model:index=\"at\" :images=\"photos\" />"
+}
