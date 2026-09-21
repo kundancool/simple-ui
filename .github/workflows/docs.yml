@@ -3,25 +3,39 @@ name: docs
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  pages:
+  deploy:
+    name: Build and deploy docs
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: simple-ui/package-lock.json
-      - run: npm ci && npm run build:docs
-        working-directory: simple-ui
-      - run: cp simple-ui/llms.txt simple-ui/llms-full.txt simple-ui/docs-dist/
+          cache-dependency-path: package-lock.json
+      - uses: actions/configure-pages@v5
+      - run: npm ci
+      - run: npm run build
+      - run: npm run build:docs
+      - name: Ship agent docs with the site
+        run: cp llms.txt llms-full.txt docs-dist/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: simple-ui/docs-dist
-      - uses: actions/deploy-pages@v4
+          path: docs-dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

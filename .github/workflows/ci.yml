@@ -5,7 +5,8 @@ on:
   pull_request:
 
 jobs:
-  build:
+  library:
+    name: Library (tests + builds)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,14 +14,35 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: simple-ui/package-lock.json
+          cache-dependency-path: package-lock.json
       - run: npm ci
-        working-directory: simple-ui
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
+      - name: Build library + registry
+        run: npm run build
+      - name: Build docs
+        run: npm run build:docs
+      - name: Assert registry/package coverage
+        run: |
+          node -e "
+            const r = require('./dist/registry.json');
+            if (r.components.length < 60) throw new Error('registry incomplete');
+            console.log(r.components.length + ' components documented');
+          "
+
+  mcp:
+    name: MCP server
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mcp/package-lock.json
+      - run: npm ci
+        working-directory: mcp
       - run: npm run build
-        working-directory: simple-ui
-      - run: npm test
-        working-directory: simple-ui
-      - run: npm run build:docs
-        working-directory: simple-ui
-      - run: npm install --no-audit --no-fund && npm run build
-        working-directory: simple-ui/mcp
+        working-directory: mcp

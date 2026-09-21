@@ -4,13 +4,17 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 jobs:
   publish-lib:
+    name: Publish @kundancool/simple-ui
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -18,28 +22,41 @@ jobs:
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
           cache: npm
-          cache-dependency-path: simple-ui/package-lock.json
-      - run: npm ci && npm run build && npm test
-        working-directory: simple-ui
-      - run: npm publish --provenance --access public
-        working-directory: simple-ui
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - name: Skip if NPM_TOKEN is not configured
+        if: env.NODE_AUTH_TOKEN == ''
+        run: |
+          echo "::notice::NPM_TOKEN secret is not set — skipping publish."
+      - name: Publish
+        if: env.NODE_AUTH_TOKEN != ''
+        run: npm publish --provenance --access public
 
   publish-mcp:
+    name: Publish @kundancool/simple-ui-mcp
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install --no-audit --no-fund && npm run build
-        working-directory: simple-ui/mcp
-      - run: npm publish --provenance --access public
-        working-directory: simple-ui/mcp
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          cache: npm
+          cache-dependency-path: mcp/package-lock.json
+      - run: npm ci
+        working-directory: mcp
+      - name: Skip if NPM_TOKEN is not configured
+        if: env.NODE_AUTH_TOKEN == ''
+        run: |
+          echo "::notice::NPM_TOKEN secret is not set — skipping publish."
+      - name: Publish
+        if: env.NODE_AUTH_TOKEN != ''
+        run: npm publish --provenance --access public
+        working-directory: mcp
