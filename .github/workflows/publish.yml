@@ -26,13 +26,25 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run typecheck
+
+      - name: Has this version already been published?
+        id: check
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "@kundancool/simple-ui@$VERSION" version > /dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::@kundancool/simple-ui@$VERSION is already on the registry — nothing to publish."
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Skip if NPM_TOKEN is not configured
         if: env.NODE_AUTH_TOKEN == ''
-        run: |
-          echo "::notice::NPM_TOKEN secret is not set — skipping publish."
+        run: echo "::notice::NPM_TOKEN secret is not set — skipping publish."
+
       - name: Publish
-        if: env.NODE_AUTH_TOKEN != ''
-        run: npm publish --provenance --access public
+        if: env.NODE_AUTH_TOKEN != '' && steps.check.outputs.published == 'false'
+        run: npm publish --provenance
 
   publish-mcp:
     name: Publish @kundancool/simple-ui-mcp
@@ -52,11 +64,24 @@ jobs:
           cache-dependency-path: mcp/package-lock.json
       - run: npm ci
         working-directory: mcp
+
+      - name: Has this version already been published?
+        id: check
+        working-directory: mcp
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "@kundancool/simple-ui-mcp@$VERSION" version > /dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::@kundancool/simple-ui-mcp@$VERSION is already on the registry — nothing to publish."
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Skip if NPM_TOKEN is not configured
         if: env.NODE_AUTH_TOKEN == ''
-        run: |
-          echo "::notice::NPM_TOKEN secret is not set — skipping publish."
+        run: echo "::notice::NPM_TOKEN secret is not set — skipping publish."
+
       - name: Publish
-        if: env.NODE_AUTH_TOKEN != ''
-        run: npm publish --provenance --access public
+        if: env.NODE_AUTH_TOKEN != '' && steps.check.outputs.published == 'false'
+        run: npm publish --provenance
         working-directory: mcp
