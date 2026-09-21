@@ -8,6 +8,8 @@ import SCta from './components/cta/SCta.vue'
 import SDescriptions from './components/descriptions/SDescriptions.vue'
 import SEmpty from './components/empty/SEmpty.vue'
 import SProgress from './components/progress/SProgress.vue'
+import SRadio from './components/radio/SRadio.vue'
+import SRadioGroup from './components/radio-group/SRadioGroup.vue'
 import SRating from './components/rating/SRating.vue'
 import SSegmented from './components/segmented/SSegmented.vue'
 import STimeline from './components/timeline/STimeline.vue'
@@ -47,6 +49,7 @@ import SMultiSelect from './components/multi-select/SMultiSelect.vue'
 import SNewsletter from './components/newsletter/SNewsletter.vue'
 import SNumberInput from './components/number-input/SNumberInput.vue'
 import SPageHeader from './components/page-header/SPageHeader.vue'
+import SOption from './components/option/SOption.vue'
 import SPagination from './components/pagination/SPagination.vue'
 import SRelativeTime from './components/relative-time/SRelativeTime.vue'
 import SSelect from './components/select/SSelect.vue'
@@ -59,6 +62,7 @@ import SSpinner from './components/spinner/SSpinner.vue'
 import SStatCard from './components/stat-card/SStatCard.vue'
 import SSteps from './components/steps/SSteps.vue'
 import SSwitch from './components/switch/SSwitch.vue'
+import SUpload from './components/upload/SUpload.vue'
 import STabs from './components/tabs/STabs.vue'
 import STag from './components/tag/STag.vue'
 import STestimonial from './components/testimonial/STestimonial.vue'
@@ -74,6 +78,8 @@ export {
     SDescriptions,
     SEmpty,
     SProgress,
+    SRadio,
+    SRadioGroup,
     SRating,
     SSegmented,
     STimeline,
@@ -115,6 +121,7 @@ export {
     SNewsletter,
     SNumberInput,
     SPageHeader,
+    SOption,
     SPagination,
     SRelativeTime,
     SSelect,
@@ -127,6 +134,7 @@ export {
     SStatCard,
     SSteps,
     SSwitch,
+    SUpload,
     STabs,
     STag,
     STestimonial,

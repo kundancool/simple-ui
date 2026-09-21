@@ -1,0 +1,20 @@
+{
+    "name": "Radio",
+    "tag": "s-radio",
+    "category": "Form",
+    "description": "Single radio option with a custom dot. Standalone with v-model, or declare only `value` inside a Radio Group.",
+    "props": [
+        { "name": "modelValue", "type": "string | number | boolean", "default": "undefined", "description": "Standalone value (v-model). Ignored inside a group." },
+        { "name": "value", "type": "string | number | boolean", "default": "null", "description": "The value this option represents." },
+        { "name": "label", "type": "string | number | boolean", "default": "undefined", "description": "Historic alias for `value`." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Blocks selection; inherited from the group." },
+        { "name": "size", "type": "xs | sm | md | lg", "default": "undefined", "description": "Dot size; inherited from the group or form item." },
+        { "name": "name", "type": "string", "default": "''", "description": "Native radio name; inherited from the group." }
+    ],
+    "events": [
+        { "name": "update:modelValue", "description": "v-model update (standalone use)." },
+        { "name": "change", "description": "Emitted with the value when selected." }
+    ],
+    "slots": [{ "name": "default", "description": "Option text." }],
+    "example": "<s-radio-group v-model=\"channel\" inline>\n  <s-radio value=\"direct\">Direct</s-radio>\n  <s-radio value=\"marketplace\">Marketplace</s-radio>\n  <s-radio value=\"partner\" disabled>Partner</s-radio>\n</s-radio-group>"
+}

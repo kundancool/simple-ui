@@ -1,0 +1,14 @@
+{
+    "name": "Option",
+    "tag": "s-option",
+    "category": "Form",
+    "description": "Declarative option for Select, so choices can be written in markup instead of a data array. Renders nothing itself.",
+    "props": [
+        { "name": "label", "type": "string", "default": "''", "description": "Visible text." },
+        { "name": "value", "type": "string | number | boolean", "default": "null", "description": "Value submitted when chosen." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Prevents selection." }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-select v-model=\"channel\" label=\"Channel\">\n  <s-option label=\"Direct\" value=\"direct\" />\n  <s-option label=\"Marketplace\" value=\"marketplace\" />\n  <s-option label=\"Sold out\" value=\"none\" disabled />\n</s-select>"
+}

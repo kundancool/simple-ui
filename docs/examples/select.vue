@@ -1,24 +1,28 @@
 <template>
-    <s-select v-model="ota" label="OTA" :options="otas" filterable clearable />
-    <s-multi-select v-model="rooms" label="Room types" :options="roomTypes" />
-    <p class="text-sm s-text-secondary">OTA: {{ ota || '—' }} · Rooms: {{ rooms.join(', ') || '—' }}</p>
+    <s-select v-model="slotted" label="Slotted options" filterable clearable @change="onChange">
+        <s-option label="Direct" value="direct" />
+        <s-option label="Marketplace" value="marketplace" />
+        <s-option label="Reseller" value="goibibo" />
+        <s-option label="Withdrawn channel" value="none" disabled />
+    </s-select>
+    <s-select v-model="fromArray" label="Array options" :options="options" option-label="label" option-value="value" clearable />
+    <p class="text-sm s-text-muted">Slotted: {{ slotted || '—' }} · Array: {{ fromArray || '—' }}</p>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { SSelect } from '@kundancool/simple-ui'
-import { SMultiSelect } from '@kundancool/simple-ui'
+import { SOption } from '@kundancool/simple-ui'
 
-const ota = ref('')
-const rooms = ref([])
-const otas = [
-    { id: 'direct', name: 'Direct' },
-    { id: 'mmt', name: 'MakeMyTrip' },
-    { id: 'booking', name: 'Booking.com' },
+const slotted = ref('direct')
+const fromArray = ref('')
+const options = [
+    { value: 'confirmed', label: 'Confirmed' },
+    { value: 'pending', label: 'Pending' },
 ]
-const roomTypes = [
-    { id: 1, name: 'Deluxe' },
-    { id: 2, name: 'Suite' },
-    { id: 3, name: 'Standard' },
-]
+
+function onChange(value) {
+    // Hook for a refetch, toast, etc.
+    void value
+}
 </script>

@@ -1,24 +1,27 @@
 <template>
-    <div :class="inline ? '' : 'mb-4'" ref="wrapperRef">
+    <div :class="[inline ? '' : 'mb-4', rootClass]" :style="rootStyle" ref="wrapperRef">
         <label v-if="label" :for="fieldId" class="block text-sm font-medium s-text-primary mb-1.5">
             {{ label }}
             <span v-if="required" class="s-text-accent" aria-hidden="true">*</span>
         </label>
 
+        <!-- Native select (default when filterable is false) -->
         <div v-if="!filterable" class="relative">
             <select
                 :id="fieldId"
                 :value="modelValue"
-                :disabled="disabled"
+                :disabled="isDisabled"
                 :aria-label="label || placeholder"
                 :aria-invalid="errorMessage ? 'true' : undefined"
                 :aria-describedby="describedBy"
-                :class="['s-input w-full px-3 py-2 rounded-md text-sm appearance-none', errorMessage ? 's-is-error' : '']"
+                :class="['s-input w-full appearance-none rounded-md', sizeClass, errorMessage ? 's-is-error' : '']"
+                :style="controlStyle"
+                v-bind="fieldAttrs"
                 @change="onNativeChange"
             >
                 <option value="" disabled>{{ placeholder }}</option>
-                <option v-for="option in options" :key="option[optionValue]" :value="option[optionValue]">
-                    {{ option[optionLabel] }}
+                <option v-for="option in resolvedOptions" :key="String(option.value)" :value="option.value" :disabled="option.disabled">
+                    {{ option.label }}
                 </option>
             </select>
             <div class="absolute inset-y-0 right-0 flex items-center gap-1 pr-2">
@@ -30,26 +33,26 @@
                     tabindex="-1"
                     @click.stop="clear"
                 >
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <SIcon name="close" size="xs" />
                 </button>
-                <svg class="w-4 h-4 s-text-muted pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
+                <SIcon name="chevrondown" size="sm" class="s-text-muted pointer-events-none" />
             </div>
         </div>
 
+        <!-- Filterable select (searchable dropdown) -->
         <div v-else class="relative">
             <input
                 :id="fieldId"
                 ref="inputRef"
                 type="text"
+                :aria-label="label || placeholder"
                 :aria-invalid="errorMessage ? 'true' : undefined"
                 :aria-describedby="describedBy"
                 :value="open ? query : selectedLabel"
                 :placeholder="selectedLabel || placeholder"
-                :aria-label="label || placeholder"
-                :disabled="disabled"
-                :class="['s-input w-full px-3 py-2 rounded-md text-sm pr-8', errorMessage ? 's-is-error' : '']"
+                :disabled="isDisabled"
+                :class="['s-input w-full rounded-md pr-8', sizeClass, errorMessage ? 's-is-error' : '']"
+                :style="controlStyle"
                 role="combobox"
                 aria-autocomplete="list"
                 :aria-expanded="open"
@@ -68,11 +71,9 @@
                     tabindex="-1"
                     @mousedown.prevent="clear"
                 >
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <SIcon name="close" size="xs" />
                 </button>
-                <svg class="w-4 h-4 s-text-muted pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
+                <SIcon name="chevrondown" size="sm" class="s-text-muted pointer-events-none" />
             </div>
 
             <Teleport to="body">
@@ -82,64 +83,79 @@
                         ref="dropdownRef"
                         data-overlay
                         role="listbox"
-                        class="fixed s-bg-surface border s-border-theme rounded-md s-shadow-lg-theme max-h-52 overflow-auto origin-top"
+                        class="fixed s-bg-surface border s-border-theme rounded-md shadow-lg max-h-52 overflow-auto origin-top"
                         :style="{ ...dropdownStyle, zIndex: 'var(--s-z-dropdown)' }"
                     >
                         <div v-if="loading" class="px-3 py-2 space-y-2" aria-busy="true">
                             <SSkeleton v-for="i in 3" :key="i" height="4" aria-label="Loading options" />
                         </div>
-                        <div v-else-if="filteredOptions.length === 0" class="px-3 py-2 text-xs s-text-muted">No matches</div>
+                        <div v-else-if="filteredOptions.length === 0" class="px-3 py-2 text-xs s-text-muted">{{ emptyText }}</div>
                         <button
                             v-for="(opt, idx) in loading ? [] : filteredOptions"
                             :id="`${fieldId}-opt-${idx}`"
-                            :key="opt[optionValue]"
+                            :key="String(opt.value)"
                             type="button"
                             role="option"
                             tabindex="-1"
-                            :aria-selected="String(opt[optionValue]) === String(modelValue)"
-                            class="s-select-option w-full text-left px-3 py-2 text-sm transition-colors"
+                            :disabled="opt.disabled"
+                            :aria-selected="isSelected(opt)"
+                            class="s-select-option w-full text-left px-3 py-2 text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             :class="[
                                 idx === highlightedIndex ? 's-bg-accent-subtle s-text-accent' : 's-text-primary',
-                                String(opt[optionValue]) === String(modelValue) ? 'font-semibold' : '',
+                                isSelected(opt) ? 'font-semibold' : '',
                             ]"
                             @mousedown.prevent="selectOption(opt)"
                             @mouseenter="highlightedIndex = idx"
-                        >{{ opt[optionLabel] }}</button>
+                        >{{ opt.label }}</button>
                     </div>
                 </Transition>
             </Teleport>
         </div>
 
         <p v-if="errorMessage" :id="messageId" class="mt-1 text-xs s-text-danger" role="alert">{{ errorMessage }}</p>
+        <p v-else-if="hint" :id="messageId" class="mt-1 text-xs s-text-muted">{{ hint }}</p>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, nextTick, onMounted, onBeforeUnmount, useId } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useAttrs, useId, useSlots, Fragment } from 'vue'
+import SIcon from '../icon/SIcon.vue'
+import SSkeleton from '../skeleton/SSkeleton.vue'
+import SOption from '../option/SOption.vue'
 import { firstValidationError } from '../../utils/validation'
 import { useListNavigation } from '../../composables/useListNavigation'
-import SSkeleton from '../skeleton/SSkeleton.vue'
+import { useFieldDisabled, useFieldId, useFieldSize } from '../../composables/formContext'
 
-defineOptions({ name: 'SSelect' })
+defineOptions({ name: 'SSelect', inheritAttrs: false })
 
 const props = defineProps({
-    modelValue: { type: [String, Number], default: '' },
+    modelValue: { type: [String, Number, Boolean], default: '' },
     label: { type: String, default: '' },
+    /** Option objects — an alternative to <s-option> children. */
     options: { type: Array, default: () => [] },
     optionLabel: { type: String, default: 'name' },
     optionValue: { type: String, default: 'id' },
     placeholder: { type: String, default: 'Select option' },
     error: { type: [String, Array], default: '' },
+    hint: { type: String, default: '' },
     required: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     filterable: { type: Boolean, default: false },
     clearable: { type: Boolean, default: false },
+    /** Shown when the filter matches nothing. */
+    emptyText: { type: String, default: 'No matches' },
+    /** xs | sm | md | lg — inherits from the enclosing s-form-item. */
+    size: { type: String, default: undefined, validator: (v) => v === undefined || ['xs', 'sm', 'md', 'lg'].includes(v) },
+    /** Options are still being fetched — shows placeholders instead of the empty text. */
+    loading: { type: Boolean, default: false },
     /** Inline mode: no bottom margin, for selects sitting in a centered row. */
     inline: { type: Boolean, default: false },
-    loading: { type: Boolean, default: false },
 })
 
-const emit = defineEmits(['update:modelValue', 'change'])
+const emit = defineEmits(['update:modelValue', 'change', 'clear', 'visible-change'])
+
+const attrs = useAttrs()
+const slots = useSlots()
 
 const wrapperRef = ref(null)
 const inputRef = ref(null)
@@ -148,30 +164,93 @@ const open = ref(false)
 const query = ref('')
 const dropdownStyle = ref({})
 
-const hasValue = computed(() => props.modelValue !== '' && props.modelValue !== null && props.modelValue !== undefined)
 const errorMessage = computed(() => firstValidationError(props.error))
-const fieldId = useId()
-const messageId = `${fieldId}-message`
-const describedBy = computed(() => (errorMessage.value ? messageId : undefined))
+const fallbackId = useId()
+const fieldId = useFieldId(() => fallbackId)
+const messageId = `${fieldId.value}-message`
+const describedBy = computed(() => (errorMessage.value || props.hint ? messageId : undefined))
+
+const fieldSize = useFieldSize(computed(() => props.size))
+const isDisabled = useFieldDisabled(computed(() => props.disabled))
+
+const rootClass = computed(() => attrs.class)
+const rootStyle = computed(() => attrs.style)
+const fieldAttrs = computed(() => {
+    const { class: _class, style: _style, ...rest } = attrs
+    return rest
+})
+
+const HEIGHTS = { xs: '28px', sm: '32px', md: '36px', lg: '40px' }
+const SIZE_CLASS = {
+    xs: 'px-2 text-xs',
+    sm: 'px-2.5 text-xs',
+    md: 'px-3 text-sm',
+    lg: 'px-3.5 text-base',
+}
+const sizeClass = computed(() => SIZE_CLASS[fieldSize.value])
+const controlStyle = computed(() => ({ '--s-field-h': HEIGHTS[fieldSize.value] }))
+
+/** <s-option> children, collected from fragments like SDataTable does. */
+function flatten(nodes) {
+    return (nodes ?? []).flatMap((node) => (node.type === Fragment ? flatten(node.children ?? []) : [node]))
+}
+
+/**
+ * A bare boolean attribute (`<s-option disabled />`) reaches the raw vnode as
+ * "" rather than true — Vue only normalises it when resolving props on the
+ * component itself, which never happens here because the option renders
+ * nothing. Treat presence as true, exactly like Vue would.
+ */
+function bareBoolean(value) {
+    return value === '' || value === true
+}
+
+const slottedOptions = computed(() =>
+    flatten(slots.default?.())
+        .filter((node) => node.type === SOption)
+        .map((node) => ({
+            label: node.props?.label ?? '',
+            value: node.props?.value ?? null,
+            disabled: bareBoolean(node.props?.disabled),
+        })),
+)
+
+/** Both sources normalise to { label, value, disabled }. */
+const resolvedOptions = computed(() => {
+    if (props.options.length) {
+        return props.options.map((option) => ({
+            label: option[props.optionLabel],
+            value: option[props.optionValue],
+            disabled: Boolean(option.disabled),
+        }))
+    }
+    return slottedOptions.value
+})
+
+const hasValue = computed(() => props.modelValue !== '' && props.modelValue !== null && props.modelValue !== undefined)
 
 const selectedLabel = computed(() => {
     if (!hasValue.value) {
         return ''
     }
-    const match = props.options.find((o) => String(o[props.optionValue]) === String(props.modelValue))
-    return match ? match[props.optionLabel] : ''
+    const match = resolvedOptions.value.find((option) => String(option.value) === String(props.modelValue))
+    return match?.label ?? ''
 })
 
 const filteredOptions = computed(() => {
     if (!props.filterable) {
-        return props.options
+        return resolvedOptions.value
     }
     const term = query.value.toLowerCase().trim()
     if (!term) {
-        return props.options
+        return resolvedOptions.value
     }
-    return props.options.filter((o) => String(o[props.optionLabel] ?? '').toLowerCase().includes(term))
+    return resolvedOptions.value.filter((option) => String(option.label ?? '').toLowerCase().includes(term))
 })
+
+function isSelected(option) {
+    return String(option.value) === String(props.modelValue)
+}
 
 function updateDropdownPosition() {
     if (!inputRef.value) {
@@ -189,35 +268,45 @@ function onNativeChange(e) {
 function clear() {
     emit('update:modelValue', '')
     emit('change', '')
+    emit('clear')
     closeDropdown()
 }
 
 function openDropdown() {
-    if (props.disabled) {
+    if (isDisabled.value) {
         return
     }
     resetNavigation()
     open.value = true
     query.value = ''
+    emit('visible-change', true)
     nextTick(() => updateDropdownPosition())
 }
 
 function closeDropdown() {
+    if (!open.value) {
+        return
+    }
     open.value = false
     query.value = ''
+    emit('visible-change', false)
 }
 
 function onFilterInput(e) {
     query.value = e.target.value
     if (!open.value) {
         open.value = true
+        emit('visible-change', true)
     }
     nextTick(() => updateDropdownPosition())
 }
 
-function selectOption(opt) {
-    emit('update:modelValue', opt[props.optionValue])
-    emit('change', opt[props.optionValue])
+function selectOption(option) {
+    if (option.disabled) {
+        return
+    }
+    emit('update:modelValue', option.value)
+    emit('change', option.value)
     closeDropdown()
     nextTick(() => inputRef.value?.blur())
 }
@@ -225,13 +314,14 @@ function selectOption(opt) {
 const { activeIndex: highlightedIndex, onKeydown: onListKeydown, reset: resetNavigation } = useListNavigation(
     filteredOptions,
     {
-        onSelect: (opt) => selectOption(opt),
+        onSelect: (option) => selectOption(option),
         onClose: () => closeDropdown(),
         typeahead: false,
-        label: (opt) => String(opt?.[props.optionLabel] ?? ''),
+        label: (option) => String(option?.label ?? ''),
     },
 )
 
+/** List navigation with the dropdown opening on ArrowDown/ArrowUp. */
 function onKeydown(event) {
     if (!open.value && ['ArrowDown', 'ArrowUp'].includes(event.key)) {
         event.preventDefault()
@@ -247,23 +337,17 @@ function onClickOutside(e) {
     }
 }
 
-onMounted(() => {
-    if (props.filterable) {
-        document.addEventListener('mousedown', onClickOutside)
-    }
-})
-onBeforeUnmount(() => {
-    if (props.filterable) {
-        document.removeEventListener('mousedown', onClickOutside)
-    }
-})
+onMounted(() => document.addEventListener('mousedown', onClickOutside))
+onBeforeUnmount(() => document.removeEventListener('mousedown', onClickOutside))
+
+defineExpose({ open: openDropdown, close: closeDropdown })
 </script>
 
 <style>
-.s-select-option:hover {
+.s-select-option:hover:not(:disabled) {
     background-color: var(--s-surface-raised);
 }
-.s-select-option.s-bg-accent-subtle:hover {
+.s-select-option.s-bg-accent-subtle:hover:not(:disabled) {
     background-color: var(--s-accent-subtle);
 }
 </style>

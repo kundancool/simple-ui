@@ -1,0 +1,34 @@
+{
+    "name": "Upload",
+    "tag": "s-upload",
+    "category": "Form",
+    "description": "Click-or-drop file upload posting multipart to an endpoint, with progress, queue and CSRF handling.",
+    "props": [
+        { "name": "action", "type": "string", "default": "required", "description": "Endpoint receiving the multipart POST." },
+        { "name": "method", "type": "string", "default": "POST", "description": "HTTP method." },
+        { "name": "data", "type": "object", "default": "{}", "description": "Extra multipart fields." },
+        { "name": "headers", "type": "object", "default": "{}", "description": "Extra headers (added to the CSRF token)." },
+        { "name": "autoUpload", "type": "boolean", "default": "true", "description": "Upload as soon as files are chosen." },
+        { "name": "accept", "type": "string", "default": "''", "description": "Input accept filter." },
+        { "name": "multiple", "type": "boolean", "default": "false", "description": "Allow several files." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Blocks interaction." },
+        { "name": "label", "type": "string", "default": "''", "description": "Field label." },
+        { "name": "tip", "type": "string", "default": "''", "description": "Small print under the drop zone." },
+        { "name": "hint", "type": "string", "default": "''", "description": "Helper text." },
+        { "name": "error", "type": "string | Array", "default": "''", "description": "Error message(s)." },
+        { "name": "inline", "type": "boolean", "default": "false", "description": "No bottom margin." },
+        { "name": "onSuccess", "type": "Function", "default": "null", "description": "Called with (response, file) on success." }
+    ],
+    "events": [
+        { "name": "change", "description": "Files selected." },
+        { "name": "progress", "description": "(percent, file) while uploading." },
+        { "name": "success", "description": "(response, file) on a 2xx response." },
+        { "name": "error", "description": "(request, file) on failure." },
+        { "name": "remove", "description": "File removed from the queue." }
+    ],
+    "slots": [
+        { "name": "default", "description": "Custom drop-zone content." },
+        { "name": "tip", "description": "Custom small print." }
+    ],
+    "example": "<s-upload action=\"/uploads\" accept=\"image/*\" tip=\"PNG or JPG, up to 5MB\" @success=\"onUploaded\" />"
+}
