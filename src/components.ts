@@ -32,9 +32,12 @@ import SDoughnutChart from './components/doughnut-chart/SDoughnutChart.vue'
 import SDropdownMenu from './components/dropdown-menu/SDropdownMenu.vue'
 import SFeature from './components/feature/SFeature.vue'
 import SFilter from './components/filter/SFilter.vue'
+import SForm from './components/form/SForm.vue'
+import SFormItem from './components/form-item/SFormItem.vue'
 import SFooter from './components/footer/SFooter.vue'
 import SHoverPopover from './components/hover-popover/SHoverPopover.vue'
 import SGallery from './components/gallery/SGallery.vue'
+import SIcon from './components/icon/SIcon.vue'
 import SInput from './components/input/SInput.vue'
 import SLightbox from './components/lightbox/SLightbox.vue'
 import SLayout from './components/layout/SLayout.vue'
@@ -52,6 +55,7 @@ import SSectionHeading from './components/section-heading/SSectionHeading.vue'
 import SSidebar from './components/sidebar/SSidebar.vue'
 import SSidebarMenu from './components/sidebar-menu/SSidebarMenu.vue'
 import SSkeleton from './components/skeleton/SSkeleton.vue'
+import SSpinner from './components/spinner/SSpinner.vue'
 import SStatCard from './components/stat-card/SStatCard.vue'
 import SSteps from './components/steps/SSteps.vue'
 import SSwitch from './components/switch/SSwitch.vue'
@@ -97,8 +101,11 @@ export {
     SFeature,
     SFilter,
     SFooter,
+    SForm,
+    SFormItem,
     SHoverPopover,
     SGallery,
+    SIcon,
     SInput,
     SLightbox,
     SLayout,
@@ -112,6 +119,7 @@ export {
     SRelativeTime,
     SSelect,
     SSearchPalette,
+    SSpinner,
     SSectionHeading,
     SSidebar,
     SSidebarMenu,

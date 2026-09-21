@@ -1,0 +1,13 @@
+{
+    "name": "Spinner",
+    "tag": "s-spinner",
+    "category": "Feedback",
+    "description": "Standalone loading ring for buttons, panels and inline waits.",
+    "props": [
+        { "name": "size", "type": "xs | sm | md | lg", "default": "md", "description": "Ring size." },
+        { "name": "label", "type": "string", "default": "''", "description": "Accessible name; omit for a decorative spinner." }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-spinner />\n<s-spinner size=\"lg\" label=\"Loading bookings\" />"
+}

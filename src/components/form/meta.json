@@ -1,0 +1,15 @@
+{
+    "name": "Form",
+    "tag": "s-form",
+    "category": "Form",
+    "description": "Form wrapper: label layout, size/disabled cascading to every control, and scrollToFirstError() for server-side validation.",
+    "props": [
+        { "name": "labelPosition", "type": "top | left", "default": "top", "description": "Stack labels above controls, or place them in a left gutter." },
+        { "name": "labelWidth", "type": "string", "default": "auto", "description": "Gutter width when labelPosition is left." },
+        { "name": "size", "type": "xs | sm | md | lg", "default": "undefined", "description": "Default size inherited by controls." },
+        { "name": "disabled", "type": "boolean", "default": "false", "description": "Disables every control and blocks interaction." }
+    ],
+    "events": [{ "name": "submit", "description": "Form submitted; native submission is prevented." }],
+    "slots": [{ "name": "default", "description": "SFormItem rows." }],
+    "example": "<s-form label-position=\"left\" label-width=\"160px\" :disabled=\"saving\" @submit=\"save\">\n  <s-form-item label=\"Guest name\" required :error=\"errors.name\">\n    <s-input v-model=\"form.name\" />\n  </s-form-item>\n  <s-button type=\"submit\">Save</s-button>\n</s-form>\n\n// after a 422 response\nconst form = useTemplateRef('form')\nform.value.scrollToFirstError()"
+}

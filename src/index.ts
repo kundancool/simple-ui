@@ -3,6 +3,8 @@ import * as components from './components'
 
 export * from './components'
 export { default as SimpleUIResolver } from './resolver'
+export { icons, iconNames } from './icons/registry'
+export type { IconShape } from './icons/registry'
 
 /**
  * Plugin options.

@@ -31,10 +31,22 @@ for (const dir of readdirSync(componentsDir, { withFileTypes: true })) {
 
 components.sort((a, b) => a.name.localeCompare(b.name))
 
+// Icon names are part of the public API (s-icon name="…"), so agents must be
+// able to discover them instead of guessing.
+let iconNames = []
+try {
+    const registrySource = readFileSync(join(root, 'src', 'icons', 'registry.ts'), 'utf8')
+    const match = registrySource.match(/export const iconNames: string\[\] = (\[[^\]]*\])/)
+    iconNames = match ? JSON.parse(match[1]) : []
+} catch {
+    iconNames = []
+}
+
 const registry = {
     package: pkg.name,
     version: pkg.version,
     prefix: 'S',
+    icons: iconNames,
     install: {
         npm: `npm install ${pkg.name}`,
         setup: `import SimpleUI from '${pkg.name}'\nimport '${pkg.name}/dist/simple-ui.css'\n\napp.use(SimpleUI)`,

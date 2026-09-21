@@ -249,11 +249,12 @@
 }
 .s-input::placeholder { color: var(--s-text-placeholder); }
 /* Single-line controls resolve to the shared control height; textareas keep
-   their rows-driven height. Padding stays for horizontal rhythm only. */
+   their rows-driven height. `--s-field-h` lets a component opt into another
+   step of the size scale. */
 input.s-input,
 select.s-input,
 button.s-input {
-    height: var(--s-control-h);
+    height: var(--s-field-h, var(--s-control-h));
     padding-top: 0;
     padding-bottom: 0;
 }

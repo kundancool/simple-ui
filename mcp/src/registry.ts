@@ -17,6 +17,8 @@ export interface Registry {
     package: string
     version: string
     prefix: string
+    /** Names accepted by s-icon. */
+    icons?: string[]
     install?: Record<string, string>
     theme?: Record<string, string>
     components: RegistryComponent[]

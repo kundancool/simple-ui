@@ -159,8 +159,21 @@ export function registerTools(server: McpServer, getRegistry: () => Promise<Regi
         },
     )
 
-    server.tool('get_theme_tokens', 'Theme variables, dark mode and override recipes.', async () => {
-        const registry = await getRegistry()
+    server.tool(
+        'list_icons',
+        'Names accepted by s-icon (case-insensitive). Use these instead of importing an icon library.',
+        {},
+        async () => {
+            const registry = await getRegistry()
+            const names = registry.icons ?? []
+            if (!names.length) {
+                return text('This version of the registry does not expose icon names.')
+            }
+            return text(`s-icon name="…" accepts ${names.length} names:\n\n${names.join(', ')}`)
+        },
+    )
+
+    server.tool('get_theme_tokens', 'Theme variables, dark mode and override recipes.', async () => {        const registry = await getRegistry()
         const extra = [registry.theme?.strategy, registry.theme?.dark, registry.theme?.example]
             .filter(Boolean)
             .join('\n')

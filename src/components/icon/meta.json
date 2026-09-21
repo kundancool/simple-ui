@@ -1,0 +1,15 @@
+{
+    "name": "Icon",
+    "tag": "s-icon",
+    "category": "Basic",
+    "description": "Renders a named icon from the built-in registry, so apps never import an icon library directly. Case-insensitive; unknown names render nothing.",
+    "props": [
+        { "name": "name", "type": "string", "default": "required", "description": "Registry name, case-insensitive (see the icon gallery)." },
+        { "name": "size", "type": "xs | sm | md | lg", "default": "md", "description": "Icon size token." },
+        { "name": "spinning", "type": "boolean", "default": "false", "description": "Adds a spin animation." },
+        { "name": "label", "type": "string", "default": "''", "description": "Sets aria-label; omit to mark the icon decorative." }
+    ],
+    "events": [],
+    "slots": [],
+    "example": "<s-icon name=\"refresh\" />\n<s-icon name=\"loading\" spinning label=\"Loading\" />\n<s-icon name=\"check\" size=\"lg\" />"
+}
