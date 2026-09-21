@@ -6,9 +6,11 @@ import SLineChart from '../src/components/line-chart/SLineChart.vue'
 import SDoughnutChart from '../src/components/doughnut-chart/SDoughnutChart.vue'
 
 /**
- * Regression test for dual chart.js copies: the components must render
- * against the SAME chart.js instance they register with, otherwise
- * Chart.js throws inside the mounted hook ("not a registered scale").
+ * Regression tests for the chart layer:
+ *  1. the runtime is fetched through a dynamic import, so a skeleton shows
+ *     first and the canvas only after the peer has loaded;
+ *  2. the components render against the SAME chart.js instance they register
+ *     with, otherwise Chart.js throws "not a registered scale".
  */
 function stubBrowserChartApis() {
     const noop = () => {}
@@ -40,6 +42,22 @@ function stubBrowserChartApis() {
     }
 }
 
+/**
+ * The chart runtime is fetched through a dynamic import, so the canvas appears
+ * once the module resolves. Poll instead of guessing a fixed tick count — the
+ * first import in a run also pays the transform cost.
+ */
+async function waitFor(predicate: () => boolean, timeout = 3000) {
+    const started = Date.now()
+    while (Date.now() - started < timeout) {
+        if (predicate()) {
+            return
+        }
+        await new Promise((resolve) => setTimeout(resolve, 10))
+        await nextTick()
+    }
+}
+
 describe('charts', () => {
     beforeAll(stubBrowserChartApis)
 
@@ -47,7 +65,7 @@ describe('charts', () => {
         const wrapper = mount(SBarChart, {
             props: { labels: ['A', 'B'], datasets: [{ label: 'X', data: [1, 2] }] },
         })
-        await nextTick()
+        await waitFor(() => wrapper.find('canvas').exists())
         expect(wrapper.find('canvas').exists()).toBe(true)
     })
 
@@ -58,9 +76,18 @@ describe('charts', () => {
         const doughnut = mount(SDoughnutChart, {
             props: { labels: ['A', 'B'], datasets: [{ data: [1, 2] }] },
         })
-        await nextTick()
+        await waitFor(() => line.find('canvas').exists() && doughnut.find('canvas').exists())
         expect(line.find('canvas').exists()).toBe(true)
         expect(doughnut.find('canvas').exists()).toBe(true)
+    })
+
+    it('renders a skeleton until chart.js has loaded', async () => {
+        const wrapper = mount(SLineChart, {
+            props: { labels: ['A'], datasets: [{ label: 'X', data: [1] }] },
+        })
+        expect(wrapper.find('.s-skeleton').exists()).toBe(true)
+        await waitFor(() => wrapper.find('canvas').exists())
+        expect(wrapper.find('.s-skeleton').exists()).toBe(false)
     })
 
     it('shows the empty slot without labels', () => {

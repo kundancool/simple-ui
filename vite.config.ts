@@ -8,7 +8,13 @@ import { fileURLToPath } from 'node:url'
 const root = fileURLToPath(new URL('.', import.meta.url))
 
 /**
- * Library build: ES + UMD bundles, compiled stylesheet, declarations.
+ * Library build: ESM bundle with a lazy chart chunk, compiled stylesheet,
+ * declarations.
+ *
+ * ESM only on purpose: chart.js is an optional peer and charts are reached
+ * through a dynamic import. A UMD/CJS build cannot code-split, so it would
+ * inline a hard `require('chart.js')` and break every consumer who has not
+ * installed the chart peers.
  */
 export default defineConfig({
     plugins: [
@@ -26,13 +32,12 @@ export default defineConfig({
         lib: {
             entry: resolve(root, 'src/index.ts'),
             name: 'SimpleUI',
-            formats: ['es', 'umd'],
-            fileName: (format) => (format === 'es' ? 'simple-ui.js' : 'simple-ui.umd.cjs'),
+            formats: ['es'],
+            fileName: () => 'simple-ui.js',
         },
         rollupOptions: {
             external: ['vue', 'chart.js', 'vue-chartjs'],
             output: {
-                globals: { vue: 'Vue', 'chart.js': 'Chart', 'vue-chartjs': 'VueChartJs' },
                 assetFileNames: (asset) =>
                     asset.name === 'style.css' ? 'simple-ui.css' : asset.name ?? '[name][extname]',
             },

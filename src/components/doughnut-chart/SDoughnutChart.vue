@@ -3,24 +3,28 @@
         <slot name="empty">No data</slot>
     </div>
     <div v-else class="relative w-full" :style="{ height: height + 'px' }">
-        <Doughnut :data="chartData" :options="mergedOptions" />
+        <component :is="Runtime" v-if="Runtime" :data="chartData" :options="mergedOptions" />
+        <div v-else class="s-skeleton h-full w-full rounded-md" aria-hidden="true" />
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Doughnut } from 'vue-chartjs'
+import { computed, onMounted, shallowRef } from 'vue'
 
 defineOptions({ name: 'SDoughnutChart' })
-
-ChartJS.register(ArcElement, Tooltip, Legend)
 
 const props = defineProps({
     labels: { type: Array, default: () => [] },
     datasets: { type: Array, default: () => [] },
     options: { type: Object, default: () => ({}) },
     height: { type: Number, default: 260 },
+})
+
+/** Resolved lazily so chart.js never loads unless a chart is on screen. */
+const Runtime = shallowRef(null)
+
+onMounted(async () => {
+    Runtime.value = (await import('../../charts/runtime')).Doughnut
 })
 
 const chartData = computed(() => ({ labels: props.labels, datasets: props.datasets }))
