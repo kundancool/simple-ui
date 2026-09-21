@@ -1,14 +1,21 @@
 # Changelog
 
-## Unreleased
+## 0.2.0
 
-- **New components (65 → 69):** `SOption`, `SRadio`, `SRadioGroup`, `SUpload`.
-- **`SSelect` rewritten** around `<s-option>` children (array options still work):
-  `empty-text`, `clear` / `visible-change` emits, size inheritance, and correct
-  coercion of bare boolean attributes such as `<s-option disabled />`.
+Eight new components (61 → 69) and a general-purpose-copy pass.
+
+- **New components:** `SIcon` (77 vendored icons, zero runtime icon
+  dependency), `SForm` + `SFormItem` (label position/width, cascading
+  size/disabled, `scrollToFirstError()`), `SSpinner`, `SOption`, `SRadio`,
+  `SRadioGroup` and `SUpload` (XHR multipart, progress, queueing, CSRF meta).
+- **`SSelect` rewritten** around `<s-option>` children (array options still
+  work): `empty-text`, `clear` / `visible-change` emits, size inheritance, and
+  correct coercion of bare boolean attributes such as `<s-option disabled />`.
 - **`SInput` extensions:** `input` / `change` / `blur` / `focus` / `clear` /
   `toggle-visibility` events, attribute forwarding to the real control,
   `size`, `clearable`, `readonly`, word-limit counter and prefix/suffix slots.
+- **MCP:** the generated registry now carries icon names and the server exposes
+  `list_icons`.
 - **Domain-neutral copy.** Every example, demo, `meta.json` entry and MCP
   scaffold now uses general-purpose vocabulary (orders, customers, items,
   workspaces) instead of hospitality/PMS terms (rooms, guests, bookings,
