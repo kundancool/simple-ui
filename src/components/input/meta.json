@@ -74,7 +74,7 @@
             "name": "inline",
             "type": "boolean",
             "default": "false",
-            "description": "No bottom margin, for inputs in a centered row."
+            "description": "Deprecated no-op (roots are margin-free). Kept for compatibility."
         }
     ],
     "events": [

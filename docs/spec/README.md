@@ -16,7 +16,7 @@ spec, implement to it, then run the gates in `06-testing.md`.
 | File | Defines | Enforced by |
 |---|---|---|
 | `00-overview.md` | What the library is, who it serves, non-goals | — (orientation) |
-| `01-design-principles.md` | Look, motion, states, responsive rules | visual review + behavior tests |
+| `01-design-principles.md` | Look, motion, states, responsive rules | `tests/layout-neutrality.spec.ts` + behavior tests |
 | `02-tokens-theming.md` | `--s-*` tokens, palettes, override contract | `tests/theme.spec.ts` |
 | `03-component-contract.md` | Naming, files, `meta.json` schema, API + a11y rules | `tests/registry.spec.ts`, `tests/imports.spec.ts`, `tests/uncontrolled.spec.ts`, `tests/scrutiny.spec.ts` |
 | `04-component-workflow.md` | Step-by-step for adding a component | `tests/registry.spec.ts` fails loudly on missed steps |

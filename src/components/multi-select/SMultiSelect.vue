@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-4" ref="wrapperRef">
+    <div ref="wrapperRef">
         <label v-if="label" :for="fieldId" class="block text-sm font-medium s-text-primary mb-1.5">
             {{ label }}
             <span v-if="required" class="s-text-accent" aria-hidden="true">*</span>
@@ -17,10 +17,11 @@
                 :aria-invalid="errorMessage ? 'true' : undefined"
                 :aria-describedby="describedBy"
                 :class="[
-                    's-input w-full px-3 py-2 rounded-md text-sm text-left flex items-center gap-1.5 h-9',
+                    's-input w-full rounded-md text-left flex items-center gap-1.5', SIZE_CLASS[fieldSize],
                     errorMessage ? 's-is-error' : '',
                     disabled ? 'opacity-50 cursor-not-allowed' : '',
                 ]"
+                :style="controlStyle"
                 @click="toggleOpen"
                 @keydown="onKeydown"
             >
@@ -52,7 +53,7 @@
                         :style="{ ...dropdownStyle, zIndex: 'var(--s-z-dropdown)' }"
                     >
                         <div v-if="searchable" class="p-2 border-b s-border-theme">
-                            <input v-model="search" type="text" placeholder="Search..." class="s-input w-full px-2 py-1.5 rounded text-xs" />
+                            <input v-model="search" type="text" placeholder="Search..." class="s-input w-full px-2 rounded text-xs" :style="{ '--s-field-h': FIELD_HEIGHTS.sm }" />
                         </div>
                         <div class="max-h-52 overflow-y-auto">
                             <div v-if="loading" class="px-3 py-2 space-y-2" aria-busy="true">
@@ -100,6 +101,8 @@ import { ref, computed, nextTick, onMounted, onBeforeUnmount, useId } from 'vue'
 import { useListNavigation } from '../../composables/useListNavigation'
 import SSkeleton from '../skeleton/SSkeleton.vue'
 import { firstValidationError } from '../../utils/validation'
+import { FIELD_HEIGHTS, isFieldSize } from '../../utils/fieldSize'
+import { useFieldSize } from '../../composables/formContext'
 
 defineOptions({ name: 'SMultiSelect' })
 
@@ -115,6 +118,8 @@ const props = defineProps({
     disabled: { type: Boolean, default: false },
     searchable: { type: Boolean, default: true },
     loading: { type: Boolean, default: false },
+    /** xs | sm | md | lg — inherits from the enclosing s-form-item when omitted. */
+    size: { type: String, default: undefined, validator: isFieldSize },
 })
 
 const emit = defineEmits(['update:modelValue', 'change'])
@@ -127,6 +132,16 @@ const search = ref('')
 const dropdownStyle = ref({})
 
 const errorMessage = computed(() => firstValidationError(props.error))
+
+/** Shared height scale so the trigger lines up with inputs and selects. */
+const fieldSize = useFieldSize(computed(() => props.size))
+const SIZE_CLASS = {
+    xs: 'px-2 text-xs',
+    sm: 'px-2.5 text-xs',
+    md: 'px-3 text-sm',
+    lg: 'px-3.5 text-base',
+}
+const controlStyle = computed(() => ({ '--s-field-h': FIELD_HEIGHTS[fieldSize.value] }))
 const fieldId = useId()
 const messageId = `${fieldId}-message`
 const describedBy = computed(() => (errorMessage.value ? messageId : undefined))

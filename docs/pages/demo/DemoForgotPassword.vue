@@ -4,7 +4,7 @@
             <s-auth-layout title="Acme Inc" subtitle="Reset your password">
                 <s-card>
                     <s-steps v-model="step" :steps="[{ key: 'email', label: 'Email' }, { key: 'code', label: 'Code' }, { key: 'new', label: 'New password' }]" />
-                    <div class="mt-4">
+                    <div class="mt-4 space-y-4">
                         <template v-if="step === 'email'">
                             <s-input v-model="email" label="Account email" placeholder="you@acme.test" :error="emailError" />
                             <s-button class="w-full" :loading="busy" @click="sendCode">Send code</s-button>

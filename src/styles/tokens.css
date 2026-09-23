@@ -245,6 +245,8 @@
     border: 1px solid var(--s-border-input);
     color: var(--s-text-primary);
     box-shadow: var(--s-shadow-xs);
+    /* Heights hold regardless of the consumer's global box-sizing. */
+    box-sizing: border-box;
     transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 .s-input::placeholder { color: var(--s-text-placeholder); }

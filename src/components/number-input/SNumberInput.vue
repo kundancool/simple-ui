@@ -1,10 +1,10 @@
 <template>
-    <div :class="[wrapper === 'block' ? 'mb-4' : 'inline-flex flex-col']">
+    <div :class="[wrapper === 'block' ? '' : 'inline-flex flex-col']">
         <label v-if="label" :for="fieldId" class="block text-sm font-medium s-text-primary mb-1.5">
             {{ label }}
             <span v-if="required" class="s-text-accent" aria-hidden="true">*</span>
         </label>
-        <div class="s-number-wrap inline-flex items-stretch rounded-md border s-border-input s-bg-surface overflow-hidden h-9" :class="errorMessage ? 's-is-error s-border-danger' : ''">
+        <div class="s-number-wrap inline-flex items-stretch rounded-md border s-border-input s-bg-surface-raised overflow-hidden" :class="errorMessage ? 's-is-error s-border-danger' : ''" :style="controlStyle">
             <button
                 type="button"
                 class="s-stepper-btn inline-flex items-center justify-center px-2.5 s-text-secondary disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
@@ -27,7 +27,7 @@
                 :step="stepBy"
                 :disabled="disabled"
                 :placeholder="placeholder"
-                class="w-14 h-full text-center text-sm s-bg-surface s-text-primary px-1 py-0 border-x s-border-theme s-no-spinner"
+                :class="['w-14 h-full text-center bg-transparent s-text-primary px-1 py-0 border-x s-border-theme s-no-spinner', TEXT_CLASS[fieldSize]]"
                 @input="onInput($event.target.value)"
                 @blur="clamp"
             />
@@ -51,6 +51,8 @@
 <script setup>
 import { computed, useId } from 'vue'
 import { firstValidationError } from '../../utils/validation'
+import { FIELD_HEIGHTS, isFieldSize } from '../../utils/fieldSize'
+import { useFieldSize } from '../../composables/formContext'
 
 defineOptions({ name: 'SNumberInput' })
 
@@ -65,8 +67,10 @@ const props = defineProps({
     required: { type: Boolean, default: false },
     error: { type: [String, Array], default: '' },
     hint: { type: String, default: '' },
-    /** block matches SInput spacing; inline sits beside other controls. */
+    /** block stacks the label above; inline sits beside other controls. */
     wrapper: { type: String, default: 'block' },
+    /** xs | sm | md | lg — inherits from the enclosing s-form-item when omitted. */
+    size: { type: String, default: undefined, validator: isFieldSize },
 })
 
 const emit = defineEmits(['update:modelValue', 'change'])
@@ -76,6 +80,11 @@ const numericValue = computed(() => {
     return Number.isFinite(n) ? n : props.min
 })
 const errorMessage = computed(() => firstValidationError(props.error))
+
+/** Shared height scale so the stepper lines up with inputs and selects. */
+const fieldSize = useFieldSize(computed(() => props.size))
+const TEXT_CLASS = { xs: 'text-xs', sm: 'text-xs', md: 'text-sm', lg: 'text-base' }
+const controlStyle = computed(() => ({ '--s-field-h': FIELD_HEIGHTS[fieldSize.value] }))
 const fieldId = useId()
 const messageId = `${fieldId}-message`
 const describedBy = computed(() => (errorMessage.value || props.hint ? messageId : undefined))
@@ -113,6 +122,11 @@ function clamp() {
 </script>
 
 <style>
+.s-number-wrap {
+    height: var(--s-field-h, var(--s-control-h));
+    box-sizing: border-box;
+    box-shadow: var(--s-shadow-xs);
+}
 .s-number-wrap:focus-within {
     outline: none;
     border-color: var(--s-accent-text);

@@ -71,6 +71,12 @@
             "description": "Disables the field."
         },
         {
+            "name": "size",
+            "type": "xs | sm | md | lg",
+            "default": "undefined",
+            "description": "Control size; inherits from the form item."
+        },
+        {
             "name": "format",
             "type": "string",
             "default": "YYYY-MM-DD",
@@ -86,7 +92,7 @@
             "name": "inline",
             "type": "boolean",
             "default": "false",
-            "description": "No bottom margin."
+            "description": "Deprecated no-op (roots are margin-free). Kept for compatibility."
         }
     ],
     "events": [

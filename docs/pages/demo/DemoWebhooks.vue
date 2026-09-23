@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live webhooks">
-            <s-page-header title="Webhooks" subtitle="Event deliveries and endpoint health." add-text="New endpoint" @add="notify('Endpoint form opening (demo).')" />
+            <s-page-header class="mb-5" title="Webhooks" subtitle="Event deliveries and endpoint health." add-text="New endpoint" @add="notify('Endpoint form opening (demo).')" />
             <s-card>
                 <div v-for="hook in hooks" :key="hook.id" class="py-3 border-b s-border-theme last:border-0">
                     <div class="flex items-center gap-3">

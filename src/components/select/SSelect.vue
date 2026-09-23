@@ -1,5 +1,5 @@
 <template>
-    <div :class="[inline ? '' : 'mb-4', rootClass]" :style="rootStyle" ref="wrapperRef">
+    <div :class="[rootClass]" :style="rootStyle" ref="wrapperRef">
         <label v-if="label" :for="fieldId" class="block text-sm font-medium s-text-primary mb-1.5">
             {{ label }}
             <span v-if="required" class="s-text-accent" aria-hidden="true">*</span>
@@ -125,6 +125,7 @@ import SOption from '../option/SOption.vue'
 import { firstValidationError } from '../../utils/validation'
 import { useListNavigation } from '../../composables/useListNavigation'
 import { useFieldDisabled, useFieldId, useFieldSize } from '../../composables/formContext'
+import { FIELD_HEIGHTS } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SSelect', inheritAttrs: false })
 
@@ -148,7 +149,7 @@ const props = defineProps({
     size: { type: String, default: undefined, validator: (v) => v === undefined || ['xs', 'sm', 'md', 'lg'].includes(v) },
     /** Options are still being fetched — shows placeholders instead of the empty text. */
     loading: { type: Boolean, default: false },
-    /** Inline mode: no bottom margin, for selects sitting in a centered row. */
+    /** Deprecated no-op (roots are margin-free per the layout-neutrality rule). Kept so existing `inline` usage keeps working. */
     inline: { type: Boolean, default: false },
 })
 
@@ -180,7 +181,6 @@ const fieldAttrs = computed(() => {
     return rest
 })
 
-const HEIGHTS = { xs: '28px', sm: '32px', md: '36px', lg: '40px' }
 const SIZE_CLASS = {
     xs: 'px-2 text-xs',
     sm: 'px-2.5 text-xs',
@@ -188,7 +188,7 @@ const SIZE_CLASS = {
     lg: 'px-3.5 text-base',
 }
 const sizeClass = computed(() => SIZE_CLASS[fieldSize.value])
-const controlStyle = computed(() => ({ '--s-field-h': HEIGHTS[fieldSize.value] }))
+const controlStyle = computed(() => ({ '--s-field-h': FIELD_HEIGHTS[fieldSize.value] }))
 
 /** <s-option> children, collected from fragments like SDataTable does. */
 function flatten(nodes) {

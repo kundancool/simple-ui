@@ -39,6 +39,21 @@ Each `src/components/<dir>/` **MUST** contain exactly:
 - Selection state **MUST** work uncontrolled (Accordion/Carousel/Lightbox
   pattern); binary controls stay `v-model`-driven.
   Enforced by `tests/uncontrolled.spec.ts`.
+
+## Layout neutrality (godly rule)
+
+Per `01 §0`: root elements **MUST NOT** carry outer margins. Only styles
+that make the component itself consistent belong in it; inter-component
+spacing belongs to the consumer or to layout components (`s-form-item`,
+`s-layout`). Internal rhythm (label→control→error) stays. Enforced by
+`tests/layout-neutrality.spec.ts`.
+
+## Height participation
+
+Per `01 §Control height contract`: every single-line form control **MUST**
+accept `size`, inherit it from the form context, and set `--s-field-h` from
+the shared scale — so a mixed row lines up by construction. Enforced by
+`tests/height-parity.spec.ts`.
 - Errors replace hints in one slot with `role="alert"`; success uses
   `role="status"` where applicable.
 

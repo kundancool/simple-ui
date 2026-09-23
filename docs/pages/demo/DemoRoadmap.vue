@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live roadmap">
-            <s-page-header title="Roadmap" subtitle="Where the product is heading. Vote to shape it." />
+            <s-page-header class="mb-5" title="Roadmap" subtitle="Where the product is heading. Vote to shape it." />
             <div class="grid lg:grid-cols-3 gap-3">
                 <s-card v-for="col in columns" :key="col.title" :title="`${col.title} (${col.items.length})`">
                     <div class="space-y-2">

@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live CRUD">
-        <s-page-header title="Team" subtitle="Manage staff accounts and roles." add-text="Invite member" @add="openCreate" />
+        <s-page-header class="mb-5" title="Team" subtitle="Manage staff accounts and roles." add-text="Invite member" @add="openCreate" />
         <s-card>
             <s-data-table :data="members">
                 <s-data-table-column prop="name" label="Name" />
@@ -24,12 +24,14 @@
         </s-card>
 
         <s-dialog v-model="dialog" :title="editing ? 'Edit member' : 'Invite member'" width="sm">
+            <div class="space-y-4">
             <s-input v-model="form.name" label="Full name" :error="errors.name" />
             <s-input v-model="form.email" label="Email" placeholder="you@acme.test" :error="errors.email" />
             <s-select v-model="form.role" label="Role" :options="roles" option-label="label" option-value="value" />
-            <div class="flex items-center gap-2 mt-1">
+            <div class="flex items-center gap-2">
                 <s-switch v-model="form.active" aria-label="Active immediately" />
                 <span class="text-sm s-text-secondary">Active immediately</span>
+            </div>
             </div>
             <template #footer>
                 <s-button variant="secondary" @click="dialog = false">Cancel</s-button>

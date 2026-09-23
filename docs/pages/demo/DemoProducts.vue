@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live product catalogue">
-            <s-page-header title="Products" subtitle="Add-ons customers can buy with an order." add-text="New product" @add="openCreate" />
+            <s-page-header class="mb-5" title="Products" subtitle="Add-ons customers can buy with an order." add-text="New product" @add="openCreate" />
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 <s-card v-for="p in products" :key="p.id">
                     <div class="flex items-start justify-between gap-2">
@@ -21,12 +21,14 @@
             </div>
         </DemoStage>
         <s-dialog v-model="dialog" :title="editing ? 'Edit product' : 'New product'" width="sm">
+            <div class="space-y-4">
             <s-input v-model="form.name" label="Name" :error="errors.name" />
             <div class="grid grid-cols-2 gap-x-4">
                 <s-number-input v-model="form.price" label="Price (₹)" :min="0" />
                 <s-number-input v-model="form.stock" label="Stock" :min="0" />
             </div>
             <s-select v-model="form.category" label="Category" :options="categories" option-label="label" option-value="value" />
+            </div>
             <template #footer>
                 <s-button variant="secondary" @click="dialog = false">Cancel</s-button>
                 <s-button @click="save">Save product</s-button>

@@ -4,7 +4,7 @@
             <div class="grid lg:grid-cols-3 gap-3">
                 <s-card title="Payment" class="lg:col-span-2">
                     <s-tabs v-model="method" :tabs="[{ key: 'card', label: 'Card' }, { key: 'upi', label: 'UPI' }]" />
-                    <div class="mt-4">
+                    <div class="mt-4 space-y-4">
                         <template v-if="method === 'card'">
                             <s-input v-model="card" label="Card number" placeholder="4111 1111 1111 1111" :error="cardError" />
                             <div class="grid grid-cols-2 gap-x-4">

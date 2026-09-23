@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live billing">
-            <s-page-header title="Billing" subtitle="Plan, card and invoice history." />
+            <s-page-header class="mb-5" title="Billing" subtitle="Plan, card and invoice history." />
             <div class="grid lg:grid-cols-3 gap-3">
                 <s-card title="Current plan">
                     <p class="text-lg font-bold s-text-primary">Growth <span class="text-xs font-medium s-text-muted">· yearly</span></p>

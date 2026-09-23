@@ -38,7 +38,8 @@ step fails loudly instead of shipping silently.
 ## Design contract (`DESIGN.md` is normative)
 
 - Tokens only: `var(--s-*)`, never hex (fixed fills in toasts/knobs/scrims are the documented exceptions).
-- Shared 36px control height for inputs, selects, date triggers and md buttons; compact rows 32px.
+- Shared control-height contract for inputs, selects, date triggers and md buttons (xs 28 / sm 32 / md 36 / lg 40 — identical at the same size).
+- Full contract: `docs/spec/01-design-principles.md` (§Control height contract, §Class hygiene) — same height at the same size, `box-sizing` guaranteed, only required classes, theme-consistent names.
 - Every variant carries the same 1px border (transparent on fills) so sizes match under any box-sizing.
 - Teleported popovers must carry `data-overlay` (the dialog focus trap looks for it).
 - Overlay levels via `var(--s-z-*)`, never literals.

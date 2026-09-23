@@ -1,5 +1,5 @@
 <template>
-    <div :class="[inline ? '' : 'mb-4', rootClass]" :style="rootStyle">
+    <div :class="[rootClass]" :style="rootStyle">
         <div v-if="label || $slots.trailing" class="flex items-center justify-between mb-1.5">
             <label v-if="label" :for="fieldId" class="block text-sm font-medium s-text-primary">
                 {{ label }}
@@ -102,6 +102,7 @@ import { computed, ref, useAttrs, useId } from 'vue'
 import SIcon from '../icon/SIcon.vue'
 import { firstValidationError } from '../../utils/validation'
 import { useFieldDisabled, useFieldId, useFieldSize } from '../../composables/formContext'
+import { FIELD_HEIGHTS } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SInput', inheritAttrs: false })
 
@@ -125,7 +126,7 @@ const props = defineProps({
     rows: { type: Number, default: 4 },
     min: { type: [String, Number], default: null },
     max: { type: [String, Number], default: null },
-    /** Inline mode: no bottom margin, for inputs sitting in a centered row. */
+    /** Deprecated no-op (roots are margin-free per the layout-neutrality rule). Kept so existing `inline` usage keeps working. */
     inline: { type: Boolean, default: false },
 })
 
@@ -160,8 +161,7 @@ const length = computed(() => String(props.modelValue ?? '').length)
 
 const describedBy = computed(() => (showError.value || props.hint ? messageId : undefined))
 
-/** Size scale keeps md on the shared 36px control height. */
-const HEIGHTS = { xs: '28px', sm: '32px', md: '36px', lg: '40px' }
+/** Size scale resolves through the shared control-height contract (01). */
 const PADDING = {
     xs: 'px-2 py-0 text-xs',
     sm: 'px-2.5 py-0 text-xs',
@@ -178,7 +178,7 @@ const controlStyle = computed(() => {
     if (props.type === 'textarea') {
         return undefined
     }
-    return { '--s-field-h': HEIGHTS[fieldSize.value] }
+    return { '--s-field-h': FIELD_HEIGHTS[fieldSize.value] }
 })
 
 function onInput(event) {

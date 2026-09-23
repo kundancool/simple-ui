@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live changelog">
-            <s-page-header title="Changelog" subtitle="What shipped, and when." />
+            <s-page-header class="mb-5" title="Changelog" subtitle="What shipped, and when." />
             <s-tabs v-model="channel" :tabs="[{ key: 'all', label: 'All updates' }, { key: 'major', label: 'Major', count: 2 }, { key: 'fixes', label: 'Fixes' }]" />
             <div class="mt-3 space-y-3">
                 <s-card v-for="r in visible" :key="r.version">

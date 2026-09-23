@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live utilization report">
-            <s-page-header title="September report" subtitle="Generated just now · all workspaces.">
+            <s-page-header class="mb-5" title="September report" subtitle="Generated just now · all workspaces.">
                 <s-button size="sm" variant="secondary" @click="notify('XLSX export started (demo).')">Export XLSX</s-button>
                 <s-button size="sm" variant="secondary" @click="notify('PDF export started (demo).')">Export PDF</s-button>
             </s-page-header>

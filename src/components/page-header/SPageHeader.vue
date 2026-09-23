@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-3 mb-5">
+    <div class="flex flex-wrap items-start justify-between gap-x-4 gap-y-3">
         <div class="min-w-0 flex-1">
             <h1 class="text-lg sm:text-xl font-semibold s-text-primary break-words">{{ title }}</h1>
             <p v-if="subtitle" class="text-sm s-text-muted mt-0.5 break-words">{{ subtitle }}</p>

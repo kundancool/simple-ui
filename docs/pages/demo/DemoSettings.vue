@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live settings page">
-        <s-page-header title="Settings" subtitle="Workspace preferences for Acme Inc." />
+        <s-page-header class="mb-5" title="Settings" subtitle="Workspace preferences for Acme Inc." />
         <s-tabs v-model="tab" :tabs="[{ key: 'profile', label: 'Profile' }, { key: 'prefs', label: 'Preferences' }, { key: 'danger', label: 'Danger zone' }]" />
         <div class="mt-4">
             <s-card v-if="tab === 'profile'" title="Profile">

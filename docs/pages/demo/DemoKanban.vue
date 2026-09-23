@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live support board">
-            <s-page-header title="Support board" subtitle="Tap a card to move it across the board." />
+            <s-page-header class="mb-5" title="Support board" subtitle="Tap a card to move it across the board." />
             <div class="grid sm:grid-cols-3 gap-3">
                 <s-card v-for="col in columns" :key="col.title" :title="`${col.title} (${col.tasks.length})`">
                     <div class="space-y-2 min-h-[120px]">

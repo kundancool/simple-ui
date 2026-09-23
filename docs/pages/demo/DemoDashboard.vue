@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live dashboard">
-        <s-page-header title="Good evening, Kundan" subtitle="Here's what's happening across your workspaces today." />
+        <s-page-header class="mb-5" title="Good evening, Kundan" subtitle="Here's what's happening across your workspaces today." />
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
             <s-stat-card :icon="Wallet" bg-color="s-bg-icon-green" icon-color="s-text-icon-green" value="₹48,210" label="Revenue today" />
             <s-stat-card :icon="CalendarCheck" bg-color="s-bg-icon-blue" icon-color="s-text-icon-blue" value="128" label="New orders" />

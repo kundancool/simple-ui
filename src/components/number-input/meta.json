@@ -68,7 +68,13 @@
             "name": "wrapper",
             "type": "block | inline",
             "default": "block",
-            "description": "Spacing layout."
+            "description": "Display layout (no outer margin in either mode)."
+        },
+        {
+            "name": "size",
+            "type": "xs | sm | md | lg",
+            "default": "undefined",
+            "description": "Control size; inherits from the form item."
         }
     ],
     "events": [

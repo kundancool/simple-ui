@@ -11,8 +11,8 @@
                         </div>
                     </div>
                     <s-input v-model="name" label="Your name" placeholder="Full name" class="mt-4" :error="nameError" />
-                    <s-input v-model="password" label="Set a password" type="password" :error="passwordError" />
-                    <div class="flex gap-2">
+                    <s-input v-model="password" label="Set a password" type="password" class="mt-4" :error="passwordError" />
+                    <div class="flex gap-2 mt-4">
                         <s-button variant="secondary" class="flex-1" @click="declined = true">Decline</s-button>
                         <s-button class="flex-1" :loading="busy" @click="accept">Accept invite</s-button>
                     </div>

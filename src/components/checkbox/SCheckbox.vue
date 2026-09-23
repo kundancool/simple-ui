@@ -1,5 +1,5 @@
 <template>
-    <div :class="inline ? '' : 'mb-4'">
+    <div>
         <div class="flex items-center gap-2">
             <input
                 :id="fieldId"
@@ -28,7 +28,7 @@ const props = defineProps({
     label: { type: String, default: '' },
     disabled: { type: Boolean, default: false },
     error: { type: [String, Array], default: '' },
-    /** Inline mode: no bottom margin. */
+    /** Deprecated no-op (roots are margin-free per the layout-neutrality rule). Kept so existing `inline` usage keeps working. */
     inline: { type: Boolean, default: false },
 })
 

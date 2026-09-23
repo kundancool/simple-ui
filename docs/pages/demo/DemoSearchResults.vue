@@ -2,7 +2,7 @@
     <div>
         <DemoStage title="Live site search">
             <div class="max-w-2xl mx-auto">
-                <s-filter v-model="query" placeholder="Search orders, customers, invoices…" @search="noop" />
+                <s-filter class="mb-4" v-model="query" placeholder="Search orders, customers, invoices…" @search="noop" />
                 <p class="text-xs s-text-muted mb-2">{{ results.length }} result{{ results.length === 1 ? '' : 's' }}{{ query ? ` for “${query}”` : '' }}</p>
                 <div class="space-y-2">
                     <button

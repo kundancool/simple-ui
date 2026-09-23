@@ -12,6 +12,12 @@ Each step is enforced — a missed step fails loudly instead of shipping silentl
    `@kundancool/simple-ui` (the built package — never `../../src`).
 6. **Add behavior tests** in `tests/`: mount it, click it, assert emits and
    visible state. Uncontrolled selection state must work.
+7. **Prove layout neutrality**: the root carries no outer margin
+   (`tests/layout-neutrality.spec.ts` scans it). Spacing in the demo comes
+   from the parent (`gap`, `space-y`), never the component.
+8. **Prove height parity**: form controls share the size scale
+   (`tests/height-parity.spec.ts`). No per-component height literals, no dead
+   utilities, theme-consistent class names only.
 7. **Use it somewhere real** — a demo page, the landing page, or another
    component. Unused components rot.
 8. **Run the gates** (`06`): `npm test`, `npm run build`, `npm run build:docs`.

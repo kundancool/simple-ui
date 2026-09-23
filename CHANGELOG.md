@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0
+
+- **Layout neutrality (breaking).** Form controls no longer ship a default
+  outer margin: `SInput`, `SSelect`, `SDatePicker`, `SDateRangePicker`,
+  `SMultiSelect`, `SCheckbox`, `SNumberInput`, `SUpload`, `SFilter`,
+  `SPageHeader` and `STimeline` render margin-free roots. Spacing between
+  components now belongs to the consumer (parent `gap` / `space-y`) or to
+  `s-form-item`, which keeps owning form-row rhythm. Migration: wrap stacked
+  fields in `space-y-4` (or add `mb-4`/`mb-5` at the usage site); the
+  `inline` prop is a deprecated no-op kept for compatibility. Enforced by
+  `tests/layout-neutrality.spec.ts`; see `docs/spec/01-design-principles.md §0`.
+- **Control height contract.** `SDatePicker`, `SMultiSelect` and `SNumberInput`
+  join the shared size scale (`xs 28 / sm 32 / md 36 / lg 40`) via
+  `src/utils/fieldSize.ts` — a mixed row of inputs, selects, date triggers
+  and steppers now lines up at every size. The library guarantees
+  `box-sizing: border-box` on controls, `SFilter` uses the standard `rounded-md`,
+  `SButton` lg uses `rounded-md`, and pagination compact rows resolve 32px
+  through `--s-field-h`. Enforced by `tests/height-parity.spec.ts`.
+
 ## 0.2.0
 
 Eight new components (61 → 69) and a general-purpose-copy pass.

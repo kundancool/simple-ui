@@ -1,9 +1,9 @@
 <template>
     <div>
         <DemoStage title="Live orders">
-            <s-page-header title="Orders" subtitle="Fulfilment queue for this week." />
+            <s-page-header class="mb-5" title="Orders" subtitle="Fulfilment queue for this week." />
             <s-card>
-                <s-filter v-model="query" placeholder="Search order, customer…" @search="noop">
+                <s-filter class="mb-4" v-model="query" placeholder="Search order, customer…" @search="noop">
                     <s-select v-model="status" :options="statusOptions" option-label="label" option-value="value" placeholder="All statuses" clearable class="w-44" />
                 </s-filter>
                 <s-data-table :data="filtered" empty-text="No orders match">

@@ -58,7 +58,7 @@ const sizeClasses = computed(() => {
         xs: isIconOnly.value ? 'w-6 h-6 rounded' : 'h-6 px-2.5 text-xs rounded',
         sm: isIconOnly.value ? 'w-7 h-7 rounded-md' : 'h-7 px-3 text-xs rounded-md',
         md: isIconOnly.value ? 'w-9 h-9 rounded-md' : 'h-9 px-4 text-sm rounded-md',
-        lg: isIconOnly.value ? 'w-10 h-10 rounded-lg' : 'h-10 px-5 text-sm rounded-lg',
+        lg: isIconOnly.value ? 'w-10 h-10 rounded-md' : 'h-10 px-5 text-sm rounded-md',
     }
     return sizes[props.size]
 })

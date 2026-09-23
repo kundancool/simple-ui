@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live sessions">
-            <s-page-header title="Sessions & devices" subtitle="Revoke anything you don't recognise." />
+            <s-page-header class="mb-5" title="Sessions & devices" subtitle="Revoke anything you don't recognise." />
             <s-card>
                 <div v-for="s in sessions" :key="s.id" class="flex items-center gap-3 py-3 border-b s-border-theme last:border-0">
                     <span class="w-9 h-9 rounded-lg s-bg-surface-raised flex items-center justify-center flex-shrink-0"><MonitorSmartphone class="w-4 h-4 s-text-muted" /></span>

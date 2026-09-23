@@ -3,7 +3,7 @@
         <DemoStage title="Live inbox">
             <div class="grid lg:grid-cols-3 gap-3">
                 <s-card class="lg:col-span-1" padding>
-                    <s-filter v-model="query" placeholder="Search threads…" @search="noop" />
+                    <s-filter class="mb-4" v-model="query" placeholder="Search threads…" @search="noop" />
                     <div class="-mx-1">
                         <button
                             v-for="t in filtered"

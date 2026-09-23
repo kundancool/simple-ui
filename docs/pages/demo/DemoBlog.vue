@@ -11,7 +11,7 @@
                 reading-time="8 min read"
                 tag="Featured"
             />
-            <s-filter v-model="query" placeholder="Search articles…" class="mt-4" @search="noop">
+            <s-filter v-model="query" placeholder="Search articles…" class="mt-4 mb-4" @search="noop">
                 <s-select v-model="tag" :options="tagOptions" option-label="label" option-value="value" placeholder="All topics" clearable class="w-44" />
             </s-filter>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">

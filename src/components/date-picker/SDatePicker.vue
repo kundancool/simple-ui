@@ -1,5 +1,5 @@
 <template>
-    <div :class="inline ? '' : 'mb-4'" ref="wrapperRef">
+    <div ref="wrapperRef">
         <label v-if="label" :for="fieldId" class="block text-sm font-medium s-text-primary mb-1.5">
             {{ label }}
             <span v-if="required" class="s-text-accent" aria-hidden="true">*</span>
@@ -13,7 +13,8 @@
                 :aria-invalid="errorMessage ? 'true' : undefined"
                 :aria-describedby="describedBy"
                 :aria-expanded="open"
-                :class="['s-input w-full px-3 py-2 rounded-md text-sm text-left flex items-center justify-between gap-2', errorMessage ? 's-is-error' : '', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer']"
+                :class="['s-input w-full rounded-md text-left flex items-center justify-between gap-2', SIZE_CLASS[fieldSize], errorMessage ? 's-is-error' : '', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer']"
+                :style="controlStyle"
                 @click="toggleOpen"
             >
                 <span :class="displayText ? 's-text-primary' : 's-text-placeholder'" class="truncate">{{ displayText || placeholder }}</span>
@@ -82,6 +83,8 @@
 <script setup>
 import { ref, computed, nextTick, onMounted, onBeforeUnmount, useId, watch } from 'vue'
 import { firstValidationError } from '../../utils/validation'
+import { FIELD_HEIGHTS, isFieldSize } from '../../utils/fieldSize'
+import { useFieldSize } from '../../composables/formContext'
 
 defineOptions({ name: 'SDatePicker' })
 
@@ -100,7 +103,9 @@ const props = defineProps({
     hint: { type: String, default: '' },
     required: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
-    /** Inline mode: no bottom margin. */
+    /** xs | sm | md | lg — inherits from the enclosing s-form-item when omitted. */
+    size: { type: String, default: undefined, validator: isFieldSize },
+    /** Deprecated no-op (roots are margin-free per the layout-neutrality rule). Kept so existing `inline` usage keeps working. */
     inline: { type: Boolean, default: false },
     /** Output format for the trigger text. Supports YYYY, MM, DD tokens. */
     format: { type: String, default: 'YYYY-MM-DD' },
@@ -114,6 +119,16 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'change'])
 
 const errorMessage = computed(() => firstValidationError(props.error))
+
+/** Shared height scale so triggers line up with inputs and selects. */
+const fieldSize = useFieldSize(computed(() => props.size))
+const SIZE_CLASS = {
+    xs: 'px-2 text-xs',
+    sm: 'px-2.5 text-xs',
+    md: 'px-3 text-sm',
+    lg: 'px-3.5 text-base',
+}
+const controlStyle = computed(() => ({ '--s-field-h': FIELD_HEIGHTS[fieldSize.value] }))
 const fieldId = useId()
 const messageId = `${fieldId}-message`
 const describedBy = computed(() => (errorMessage.value || props.hint ? messageId : undefined))

@@ -1,9 +1,9 @@
 <template>
     <div>
         <DemoStage title="Live audit log">
-            <s-page-header title="Audit log" subtitle="Who changed what, and when." />
+            <s-page-header class="mb-5" title="Audit log" subtitle="Who changed what, and when." />
             <s-card>
-                <s-filter v-model="query" placeholder="Search actor or action…" @search="noop">
+                <s-filter class="mb-4" v-model="query" placeholder="Search actor or action…" @search="noop">
                     <s-select v-model="severity" :options="severities" option-label="label" option-value="value" placeholder="All severities" clearable inline class="w-44" />
                 </s-filter>
                 <s-data-table :data="filtered" :stripe="false" size="small" empty-text="No matching events">

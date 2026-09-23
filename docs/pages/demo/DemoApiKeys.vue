@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live API keys">
-            <s-page-header title="API keys" subtitle="Keys inherit your permissions. Rotate often." add-text="New key" @add="dialog = true" />
+            <s-page-header class="mb-5" title="API keys" subtitle="Keys inherit your permissions. Rotate often." add-text="New key" @add="dialog = true" />
             <s-card>
                 <div v-for="k in keys" :key="k.id" class="flex items-center gap-3 py-3 border-b s-border-theme last:border-0">
                     <div class="flex-1 min-w-0">

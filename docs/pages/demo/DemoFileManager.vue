@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live file manager">
-            <s-page-header title="Files" subtitle="Workspace documents and customer uploads.">
+            <s-page-header class="mb-5" title="Files" subtitle="Workspace documents and customer uploads.">
                 <s-button size="sm" variant="secondary" @click="notify('Upload dialog opening (demo).')">Upload</s-button>
             </s-page-header>
             <s-tabs v-model="view" :tabs="[{ key: 'grid', label: 'Grid' }, { key: 'list', label: 'List' }]" />

@@ -1,5 +1,5 @@
 <template>
-    <div :class="inline ? '' : 'mb-4'">
+    <div>
         <label v-if="label" class="block text-sm font-medium s-text-primary mb-1.5">{{ label }}</label>
 
         <div
@@ -83,7 +83,7 @@ const props = defineProps({
     tip: { type: String, default: '' },
     hint: { type: String, default: '' },
     error: { type: [String, Array], default: '' },
-    /** Inline mode: no bottom margin. */
+    /** Deprecated no-op (roots are margin-free per the layout-neutrality rule). Kept so existing `inline` usage keeps working. */
     inline: { type: Boolean, default: false },
     /** Called with (response, file) after a successful upload. */
     onSuccess: { type: Function, default: null },

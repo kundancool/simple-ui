@@ -6,7 +6,8 @@
                 <select
                     :value="perPage"
                     aria-label="Results per page"
-                    class="s-input h-8 pl-2.5 pr-7 rounded-md text-xs appearance-none cursor-pointer"
+                    class="s-input pl-2.5 pr-7 rounded-md text-xs appearance-none cursor-pointer"
+                    style="--s-field-h: 32px"
                     @change="onPerPageChange($event.target.value)"
                 >
                     <option v-for="n in pageSizes" :key="n" :value="n">{{ n }}</option>

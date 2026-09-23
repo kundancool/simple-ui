@@ -3,6 +3,33 @@
 Canonical design rules. `DESIGN.md` mirrors this spec in friendlier prose;
 on conflict this file wins.
 
+## 0. Layout neutrality — the godly rule
+
+A component **MUST NOT** shift its surroundings by default. The consumer
+never adjusts around component defaults; the component fits wherever it is
+placed.
+
+- Root elements **MUST NOT** carry outer margins (`m-*`, `mb-*`, `mt-*`,
+  `mx-*`, `my-*`, …) or any style that pushes siblings. No `mb-4` on a
+  control root — that margin is not needed for the component to work, and in
+  the consumer's app it shifts the whole UI.
+- Only styles that make the component *itself* consistent belong in the
+  component: its own padding, borders, internal label→control→error rhythm,
+  focus rings.
+- Spacing *between* components belongs to the consumer (parent `gap`,
+  `space-y`) or to layout components whose explicit job is layout:
+  `s-form-item` owns form-row spacing, `s-layout` owns the app shell.
+- Internal composition spacing (label→control `mb-1.5`, control→error `mt-1`,
+  action rows) is the component's own business and stays.
+- Props that merely switch off a default margin (the old `inline`
+  escape-hatch pattern) are a smell: margin-free is the only default. Layout
+  props must be explicit opt-ins (e.g. `align="center"`), never margin
+  negations.
+
+Rationale: margins leak. The consumer cannot unset what they cannot see, and
+every default margin is a layout bug report waiting to happen. This rule is
+enforced by `tests/layout-neutrality.spec.ts` — a root margin fails the build.
+
 ## Foundations
 
 - **MUST** use the 4px base unit (Tailwind steps) for spacing, sizes and
@@ -12,18 +39,50 @@ on conflict this file wins.
 - **MUST** support both palettes (`:root` light, `.dark` dark). Neither uses
   pure white or pure black. Every semantic token exists in both.
 
+## Control height contract (no exceptions)
+
+All single-line form controls **MUST** resolve to the same height at the same
+size step, no matter the element (`input`, `select`, `button` trigger):
+
+| Size | Height | Use |
+|---|---|---|
+| `xs` | 28px | Dense rows |
+| `sm` | 32px | Compact rows (pagination uses `h-8`) |
+| `md` | 36px (`--s-control-h`) | Default: inputs, selects, date triggers, md buttons, steppers |
+| `lg` | 40px | Emphasis |
+
+- Implemented via `--s-field-h` on the control (falls back to
+  `--s-control-h`). The scale lives in one shared module — never a
+  per-component literal — so a row of mixed controls always lines up.
+- New form controls **MUST** accept `size` (and inherit it from the form
+  context) and set `--s-field-h` from the shared scale.
+- The library guarantees `box-sizing: border-box` on its controls, so heights
+  hold regardless of the consumer's global `box-sizing`.
+- Single-line controls use `rounded-md` (6px). One radius for one job.
+
+## Class hygiene (no dead weight)
+
+- Components carry only classes required for their own consistent rendering:
+  no dead utilities (e.g. `py-*` on a fixed-height control), no speculative
+  wrappers, no copy-pasted layout guesses.
+- Class names **MUST** be theme-consistent: `s-*` utilities/tokens or
+  Tailwind layout primitives only. A hardcoded color or an off-palette radius
+  is a bug — the component will look broken in the other theme.
+- Aesthetics are non-negotiable: the user picks this library knowing every
+  component looks its best with zero adjustments. "Close enough" never ships.
+
 ## Spacing
 
 | Use | Scale |
 |---|---|
-| Field bottom margin | `mb-4` (16px) on every block form control |
-| Label → control | `mb-1.5` (6px) |
-| Control → error/hint | `mt-1` (4px) |
+| Form-row spacing | `margin-bottom: 1rem` owned by `s-form-item` — never by the control inside it |
+| Label → control | `mb-1.5` (6px), internal to the control |
+| Control → error/hint | `mt-1` (4px), internal to the control |
 | Card body | `px-4 py-4`, `md:px-5 md:py-5` |
 | Dialog body | `px-4 py-4`, `md:px-6 md:py-5` |
 | Table cells (`default`) | `px-4 py-3` (`small` 12/8, `large` 20/16) |
 | Button heights | 24 / 28 / 36 / 40 (`h-6 / h-7 / h-9 / h-10`) |
-| Control height | 36px (`--s-control-h`); compact rows 32px (`h-8`) |
+| Control height | Contract above: xs 28 / sm 32 / md 36 (`--s-control-h`) / lg 40 — identical for every control at the same size |
 | Inline gaps | `gap-1.5`–`gap-3`; section gaps `gap-3`–`gap-4` |
 
 ## Color roles

@@ -1,5 +1,5 @@
 <template>
-    <ol class="relative ml-2 border-l s-border-theme space-y-5 pl-5 py-1">
+    <ol class="relative border-l s-border-theme space-y-5 pl-7 py-1">
         <li v-for="(item, index) in items" :key="item.key ?? index" class="relative">
             <slot name="dot" :item="item" :index="index">
                 <span class="absolute -left-[27px] top-0.5 w-3 h-3 rounded-full border-2 s-bg-surface" :class="dotClass(item.tone)" />

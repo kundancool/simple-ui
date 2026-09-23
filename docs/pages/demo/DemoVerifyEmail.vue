@@ -17,7 +17,8 @@
                             maxlength="1"
                             inputmode="numeric"
                             aria-label="Digit"
-                            class="s-input w-11 h-12 text-center text-lg font-semibold rounded-lg"
+                            class="s-input w-11 text-center text-lg font-semibold rounded-lg"
+                            style="--s-field-h: 48px"
                             @input="onDigit(i)"
                             @keydown.backspace="onBackspace(i, $event)"
                         />

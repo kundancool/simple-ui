@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live analytics">
-        <s-page-header title="Analytics" subtitle="Pick a range — every chart follows." />
+        <s-page-header class="mb-5" title="Analytics" subtitle="Pick a range — every chart follows." />
         <s-card>
             <s-date-range-picker v-model="range" label="Reporting period" @change="shuffle" />
         </s-card>

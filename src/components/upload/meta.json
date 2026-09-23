@@ -16,7 +16,7 @@
         { "name": "tip", "type": "string", "default": "''", "description": "Small print under the drop zone." },
         { "name": "hint", "type": "string", "default": "''", "description": "Helper text." },
         { "name": "error", "type": "string | Array", "default": "''", "description": "Error message(s)." },
-        { "name": "inline", "type": "boolean", "default": "false", "description": "No bottom margin." },
+        { "name": "inline", "type": "boolean", "default": "false", "description": "Deprecated no-op (roots are margin-free). Kept for compatibility." },
         { "name": "onSuccess", "type": "Function", "default": "null", "description": "Called with (response, file) on success." }
     ],
     "events": [

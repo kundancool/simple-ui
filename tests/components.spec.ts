@@ -64,10 +64,10 @@ describe('useToast', () => {
 })
 
 describe('inline mode', () => {
-    it('drops the block margin on SInput', async () => {
+    it('SInput root is margin-free with or without the deprecated inline prop', async () => {
         const { default: SInput } = await import('../src/components/input/SInput.vue')
         const { mount } = await import('@vue/test-utils')
-        expect(mount(SInput).classes()).toContain('mb-4')
+        expect(mount(SInput).classes()).not.toContain('mb-4')
         expect(mount(SInput, { props: { inline: true } }).classes()).not.toContain('mb-4')
     })
 })

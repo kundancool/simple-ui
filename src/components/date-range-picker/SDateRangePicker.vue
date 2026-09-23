@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-4">
+    <div>
         <span v-if="label" class="block text-sm font-medium s-text-primary mb-1.5">
             {{ label }}
             <span v-if="required" class="s-text-accent" aria-hidden="true">*</span>
@@ -124,8 +124,5 @@ function onManual(value) {
 .s-preset-hover:hover {
     color: var(--s-text-primary);
     background-color: var(--s-accent-subtle);
-}
-.s-range-fields .mb-4 {
-    margin-bottom: 0;
 }
 </style>

@@ -27,6 +27,10 @@ build:docs, then asserts the registry covers ≥ 60 components.
   `landing*.spec.ts`.
 - **A11y/interaction**: `uncontrolled.spec.ts`, `scrutiny.spec.ts`
   (keyboard, labels, captions, inline mode).
+- **Layout neutrality**: `layout-neutrality.spec.ts` (no outer margins on
+  component roots — the godly rule, `01 §0`).
+- **Height parity**: `height-parity.spec.ts` (every form control resolves to
+  the shared scale at every size, `01 §Control height contract`).
 
 ## Rules
 

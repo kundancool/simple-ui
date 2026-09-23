@@ -69,6 +69,12 @@
             "type": "boolean",
             "default": "false",
             "description": "Skeleton options."
+        },
+        {
+            "name": "size",
+            "type": "xs | sm | md | lg",
+            "default": "undefined",
+            "description": "Control size; inherits from the form item."
         }
     ],
     "events": [

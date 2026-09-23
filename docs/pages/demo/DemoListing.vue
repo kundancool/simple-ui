@@ -1,9 +1,9 @@
 <template>
     <div>
         <DemoStage title="Live listing">
-        <s-page-header title="Orders" subtitle="Search, filter and page through orders." add-text="New order" refreshable :loading="loading" @refresh="reload" />
+        <s-page-header class="mb-5" title="Orders" subtitle="Search, filter and page through orders." add-text="New order" refreshable :loading="loading" @refresh="reload" />
         <s-card>
-            <s-filter v-model="query" placeholder="Search customer, order no…" @search="resetPage">
+            <s-filter class="mb-4" v-model="query" placeholder="Search customer, order no…" @search="resetPage">
                 <s-select v-model="status" :options="statusOptions" option-label="label" option-value="value" placeholder="All statuses" clearable inline class="w-44" />
                 <s-date-range-picker v-model="range" :show-presets="false" class="w-64" />
             </s-filter>

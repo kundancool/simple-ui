@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live notification center">
-            <s-page-header title="Notifications" subtitle="Mentions, alerts and updates in one place.">
+            <s-page-header class="mb-5" title="Notifications" subtitle="Mentions, alerts and updates in one place.">
                 <s-badge :value="unreadCount" :hidden="unreadCount === 0">
                     <s-button size="sm" variant="ghost" @click="readAll">Mark all read</s-button>
                 </s-badge>

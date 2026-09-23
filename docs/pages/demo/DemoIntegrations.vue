@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live integrations">
-            <s-page-header title="Integrations" subtitle="Connect the tools around your workspaces." />
+            <s-page-header class="mb-5" title="Integrations" subtitle="Connect the tools around your workspaces." />
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 <s-card v-for="app in apps" :key="app.name">
                     <div class="flex items-center gap-2.5">

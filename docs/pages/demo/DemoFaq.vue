@@ -3,7 +3,7 @@
         <DemoStage title="Live FAQ">
             <div class="max-w-2xl mx-auto text-center">
                 <h1 class="text-xl font-bold s-text-primary">How can we help?</h1>
-                <s-filter v-model="query" placeholder="Search answers…" class="mt-3 text-left" @search="noop" />
+                <s-filter v-model="query" placeholder="Search answers…" class="mt-3 mb-4 text-left" @search="noop" />
             </div>
             <s-accordion :items="filtered.map((f) => ({ key: f.q, title: f.q, text: f.a }))" :model-value="openKey" @update:model-value="openKey = $event" />
             <p v-if="!filtered.length" class="text-sm s-text-muted text-center mt-3">No answers match — try “refund”.</p>

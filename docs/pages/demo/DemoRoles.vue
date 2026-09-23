@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live roles matrix">
-            <s-page-header title="Roles & permissions" subtitle="Toggle access — changes save instantly." />
+            <s-page-header class="mb-5" title="Roles & permissions" subtitle="Toggle access — changes save instantly." />
             <s-card>
                 <s-data-table :data="matrix" :stripe="false" size="small">
                     <s-data-table-column prop="ability" label="Capability" />

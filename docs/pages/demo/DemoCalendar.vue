@@ -1,7 +1,7 @@
 <template>
     <div>
         <DemoStage title="Live events calendar">
-            <s-page-header :title="monthLabel">
+            <s-page-header class="mb-5" :title="monthLabel">
                 <s-button size="sm" variant="secondary" @click="shift(-1)">← Prev</s-button>
                 <s-button size="sm" variant="secondary" @click="today">Today</s-button>
                 <s-button size="sm" variant="secondary" @click="shift(1)">Next →</s-button>

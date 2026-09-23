@@ -1,9 +1,9 @@
 <template>
     <div>
         <DemoStage title="Live activity feed">
-        <s-page-header title="Activity" subtitle="Everything happening across your workspace." refreshable :loading="loading" @refresh="reload" />
+        <s-page-header class="mb-5" title="Activity" subtitle="Everything happening across your workspace." refreshable :loading="loading" @refresh="reload" />
         <s-card>
-            <s-filter v-model="query" placeholder="Search activity..." @search="noop">
+            <s-filter class="mb-4" v-model="query" placeholder="Search activity..." @search="noop">
                 <s-select v-model="kind" :options="kinds" option-label="label" option-value="value" placeholder="All types" clearable inline class="w-44" />
             </s-filter>
             <div v-if="loading" class="space-y-3">
