@@ -39,6 +39,10 @@ Each `src/components/<dir>/` **MUST** contain exactly:
 - Selection state **MUST** work uncontrolled (Accordion/Carousel/Lightbox
   pattern); binary controls stay `v-model`-driven.
   Enforced by `tests/uncontrolled.spec.ts`.
+- Curated option lists (date presets, shortcuts) share one shape
+  (`{ label, value } | { label, range: [from, to] }`, resolved in
+  `src/utils/datePresets.ts`), validate before applying, and never throw on
+  malformed entries — a bad preset is ignored, not emitted.
 
 ## Layout neutrality (godly rule)
 

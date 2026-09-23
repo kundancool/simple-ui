@@ -20,7 +20,7 @@
             "name": "presets",
             "type": "Array",
             "default": "null",
-            "description": "Custom [{ label, range }] — null uses the defaults."
+            "description": "Shortcut override: [{ label, range: [from, to] }] as YYYY-MM-DD. null keeps the built-ins, [] hides them. Bad entries are ignored."
         },
         {
             "name": "showPresets",

@@ -74,12 +74,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="presets.length" class="flex flex-wrap gap-1.5 mt-2 pt-2 border-t s-border-theme">
+                        <div v-if="usablePresets.length" class="flex flex-wrap gap-1.5 mt-2 pt-2 border-t s-border-theme" role="group" aria-label="Date presets">
                             <button
-                                v-for="p in presets"
+                                v-for="p in usablePresets"
                                 :key="p.label"
                                 type="button"
-                                class="s-focus-ring px-2 py-1 text-xs rounded-md s-bg-surface-raised s-text-secondary"
+                                class="s-focus-ring px-2 py-1 text-xs rounded-md"
+                                :class="activePreset === p.label ? 's-bg-accent-subtle s-text-accent' : 's-bg-surface-raised s-text-secondary s-preset-hover'"
+                                :aria-pressed="activePreset === p.label"
                                 @click="applyPreset(p)"
                             >{{ p.label }}</button>
                         </div>
@@ -96,6 +98,7 @@
 import { ref, computed, nextTick, onMounted, onBeforeUnmount, useId, watch } from 'vue'
 import { firstValidationError } from '../../utils/validation'
 import { FIELD_HEIGHTS, isFieldSize } from '../../utils/fieldSize'
+import { normalizePreset, resolvePresets } from '../../utils/datePresets'
 import { useFieldSize } from '../../composables/formContext'
 
 defineOptions({ name: 'SDatePicker' })
@@ -133,6 +136,8 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'change'])
 
 const errorMessage = computed(() => firstValidationError(props.error))
+const activePreset = ref('')
+const usablePresets = computed(() => resolvePresets(props.presets, props.range))
 
 /** Shared height scale so triggers line up with inputs and selects. */
 const fieldSize = useFieldSize(computed(() => props.size))
@@ -306,6 +311,7 @@ function shiftMonth(delta) {
 }
 
 function commit(value) {
+    activePreset.value = ''
     emit('update:modelValue', value)
     emit('change', value)
 }
@@ -333,11 +339,13 @@ function pick(date) {
 }
 
 function applyPreset(p) {
-    if (props.range && p.range) {
-        commit(p.range)
-    } else if (!props.range && p.value) {
-        commit(p.value)
+    const value = normalizePreset(p, props.range)
+    if (value === null) {
+        return
     }
+    activePreset.value = p.label
+    emit('update:modelValue', Array.isArray(value) ? [value[0], value[1]] : value)
+    emit('change', Array.isArray(value) ? [value[0], value[1]] : value)
     open.value = false
 }
 
@@ -419,5 +427,9 @@ onBeforeUnmount(() => {
 .s-cal-nav:hover {
     background-color: var(--s-surface-raised);
     color: var(--s-text-primary);
+}
+.s-preset-hover:hover {
+    color: var(--s-text-primary);
+    background-color: var(--s-accent-subtle);
 }
 </style>

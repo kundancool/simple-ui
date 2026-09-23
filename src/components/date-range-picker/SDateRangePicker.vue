@@ -4,7 +4,7 @@
             {{ label }}
             <span v-if="required" class="s-text-accent" aria-hidden="true">*</span>
         </span>
-        <div v-if="showPresets" class="flex flex-wrap gap-1.5 mb-2" role="group" aria-label="Date presets">
+        <div v-if="showPresets && resolvedPresets.length" class="flex flex-wrap gap-1.5 mb-2" role="group" aria-label="Date presets">
             <button
                 v-for="preset in resolvedPresets"
                 :key="preset.label"
@@ -33,6 +33,7 @@
 import { ref, computed } from 'vue'
 import SDatePicker from '../date-picker/SDatePicker.vue'
 import { firstValidationError } from '../../utils/validation'
+import { defaultRangePresets, normalizePreset, resolvePresets } from '../../utils/datePresets'
 
 defineOptions({ name: 'SDateRangePicker' })
 
@@ -60,41 +61,11 @@ const emit = defineEmits(['update:modelValue', 'change'])
 const errorMessage = computed(() => firstValidationError(props.error))
 const activePreset = ref('')
 
-function iso(d) {
-    const y = d.getFullYear()
-    const m = String(d.getMonth() + 1).padStart(2, '0')
-    const day = String(d.getDate()).padStart(2, '0')
-    return `${y}-${m}-${day}`
-}
-
-function startOfDay(d) {
-    const c = new Date(d)
-    c.setHours(0, 0, 0, 0)
-    return c
-}
-
-function addDays(d, n) {
-    const c = new Date(d)
-    c.setDate(c.getDate() + n)
-    return c
-}
-
-function defaultPresets() {
-    const today = startOfDay(new Date())
-    const firstOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
-    const firstOfLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1)
-    const lastOfLastMonth = new Date(today.getFullYear(), today.getMonth(), 0)
-    return [
-        { label: 'Today', range: [iso(today), iso(today)] },
-        { label: 'Yesterday', range: [iso(addDays(today, -1)), iso(addDays(today, -1))] },
-        { label: 'Last 7 days', range: [iso(addDays(today, -6)), iso(today)] },
-        { label: 'Last 30 days', range: [iso(addDays(today, -29)), iso(today)] },
-        { label: 'This month', range: [iso(firstOfMonth), iso(today)] },
-        { label: 'Last month', range: [iso(firstOfLastMonth), iso(lastOfLastMonth)] },
-    ]
-}
-
-const resolvedPresets = computed(() => props.presets ?? defaultPresets())
+const resolvedPresets = computed(() =>
+    props.presets === null || props.presets === undefined
+        ? defaultRangePresets()
+        : resolvePresets(props.presets, true),
+)
 
 const calendarAttrs = computed(() => ({
     placeholder: props.placeholder,
@@ -112,7 +83,11 @@ function commit(value, presetLabel = '') {
 }
 
 function applyPreset(preset) {
-    commit([...preset.range], preset.label)
+    const value = normalizePreset(preset, true)
+    if (value === null) {
+        return
+    }
+    commit([value[0], value[1]], preset.label)
 }
 
 function onManual(value) {

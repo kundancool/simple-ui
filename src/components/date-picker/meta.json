@@ -44,7 +44,7 @@
             "name": "presets",
             "type": "Array",
             "default": "[]",
-            "description": "Quick picks: [{ label, value }] or [{ label, range }]."
+            "description": "Shortcut override: [{ label, value }] or [{ label, range: [from, to] }] as YYYY-MM-DD. Bad entries are ignored."
         },
         {
             "name": "error",
