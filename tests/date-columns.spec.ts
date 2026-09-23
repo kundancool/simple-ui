@@ -4,7 +4,33 @@ import { nextTick } from 'vue'
 import SDatePicker from '../src/components/date-picker/SDatePicker.vue'
 
 describe('SDatePicker columns', () => {
+    it.each([
+        ['empty string', ''],
+        ['single string', '2026-09-01'],
+        ['missing', undefined],
+    ] as Array<[string, unknown]>)(
+        'range opens without crashing on %s model',
+        async (label, value) => {
+            const props: Record<string, unknown> =
+                value === undefined ? { range: true } : { modelValue: value, range: true }
+            const wrapper = mount(SDatePicker, { props, attachTo: document.body })
+            await wrapper.find('input').trigger('click')
+            await nextTick()
+            expect(document.body.querySelectorAll('.s-cal-month').length).toBeGreaterThan(0)
+            wrapper.unmount()
+            document.body.innerHTML = ''
+        },
+    )
+
+    function wideScreen(wide) {
+        Object.defineProperty(window, 'matchMedia', {
+            value: () => ({ matches: wide, addEventListener: () => {}, removeEventListener: () => {} }),
+            configurable: true,
+        })
+    }
+
     it('shows one centered heading naming every visible month', async () => {
+        wideScreen(true)
         const wrapper = mount(SDatePicker, {
             props: { modelValue: [], range: true },
             attachTo: document.body,
@@ -18,6 +44,20 @@ describe('SDatePicker columns', () => {
         for (const month of document.body.querySelectorAll('.s-cal-month')) {
             expect(month.querySelector('p')).toBeNull()
         }
+        wrapper.unmount()
+        document.body.innerHTML = ''
+    })
+
+    it('names a single month on narrow screens even in range mode', async () => {
+        wideScreen(false)
+        const wrapper = mount(SDatePicker, {
+            props: { modelValue: [], range: true },
+            attachTo: document.body,
+        })
+        await wrapper.find('input').trigger('click')
+        await nextTick()
+        const label = document.body.querySelector('[aria-label="Previous month"] + span')?.textContent ?? ''
+        expect(label).not.toContain('–')
         wrapper.unmount()
         document.body.innerHTML = ''
     })

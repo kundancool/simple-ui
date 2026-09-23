@@ -41,7 +41,7 @@
                         data-overlay
                         role="dialog"
                         aria-label="Choose date"
-                        class="fixed s-bg-surface border s-border-theme rounded-lg s-shadow-lg-theme p-3 origin-top"
+                        class="fixed s-bg-surface border s-border-theme rounded-lg s-shadow-lg-theme p-3 origin-top w-max max-w-[calc(100vw-1rem)] max-h-[calc(100vh-1rem)] overflow-y-auto"
                         :style="{ ...panelStyle, zIndex: 'var(--s-z-dropdown)' }"
                         @keydown.escape="closePanel"
                     >
@@ -225,12 +225,21 @@ function currentValue() {
     return props.range ? toIso(props.modelValue?.[0] ?? '') : toIso(props.modelValue)
 }
 
-/** Model values back to canonical ISO for internal compares. */
-const isoRange = computed(() => (props.range ? (props.modelValue ?? []).map((v) => toIso(v)) : []))
+/** Model values back to canonical ISO for internal compares.
+ * Range mode with a non-array model ('' default, stray string) is an empty
+ * range — never a crash. */
+const isoRange = computed(() => {
+    if (!props.range) {
+        return []
+    }
+    const raw = Array.isArray(props.modelValue) ? props.modelValue : []
+    return raw.map((v) => toIso(v))
+})
 
 const displayText = computed(() => {
     if (props.range) {
-        const [from, to] = props.modelValue ?? []
+        const raw = Array.isArray(props.modelValue) ? props.modelValue : []
+        const [from, to] = raw
         if (!from) {
             return ''
         }
@@ -245,13 +254,22 @@ function monthStart(offset) {
     return new Date(anchor.value.getFullYear(), anchor.value.getMonth() + offset, 1)
 }
 
+/** Mirrors the min-[540px] breakpoint CSS uses: below it only the first
+ * month shows, so the heading must name one month, not the range. */
+const wideScreen = ref(typeof window !== 'undefined' && !!window.matchMedia?.('(min-width: 540px)').matches)
+function syncViewport() {
+    wideScreen.value = !!window.matchMedia?.('(min-width: 540px)').matches
+}
+
+const visibleColumns = computed(() => (wideScreen.value ? resolvedColumns.value : 1))
+
 const visibleRangeLabel = computed(() => {
     const first = monthStart(0)
     const firstLabel = first.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
-    if (resolvedColumns.value < 2) {
+    if (visibleColumns.value < 2) {
         return firstLabel
     }
-    const last = monthStart(resolvedColumns.value - 1)
+    const last = monthStart(visibleColumns.value - 1)
     if (last.getFullYear() === first.getFullYear()) {
         const lastMonth = last.toLocaleDateString(undefined, { month: 'long' })
         const firstMonth = first.toLocaleDateString(undefined, { month: 'long' })
@@ -364,7 +382,7 @@ function pick(date) {
         open.value = false
         return
     }
-    const [from, to] = (props.modelValue ?? []).map((v) => toIso(v))
+    const [from, to] = isoRange.value
     if (!from || (from && to)) {
         commit([toValue(iso), ''])
     } else if (iso < from) {
@@ -417,12 +435,39 @@ function toggleOpen() {
     }
 }
 
+/** Gap between the trigger and the panel, and the viewport margin. */
+const PANEL_GAP = 4
+const VIEW_MARGIN = 8
+
+/**
+ * Keep the whole calendar in view: measure it, then pick the side with
+ * room — below by default, above when cramped; left-aligned by default,
+ * right-aligned near the right edge. The panel never compresses (w-max)
+ * and never leaves the viewport on any side.
+ */
 function updatePanelPosition() {
     if (!triggerRef.value) {
         return
     }
     const rect = triggerRef.value.getBoundingClientRect()
-    panelStyle.value = { top: `${rect.bottom + 4}px`, left: `${rect.left}px` }
+    const width = panelRef.value?.offsetWidth ?? 0
+    const height = panelRef.value?.offsetHeight ?? 0
+    const viewWidth = window.innerWidth
+    const viewHeight = window.innerHeight
+
+    let left = rect.left
+    if (width > 0 && left + width > viewWidth - VIEW_MARGIN) {
+        left = rect.right - width
+    }
+    left = Math.max(VIEW_MARGIN, Math.min(left, viewWidth - VIEW_MARGIN))
+
+    let top = rect.bottom + PANEL_GAP
+    if (height > 0 && top + height > viewHeight - VIEW_MARGIN) {
+        top = rect.top - height - PANEL_GAP
+    }
+    top = Math.max(VIEW_MARGIN, top)
+
+    panelStyle.value = { top: `${top}px`, left: `${left}px` }
 }
 
 function onClickOutside(e) {
@@ -448,11 +493,13 @@ onMounted(() => {
     document.addEventListener('mousedown', onClickOutside)
     window.addEventListener('scroll', onScrollResize, true)
     window.addEventListener('resize', onScrollResize)
+    window.matchMedia?.('(min-width: 540px)').addEventListener?.('change', syncViewport)
 })
 onBeforeUnmount(() => {
     document.removeEventListener('mousedown', onClickOutside)
     window.removeEventListener('scroll', onScrollResize, true)
     window.removeEventListener('resize', onScrollResize)
+    window.matchMedia?.('(min-width: 540px)').removeEventListener?.('change', syncViewport)
 })
 </script>
 

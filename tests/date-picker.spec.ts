@@ -57,6 +57,49 @@ describe('SDatePicker trigger', () => {
         document.body.innerHTML = ''
     })
 
+    it('right-aligns near the right edge instead of leaving the viewport', async () => {
+        Object.defineProperty(window, 'innerWidth', { value: 1024, configurable: true })
+        Object.defineProperty(window, 'innerHeight', { value: 768, configurable: true })
+        const wrapper = mount(SDatePicker, { props: { modelValue: '' }, attachTo: document.body })
+        await wrapper.find('input').trigger('click')
+        await nextTick()
+        const input = wrapper.find('input').element
+        input.getBoundingClientRect = () => ({ left: 900, right: 1000, top: 100, bottom: 136, width: 100, height: 36 }) as unknown as DOMRect
+        const panel = document.body.querySelector('[role="dialog"]')
+        Object.defineProperty(panel, 'offsetWidth', { value: 500, configurable: true })
+        Object.defineProperty(panel, 'offsetHeight', { value: 300, configurable: true })
+        window.dispatchEvent(new Event('resize'))
+        await nextTick()
+        const style = (panel as HTMLElement).style
+        // 900 + 500 overflows 1024 → right-aligned at 1000 - 500
+        expect(style.left).toBe('500px')
+        // 136 + 300 fits 768 → still drops below
+        expect(style.top).toBe('140px')
+        wrapper.unmount()
+        document.body.innerHTML = ''
+    })
+
+    it('flips above the trigger when there is no room below', async () => {
+        Object.defineProperty(window, 'innerWidth', { value: 1024, configurable: true })
+        Object.defineProperty(window, 'innerHeight', { value: 600, configurable: true })
+        const wrapper = mount(SDatePicker, { props: { modelValue: '' }, attachTo: document.body })
+        await wrapper.find('input').trigger('click')
+        await nextTick()
+        const input = wrapper.find('input').element
+        input.getBoundingClientRect = () => ({ left: 100, right: 300, top: 500, bottom: 536, width: 200, height: 36 }) as unknown as DOMRect
+        const panel = document.body.querySelector('[role="dialog"]')
+        Object.defineProperty(panel, 'offsetWidth', { value: 320, configurable: true })
+        Object.defineProperty(panel, 'offsetHeight', { value: 300, configurable: true })
+        window.dispatchEvent(new Event('resize'))
+        await nextTick()
+        const style = (panel as HTMLElement).style
+        expect(style.left).toBe('100px')
+        // 536 + 300 overflows 600 → opens above at 500 - 300 - 4
+        expect(style.top).toBe('196px')
+        wrapper.unmount()
+        document.body.innerHTML = ''
+    })
+
     it('opens on Enter and ArrowDown', async () => {
         const wrapper = mount(SDatePicker, { props: { modelValue: '' }, attachTo: document.body })
         await wrapper.find('input').trigger('keydown', { key: 'Enter' })

@@ -191,7 +191,18 @@ function updateDropdownPosition() {
         return
     }
     const rect = triggerRef.value.getBoundingClientRect()
-    dropdownStyle.value = { top: `${rect.bottom + 4}px`, left: `${rect.left}px`, width: `${rect.width}px` }
+    // Flip above / right-align when the viewport runs out, so the panel
+    // always stays in view (same contract as the date picker panel).
+    const height = DROPDOWNtriggerRef.value.value?.offsetHeight ?? 0
+    let top = rect.bottom + 4
+    if (height > 0 && top + height > window.innerHeight - 8) {
+        top = rect.top - height - 4
+    }
+    let left = rect.left
+    if (left + rect.width > window.innerWidth - 8) {
+        left = Math.max(8, rect.right - rect.width)
+    }
+    dropdownStyle.value = { top: `${Math.max(8, top)}px`, left: `${left}px`, width: `${rect.width}px` }
 }
 
 const { activeIndex, onKeydown, reset: resetNavigation } = useListNavigation(filteredOptions, {
