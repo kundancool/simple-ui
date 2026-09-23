@@ -82,6 +82,7 @@ npm install chart.js vue-chartjs
 
 ## Docs & AI
 
+- Specs (start here on a fresh clone): `docs/spec/README.md`
 - Docs: `npm run dev:docs` (static build: `npm run build:docs`)
 - Agents: hosted MCP + `llms.txt` — see the docs “Build with AI” page and `mcp/DEPLOY.md`.
 

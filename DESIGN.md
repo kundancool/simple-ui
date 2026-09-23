@@ -1,5 +1,8 @@
 # Simple UI — Design Guidelines
 
+> Canonical version: `docs/spec/01-design-principles.md`. This file mirrors
+> it in friendlier prose; on conflict the spec wins.
+
 Single source of truth for how Simple UI looks, moves and behaves.
 Every component in `src/components` follows this document; contributions
 must follow it too. Users can read the friendlier version on the docs

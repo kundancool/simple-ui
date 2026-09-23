@@ -1,5 +1,9 @@
 # Contributing to Simple UI
 
+> Spec-first: `docs/spec/README.md` is the index.
+> Adding a component → `docs/spec/04-component-workflow.md` (canonical).
+> Design rules → `docs/spec/01-design-principles.md`. Gates → `docs/spec/06-testing.md`.
+
 ## Adding a component
 
 Follow every step — each one is enforced by tests or the build, so a missed
