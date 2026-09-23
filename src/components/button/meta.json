@@ -44,7 +44,7 @@
             "name": "label",
             "type": "string",
             "default": "''",
-            "description": "Accessible name for icon-only buttons."
+            "description": "Accessible name (aria-label) for icon-only circle buttons. Required when there is no default slot — warns in dev without it."
         }
     ],
     "events": [

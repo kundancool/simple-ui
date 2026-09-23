@@ -60,6 +60,12 @@ the shared scale — so a mixed row lines up by construction. Enforced by
 ## Accessibility & keyboard
 
 - Every input **MUST** be labelled (`label` prop or `aria-label` fallback).
+- Icon-only controls (circle buttons included) **MUST** expose their name via
+  `aria-label` — `title` alone is not an accessible name. A component that can
+  render without visible text **MUST** dev-warn when it has neither a `label`
+  prop nor a consumer `aria-label`/`aria-labelledby`, so the missing name
+  fails loudly in development instead of shipping silently to screen readers.
+  Enforced by `tests/components.spec.ts`.
 - Lists/tabs/ratings **MUST** support arrows/Home/End; overlays **MUST** close
   on Escape. Enforced by `tests/scrutiny.spec.ts`.
 - Focus follows `01`: `s-focus-ring` on `:focus-visible` for buttons/menus,

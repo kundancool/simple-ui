@@ -42,7 +42,9 @@ enforced by `tests/layout-neutrality.spec.ts` — a root margin fails the build.
 ## Control height contract (no exceptions)
 
 All single-line form controls **MUST** resolve to the same height at the same
-size step, no matter the element (`input`, `select`, `button` trigger):
+size step. Date and multi-select triggers are readonly text inputs — the
+correct tag for a form value — so they share the exact same rendering path
+as `s-input` (native submission, label association, placeholder, focus).
 
 | Size | Height | Use |
 |---|---|---|

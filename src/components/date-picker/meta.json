@@ -71,6 +71,12 @@
             "description": "Disables the field."
         },
         {
+            "name": "name",
+            "type": "string",
+            "default": "''",
+            "description": "Native input name so the date joins form submission."
+        },
+        {
             "name": "size",
             "type": "xs | sm | md | lg",
             "default": "undefined",

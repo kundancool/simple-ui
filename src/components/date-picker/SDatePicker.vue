@@ -5,23 +5,34 @@
             <span v-if="required" class="s-text-accent" aria-hidden="true">*</span>
         </label>
         <div class="relative">
-            <button
+            <input
                 :id="fieldId"
                 ref="triggerRef"
-                type="button"
+                type="text"
+                readonly
+                :name="name || undefined"
+                :value="displayText"
+                :placeholder="placeholder"
                 :disabled="disabled"
                 :aria-invalid="errorMessage ? 'true' : undefined"
                 :aria-describedby="describedBy"
+                aria-haspopup="dialog"
                 :aria-expanded="open"
-                :class="['s-input w-full rounded-md text-left flex items-center justify-between gap-2', SIZE_CLASS[fieldSize], errorMessage ? 's-is-error' : '', disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer']"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                spellcheck="false"
+                inputmode="none"
+                :class="['s-input w-full rounded-md pr-9 cursor-pointer', SIZE_CLASS[fieldSize], errorMessage ? 's-is-error' : '', disabled ? 'opacity-50 cursor-not-allowed' : '']"
                 :style="controlStyle"
                 @click="toggleOpen"
-            >
-                <span :class="displayText ? 's-text-primary' : 's-text-placeholder'" class="truncate">{{ displayText || placeholder }}</span>
-                <svg class="w-4 h-4 s-text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                @keydown="onTriggerKeydown"
+            />
+            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3" aria-hidden="true">
+                <svg class="w-4 h-4 s-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-            </button>
+            </span>
             <Teleport to="body">
                 <Transition name="s-pop">
                     <div
@@ -32,6 +43,7 @@
                         aria-label="Choose date"
                         class="fixed s-bg-surface border s-border-theme rounded-lg s-shadow-lg-theme p-3 origin-top"
                         :style="{ ...panelStyle, zIndex: 'var(--s-z-dropdown)' }"
+                        @keydown.escape="closePanel"
                     >
                         <div class="flex items-center justify-between mb-2">
                             <button type="button" aria-label="Previous month" class="s-focus-ring s-cal-nav w-7 h-7 flex items-center justify-center rounded-md s-text-secondary" @click="shiftMonth(-1)">
@@ -105,6 +117,8 @@ const props = defineProps({
     disabled: { type: Boolean, default: false },
     /** xs | sm | md | lg — inherits from the enclosing s-form-item when omitted. */
     size: { type: String, default: undefined, validator: isFieldSize },
+    /** Native input name so the date joins form submission. */
+    name: { type: String, default: '' },
     /** Deprecated no-op (roots are margin-free per the layout-neutrality rule). Kept so existing `inline` usage keeps working. */
     inline: { type: Boolean, default: false },
     /** Output format for the trigger text. Supports YYYY, MM, DD tokens. */
@@ -325,6 +339,24 @@ function applyPreset(p) {
         commit(p.value)
     }
     open.value = false
+}
+
+/** Close from inside the calendar and hand focus back to the field. */
+function closePanel() {
+    open.value = false
+    triggerRef.value?.focus()
+}
+
+/** Keyboard parity with the old button trigger: Enter/Space/Down open, Escape closes. */
+function onTriggerKeydown(event) {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown') {
+        event.preventDefault()
+        if (!open.value) {
+            toggleOpen()
+        }
+    } else if (event.key === 'Escape' && open.value) {
+        closePanel()
+    }
 }
 
 function toggleOpen() {

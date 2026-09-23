@@ -1,6 +1,9 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import SButton from '../src/components/button/SButton.vue'
+import { markRaw } from 'vue'
+
+const XIcon = markRaw({ name: 'XIcon', render: () => null })
 import STag from '../src/components/tag/STag.vue'
 import SAlert from '../src/components/alert/SAlert.vue'
 import SSkeleton from '../src/components/skeleton/SSkeleton.vue'
@@ -27,6 +30,34 @@ describe('SButton', () => {
     it('disables while loading', () => {
         const wrapper = mount(SButton, { props: { loading: true }, slots: { default: 'Go' } })
         expect(wrapper.attributes('disabled')).toBeDefined()
+    })
+
+    it('names circle buttons via aria-label, not just title', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+        const wrapper = mount(SButton, { props: { icon: XIcon, label: 'Close' } })
+        expect(wrapper.classes()).toContain('rounded-full')
+        expect(wrapper.attributes('aria-label')).toBe('Close')
+        expect(warn).not.toHaveBeenCalled()
+        warn.mockRestore()
+        wrapper.unmount()
+    })
+
+    it('warns when a circle button has no accessible name', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+        const wrapper = mount(SButton, { props: { icon: XIcon } })
+        expect(wrapper.attributes('aria-label')).toBeUndefined()
+        expect(warn).toHaveBeenCalledWith(expect.stringContaining('accessible name'))
+        warn.mockRestore()
+        wrapper.unmount()
+    })
+
+    it('respects a consumer aria-label on circle buttons', () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+        const wrapper = mount(SButton, { props: { icon: XIcon }, attrs: { 'aria-label': 'Dismiss' } })
+        expect(wrapper.attributes('aria-label')).toBe('Dismiss')
+        expect(warn).not.toHaveBeenCalled()
+        warn.mockRestore()
+        wrapper.unmount()
     })
 })
 

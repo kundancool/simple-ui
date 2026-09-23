@@ -5,7 +5,8 @@
         :disabled="disabled || loading"
         :aria-busy="loading || undefined"
         :type="type"
-        :title="isIconOnly ? label : undefined"
+        :aria-label="isIconOnly ? label || undefined : undefined"
+        :title="isIconOnly ? label || undefined : undefined"
         v-bind="$attrs"
         @click="$emit('click', $event)"
     >
@@ -19,7 +20,7 @@
 </template>
 
 <script setup>
-import { computed, useSlots } from 'vue'
+import { computed, useAttrs, useSlots } from 'vue'
 
 defineOptions({ name: 'SButton' })
 
@@ -50,8 +51,17 @@ const props = defineProps({
 defineEmits(['click'])
 
 const slots = useSlots()
+const attrs = useAttrs()
 
 const isIconOnly = computed(() => props.icon && !slots.default?.())
+
+/**
+ * Circle buttons have no visible text — without a name they are silent to
+ * screen readers. Fail loudly in development instead of shipping that.
+ */
+if (isIconOnly.value && !props.label && !attrs['aria-label'] && !attrs['aria-labelledby']) {
+    console.warn('[Simple UI] <s-button> with icon and no default slot renders a circle button without an accessible name. Pass `label` (or aria-label).')
+}
 
 const sizeClasses = computed(() => {
     const sizes = {
