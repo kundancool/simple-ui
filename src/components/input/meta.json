@@ -71,6 +71,36 @@
             "description": "Max attribute."
         },
         {
+            "name": "size",
+            "type": "xs | sm | md | lg | xl | 2xl | 3xl",
+            "default": "undefined",
+            "description": "Control size; inherits from the form item."
+        },
+        {
+            "name": "clearable",
+            "type": "boolean",
+            "default": "false",
+            "description": "Clear button when there is a value."
+        },
+        {
+            "name": "maxlength",
+            "type": "string | number",
+            "default": "null",
+            "description": "Max length attribute."
+        },
+        {
+            "name": "readonly",
+            "type": "boolean",
+            "default": "false",
+            "description": "Readonly state."
+        },
+        {
+            "name": "showWordLimit",
+            "type": "boolean",
+            "default": "false",
+            "description": "Character counter with maxlength."
+        },
+        {
             "name": "inline",
             "type": "boolean",
             "default": "false",
@@ -81,12 +111,44 @@
         {
             "name": "update:modelValue",
             "description": "v-model update."
+        },
+        {
+            "name": "input",
+            "description": "Emitted on every keystroke with the value."
+        },
+        {
+            "name": "change",
+            "description": "Emitted on change with the value."
+        },
+        {
+            "name": "blur",
+            "description": "Emitted on blur with the FocusEvent."
+        },
+        {
+            "name": "focus",
+            "description": "Emitted on focus with the FocusEvent."
+        },
+        {
+            "name": "clear",
+            "description": "Emitted when the clear button empties the field."
+        },
+        {
+            "name": "toggle-visibility",
+            "description": "Emitted with visibility after password reveal toggle."
         }
     ],
     "slots": [
         {
             "name": "trailing",
             "description": "Action beside the label."
+        },
+        {
+            "name": "prefix",
+            "description": "Leading adornment inside the field."
+        },
+        {
+            "name": "suffix",
+            "description": "Trailing adornment inside the field."
         }
     ],
     "example": "<s-input v-model=\"name\" label=\"Customer name\" placeholder=\"Full name\" :error=\"errors.name\" required />"

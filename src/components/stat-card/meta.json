@@ -7,8 +7,8 @@
         {
             "name": "icon",
             "type": "Component",
-            "default": "required",
-            "description": "Icon component in the tile."
+            "default": "null",
+            "description": "Leading icon tile. Omit for a text-only stat."
         },
         {
             "name": "bgColor",
@@ -31,8 +31,8 @@
         {
             "name": "label",
             "type": "string",
-            "default": "required",
-            "description": "Metric caption."
+            "default": "''",
+            "description": "Caption under the value. Omit for a value-only stat."
         },
         {
             "name": "loading",

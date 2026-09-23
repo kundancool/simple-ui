@@ -3,7 +3,7 @@
         <DemoStage title="Live analytics">
         <s-page-header class="mb-5" title="Analytics" subtitle="Pick a range — every chart follows." />
         <s-card>
-            <s-date-range-picker v-model="range" label="Reporting period" @change="shuffle" />
+            <s-date-picker v-model="range" range label="Reporting period" @change="shuffle" />
         </s-card>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-3">
             <s-stat-card :icon="Wallet" bg-color="s-bg-icon-green" icon-color="s-text-icon-green" :value="kpiRevenue" label="Revenue" />
@@ -32,7 +32,7 @@ import { Wallet, CalendarCheck, Percent, Star } from 'lucide-vue-next'
 import { SPageHeader } from '@kundancool/simple-ui'
 import { SStatCard } from '@kundancool/simple-ui'
 import { SCard } from '@kundancool/simple-ui'
-import { SDateRangePicker } from '@kundancool/simple-ui'
+import { SDatePicker } from '@kundancool/simple-ui'
 import { SBarChart } from '@kundancool/simple-ui'
 import { SLineChart } from '@kundancool/simple-ui'
 import { SDoughnutChart } from '@kundancool/simple-ui'

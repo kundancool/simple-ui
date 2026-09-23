@@ -265,6 +265,13 @@ button.s-input {
     border-color: var(--s-accent-text);
     box-shadow: 0 0 0 3px var(--s-accent-subtle);
 }
+/* Firefox draws its own dotted ring on focused selects via :-moz-focusring,
+   ignoring the outline reset above — kill it so only the theme ring shows. */
+select.s-input:-moz-focusring {
+    outline: none;
+    color: inherit;
+    text-shadow: none;
+}
 .s-input.s-is-error {
     border-color: var(--s-danger);
     box-shadow: 0 0 0 3px var(--s-danger-subtle);

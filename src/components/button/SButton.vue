@@ -21,6 +21,7 @@
 
 <script setup>
 import { computed, useAttrs, useSlots } from 'vue'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SButton' })
 
@@ -39,7 +40,7 @@ const props = defineProps({
     size: {
         type: String,
         default: 'md',
-        validator: (v) => ['xs', 'sm', 'md', 'lg'].includes(v),
+        validator: isFieldSize,
     },
     disabled: { type: Boolean, default: false },
     loading: { type: Boolean, default: false },
@@ -69,12 +70,15 @@ const sizeClasses = computed(() => {
         sm: isIconOnly.value ? 'w-7 h-7 rounded-md' : 'h-7 px-3 text-xs rounded-md',
         md: isIconOnly.value ? 'w-9 h-9 rounded-md' : 'h-9 px-4 text-sm rounded-md',
         lg: isIconOnly.value ? 'w-10 h-10 rounded-md' : 'h-10 px-5 text-sm rounded-md',
+        xl: isIconOnly.value ? 'w-11 h-11 rounded-md' : 'h-11 px-6 text-base rounded-md',
+        '2xl': isIconOnly.value ? 'w-12 h-12 rounded-md' : 'h-12 px-8 text-base rounded-md',
+        '3xl': isIconOnly.value ? 'w-14 h-14 rounded-md' : 'h-14 px-8 text-lg rounded-md',
     }
     return sizes[props.size]
 })
 
 const iconSizeClasses = computed(() => {
-    const sizes = { xs: 'w-3 h-3', sm: 'w-3.5 h-3.5', md: 'w-4 h-4', lg: 'w-5 h-5' }
+    const sizes = { xs: 'w-3 h-3', sm: 'w-3.5 h-3.5', md: 'w-4 h-4', lg: 'w-5 h-5', xl: 'w-5 h-5', '2xl': 'w-6 h-6', '3xl': 'w-7 h-7' }
     return sizes[props.size]
 })
 

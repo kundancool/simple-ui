@@ -6,7 +6,6 @@
         <label class="flex items-center gap-2 text-sm s-text-secondary">
             <s-switch v-model="b" aria-label="SMS alerts" /> SMS
         </label>
-        <s-switch :model-value="true" loading aria-label="Saving" />
     </div>
     <p class="text-sm s-text-muted mt-2">Email {{ a ? 'on' : 'off' }} · SMS {{ b ? 'on' : 'off' }}</p>
 </template>

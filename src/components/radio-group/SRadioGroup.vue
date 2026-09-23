@@ -14,13 +14,14 @@
 import { computed, provide, toRef } from 'vue'
 import { firstValidationError } from '../../utils/validation'
 import { useFieldDisabled, useFieldSize } from '../../composables/formContext'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SRadioGroup' })
 
 const props = defineProps({
     modelValue: { type: [String, Number, Boolean], default: null },
     disabled: { type: Boolean, default: false },
-    size: { type: String, default: undefined, validator: (v) => v === undefined || ['xs', 'sm', 'md', 'lg'].includes(v) },
+    size: { type: String, default: undefined, validator: isFieldSize },
     /** Native radio name shared by the options. */
     name: { type: String, default: '' },
     /** Lay the options out in a row instead of a column. */

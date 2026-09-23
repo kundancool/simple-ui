@@ -46,6 +46,7 @@ const BANNED = [
     /\bfront desk\b/i,
     /\bnights?\b/i,
     /\bnightly\b/i,
+    /\btonight\b/i,
     /\bper night\b/i,
     /\broom (type|no|number|rate|key)s?\b/i,
     /\bdeluxe\b/i,

@@ -1,11 +1,5 @@
 <template>
-    <div class="flex items-center gap-4">
-        <s-spinner size="xs" />
-        <s-spinner size="sm" />
-        <s-spinner />
-        <s-spinner size="lg" />
-        <s-spinner size="lg" label="Loading orders" />
-    </div>
+    <s-spinner />
 </template>
 
 <script setup>

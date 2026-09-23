@@ -18,6 +18,19 @@
             </DemoCard>
             <DemoBlock v-else :code="component.example" :title="component.name" />
 
+            <template v-if="variationFiles.length">
+                <h2 class="text-lg font-semibold s-text-primary mt-10 mb-3">Variations</h2>
+                <div class="space-y-6">
+                    <section v-for="v in variationFiles" :key="v.key">
+                        <h3 class="text-[15px] font-semibold s-text-primary">{{ v.title }}</h3>
+                        <p v-if="v.description" class="text-sm s-text-secondary mt-0.5 mb-2">{{ v.description }}</p>
+                        <DemoCard :code="v.code" :title="`${component.dir}.${v.slug}.vue`">
+                            <component :is="v.comp" />
+                        </DemoCard>
+                    </section>
+                </div>
+            </template>
+
             <template v-if="component.props?.length">
                 <h2 class="text-lg font-semibold s-text-primary mt-10 mb-3">Props</h2>
                 <s-data-table :data="component.props" :stripe="false" size="small" border>
@@ -95,6 +108,41 @@ const raws = import.meta.glob('../examples/*.vue', { eager: true, query: '?raw',
 
 const ExampleComp = computed(() => demos[`../examples/${dir.value}.vue`]?.default ?? null)
 const exampleCode = computed(() => raws[`../examples/${dir.value}.vue`] ?? component.value?.example ?? '')
+
+/**
+ * One section per variation. Variation files declare their own heading:
+ * `<!-- demo: Title — description -->` on the first line. The page parses
+ * it and never invents titles from filenames (a `<dir>.vue` main file
+ * starts with `<dir>.` too, so prefix matching alone double-renders it).
+ */
+function parseDemoHeader(raw, fallbackTitle) {
+    const match = raw.match(/<!--\s*demo:\s*([\s\S]*?)\s*-->/)
+    if (!match) {
+        return { title: fallbackTitle, description: '' }
+    }
+    const [title, ...rest] = match[1].split('—')
+    return { title: (title || fallbackTitle).trim(), description: rest.join('—').trim() }
+}
+
+const humanizeSlug = (slug) =>
+    slug
+        .split('-')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ')
+
+const variationFiles = computed(() => {
+    const mainKey = `../examples/${dir.value}.vue`
+    const prefix = `../examples/${dir.value}.`
+    return Object.keys(demos)
+        .filter((key) => key !== mainKey && key.startsWith(prefix) && key.endsWith('.vue'))
+        .sort()
+        .map((key) => {
+            const slug = key.slice(prefix.length, -'.vue'.length)
+            const header = parseDemoHeader(raws[key] ?? '', humanizeSlug(slug))
+            return { key, slug, ...header, comp: demos[key]?.default ?? null, code: raws[key] ?? '' }
+        })
+        .filter((v) => v.comp)
+})
 </script>
 
 <style>

@@ -11,6 +11,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SSectionHeading' })
 
@@ -19,10 +20,18 @@ const props = defineProps({
     title: { type: String, required: true },
     description: { type: String, default: '' },
     align: { type: String, default: 'center', validator: (v) => ['left', 'center'].includes(v) },
-    size: { type: String, default: 'md', validator: (v) => ['md', 'lg'].includes(v) },
+    size: { type: String, default: 'md', validator: isFieldSize },
 })
 
 const level = 'h2'
 
-const titleClass = computed(() => (props.size === 'lg' ? 'text-2xl md:text-4xl' : 'text-xl md:text-2xl'))
+const titleClass = computed(() => ({
+    xs: 'text-base',
+    sm: 'text-lg md:text-xl',
+    md: 'text-xl md:text-2xl',
+    lg: 'text-2xl md:text-4xl',
+    xl: 'text-3xl md:text-5xl',
+    '2xl': 'text-4xl md:text-6xl',
+    '3xl': 'text-5xl md:text-7xl',
+}[props.size] ?? 'text-xl md:text-2xl'))
 </script>

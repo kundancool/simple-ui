@@ -23,6 +23,7 @@
 import { computed, onBeforeUnmount, ref, useId } from 'vue'
 import { DEFAULT_FORM_SIZE, provideFormItemContext, useFormContext } from '../../composables/formContext'
 import { firstValidationError } from '../../utils/validation'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SFormItem' })
 
@@ -33,7 +34,7 @@ const props = defineProps({
     /** Marks the field required in the label. */
     required: { type: Boolean, default: false },
     /** Overrides the form size for this one row. */
-    size: { type: String, default: undefined, validator: (v) => v === undefined || ['xs', 'sm', 'md', 'lg'].includes(v) },
+    size: { type: String, default: undefined, validator: isFieldSize },
     /** Shows a success message instead of the helper. */
     success: { type: Boolean, default: false },
     successMessage: { type: String, default: 'Looks good' },

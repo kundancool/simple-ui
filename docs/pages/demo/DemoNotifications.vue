@@ -40,8 +40,8 @@ import { SEmpty } from '@kundancool/simple-ui'
 const now = Date.now()
 const items = ref([
     { id: 1, cat: 'reviews', icon: Star, text: 'New 5★ review from Kabir Singh', at: now - 1000 * 60 * 6, unread: true },
-    { id: 2, cat: 'alerts', icon: AlertTriangle, text: 'Item 204 conflicting for tonight', at: now - 1000 * 60 * 44, unread: true },
-    { id: 3, cat: 'team', icon: UserPlus, text: 'Rahul Das accepted the front-desk invite', at: now - 1000 * 60 * 60 * 2, unread: true },
+    { id: 2, cat: 'alerts', icon: AlertTriangle, text: 'ORD-204 payment needs review', at: now - 1000 * 60 * 44, unread: true },
+    { id: 3, cat: 'team', icon: UserPlus, text: 'Rahul Das accepted the team invite', at: now - 1000 * 60 * 60 * 2, unread: true },
     { id: 4, cat: 'billing', icon: CreditCard, text: 'September invoice of ₹1,249 is due', at: now - 1000 * 60 * 60 * 9, unread: false },
 ])
 const unreadCount = computed(() => items.value.filter((i) => i.unread).length)

@@ -37,7 +37,9 @@ const props = defineProps({
 const emit = defineEmits(['navigate'])
 
 function itemKey(item, index) {
-    return item.to ?? item.label ?? index
+    // `to` alone is not unique (trails often repeat a section link),
+    // so the index suffixes every key — stable per list, unique per row.
+    return `${item.to ?? item.label ?? 'crumb'}-${index}`
 }
 
 function isLast(index) {

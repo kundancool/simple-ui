@@ -128,3 +128,6 @@ so all sizes match regardless of the consumer's `box-sizing`.
 - Pagination collapses to prev/next + `n / m`; tables scroll horizontally,
   columns are never hidden (horizontal scroll instead).
 - Dialogs are `w-[90%]` with capped max-widths; one size up on `md`.
+- Calendar panels show one month on small screens: the options sidebar and
+  extra months render `hidden` below `min-[540px]`, so mobile users page with
+  the prev/next buttons and pick ranges across months.

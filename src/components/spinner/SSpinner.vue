@@ -15,11 +15,12 @@
 
 <script setup>
 import { computed } from 'vue'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SSpinner' })
 
 const props = defineProps({
-    size: { type: String, default: 'md', validator: (v) => ['xs', 'sm', 'md', 'lg'].includes(v) },
+    size: { type: String, default: 'md', validator: isFieldSize },
     /** Accessible name. Omit for a decorative spinner. */
     label: { type: String, default: '' },
 })
@@ -30,6 +31,9 @@ const sizeClass = computed(() => {
         sm: 'w-4 h-4',
         md: 'w-5 h-5',
         lg: 'w-6 h-6',
+        xl: 'w-8 h-8',
+        '2xl': 'w-10 h-10',
+        '3xl': 'w-12 h-12',
     }
     return map[props.size]
 })

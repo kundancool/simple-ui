@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="[attrs.class]" :style="attrs.style">
         <label v-if="label" class="block text-sm font-medium s-text-primary mb-1.5">{{ label }}</label>
 
         <div
@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, ref, useAttrs } from 'vue'
 import SIcon from '../icon/SIcon.vue'
 import { firstValidationError } from '../../utils/validation'
 
@@ -87,12 +87,28 @@ const props = defineProps({
     inline: { type: Boolean, default: false },
     /** Called with (response, file) after a successful upload. */
     onSuccess: { type: Function, default: null },
+    /** Abort stalled requests after this many ms (0 disables). */
+    timeout: { type: Number, default: 30000 },
 })
 
-const emit = defineEmits(['success', 'error', 'progress', 'change', 'remove'])
+const emit = defineEmits(['success', 'error', 'progress', 'change', 'remove', 'timeout'])
+
+const attrs = useAttrs()
 
 const inputRef = ref(null)
 const files = ref([])
+const inflight = new Set()
+
+onBeforeUnmount(() => {
+    for (const request of inflight) {
+        try {
+            request.abort()
+        } catch {
+            // already settled
+        }
+    }
+    inflight.clear()
+})
 const dragging = ref(false)
 let nextId = 0
 
@@ -158,6 +174,18 @@ function upload(entry) {
         request.setRequestHeader(key, value)
     }
 
+    inflight.add(request)
+    const settle = () => inflight.delete(request)
+    if (props.timeout > 0) {
+        request.timeout = props.timeout
+    }
+    request.ontimeout = () => {
+        entry.status = 'error'
+        emit('timeout', entry.file)
+        emit('error', request, entry.file)
+        settle()
+    }
+
     request.upload.onprogress = (event) => {
         if (!event.lengthComputable) {
             return
@@ -179,15 +207,18 @@ function upload(entry) {
             entry.response = response
             props.onSuccess?.(response, entry.file)
             emit('success', response, entry.file)
+            settle()
             return
         }
         entry.status = 'error'
         emit('error', request, entry.file)
+        settle()
     }
 
     request.onerror = () => {
         entry.status = 'error'
         emit('error', request, entry.file)
+        settle()
     }
 
     entry.status = 'uploading'

@@ -20,6 +20,7 @@
 
 <script setup>
 import { computed, inject } from 'vue'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SRadio' })
 
@@ -30,7 +31,7 @@ const props = defineProps({
     value: { type: [String, Number, Boolean], default: null },
     label: { type: [String, Number, Boolean], default: undefined },
     disabled: { type: Boolean, default: false },
-    size: { type: String, default: undefined, validator: (v) => v === undefined || ['xs', 'sm', 'md', 'lg'].includes(v) },
+    size: { type: String, default: undefined, validator: isFieldSize },
     /** Native radio group name; inherited from SRadioGroup. */
     name: { type: String, default: '' },
 })
@@ -95,14 +96,23 @@ function select() {
 .s-radio-sm .s-radio-dot { width: 1rem; height: 1rem; }
 .s-radio-md .s-radio-dot { width: 1rem; height: 1rem; }
 .s-radio-lg .s-radio-dot { width: 1.25rem; height: 1.25rem; }
+.s-radio-xl .s-radio-dot { width: 1.5rem; height: 1.5rem; }
+.s-radio-2xl .s-radio-dot { width: 1.75rem; height: 1.75rem; }
+.s-radio-3xl .s-radio-dot { width: 2rem; height: 2rem; }
 .s-radio-xs .s-radio-dot-inner { width: 0.375rem; height: 0.375rem; }
 .s-radio-sm .s-radio-dot-inner,
 .s-radio-md .s-radio-dot-inner { width: 0.5rem; height: 0.5rem; }
 .s-radio-lg .s-radio-dot-inner { width: 0.625rem; height: 0.625rem; }
+.s-radio-xl .s-radio-dot-inner { width: 0.75rem; height: 0.75rem; }
+.s-radio-2xl .s-radio-dot-inner { width: 0.875rem; height: 0.875rem; }
+.s-radio-3xl .s-radio-dot-inner { width: 1rem; height: 1rem; }
 .s-radio-xs { font-size: 0.75rem; }
 .s-radio-sm,
 .s-radio-md { font-size: 0.875rem; }
 .s-radio-lg { font-size: 1rem; }
+.s-radio-xl { font-size: 1.125rem; }
+.s-radio-2xl { font-size: 1.25rem; }
+.s-radio-3xl { font-size: 1.5rem; }
 
 .s-radio-input:checked + .s-radio-dot {
     border-color: var(--s-accent);

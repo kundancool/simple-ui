@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeAll } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import { readdirSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import App from '../docs/App.vue'
@@ -51,6 +51,11 @@ const routes = readdirSync(dir)
 
 describe('docs shell routing', () => {
     beforeAll(stubBrowserChartApis)
+
+    it('roots the shell in themed background + text so icons follow dark mode', () => {
+        const source = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '..', 'docs', 'App.vue'), 'utf8')
+        expect(source).toMatch(/s-bg-app[\s\S]{0,80}s-text-primary|s-text-primary[\s\S]{0,80}s-bg-app/)
+    })
 
     it.each(['/docs', '/docs/theming', '/docs/components/button'])('renders %s without errors', async (route) => {
         window.location.hash = `#${route}`

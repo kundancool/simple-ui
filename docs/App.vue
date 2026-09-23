@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-screen overflow-hidden s-bg-app">
+    <div class="flex h-screen overflow-hidden s-bg-app s-text-primary">
         <s-sidebar
             v-if="showSidebar || isDemo"
             :open="sidebarOpen"

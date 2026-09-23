@@ -28,7 +28,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SRating' })
 
@@ -38,7 +39,7 @@ const props = defineProps({
     /** Display only — no interaction. */
     readonly: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
-    size: { type: String, default: 'md', validator: (v) => ['sm', 'md', 'lg'].includes(v) },
+    size: { type: String, default: 'md', validator: isFieldSize },
     /** Star color when lit. */
     color: { type: String, default: 'warning' },
     ariaLabel: { type: String, default: 'Rating' },
@@ -46,8 +47,15 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'change'])
 const hover = ref(0)
+const inner = ref(null)
+watch(
+    () => props.modelValue,
+    (value) => {
+        inner.value = value
+    },
+)
 
-const rounded = computed(() => Math.round(props.modelValue))
+const rounded = computed(() => Math.round(inner.value ?? props.modelValue))
 const shown = computed(() => hover.value || rounded.value)
 
 function lit(n) {
@@ -55,7 +63,7 @@ function lit(n) {
 }
 
 const starClass = computed(() => {
-    const map = { sm: 'w-3.5 h-3.5', md: 'w-5 h-5', lg: 'w-6 h-6' }
+    const map = { xs: 'w-3 h-3', sm: 'w-3.5 h-3.5', md: 'w-5 h-5', lg: 'w-6 h-6', xl: 'w-7 h-7', '2xl': 'w-8 h-8', '3xl': 'w-10 h-10' }
     return map[props.size]
 })
 
@@ -65,6 +73,7 @@ function rate(n) {
     if (props.readonly || props.disabled) {
         return
     }
+    inner.value = n
     emit('update:modelValue', n)
     emit('change', n)
 }

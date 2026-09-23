@@ -45,6 +45,19 @@
                         :style="{ ...panelStyle, zIndex: 'var(--s-z-dropdown)' }"
                         @keydown.escape="closePanel"
                     >
+                        <div class="flex flex-col min-[540px]:flex-row gap-3">
+                            <div v-if="usableOptions.length" role="group" aria-label="Date options" class="hidden min-[540px]:flex min-[540px]:flex-col gap-1.5 flex-shrink-0 min-[540px]:w-36 min-[540px]:border-r s-border-theme min-[540px]:pr-3">
+                                <button
+                                    v-for="p in usableOptions"
+                                    :key="p.label"
+                                    type="button"
+                                    class="s-focus-ring px-2.5 py-1.5 text-xs rounded-md flex items-center justify-start min-[540px]:w-full text-left"
+                                    :class="activeOption === p.label ? 's-bg-accent-subtle s-text-accent' : 's-bg-surface-raised s-text-secondary s-preset-hover'"
+                                    :aria-pressed="activeOption === p.label"
+                                    @click="applyOption(p)"
+                                >{{ p.label }}</button>
+                            </div>
+                            <div class="min-w-0 flex-1">
                         <div class="flex items-center justify-between mb-2">
                             <button type="button" aria-label="Previous month" class="s-focus-ring s-cal-nav w-7 h-7 flex items-center justify-center rounded-md s-text-secondary" @click="shiftMonth(-1)">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
@@ -55,8 +68,7 @@
                             </button>
                         </div>
                         <div class="flex flex-col min-[540px]:flex-row gap-4">
-                            <div v-for="(month, mi) in months" :key="mi" class="s-cal-month">
-                                <p class="text-xs font-semibold s-text-secondary text-center mb-1">{{ month.label }}</p>
+                            <div v-for="(month, mi) in months" :key="mi" :class="['s-cal-month', mi > 0 && 'hidden min-[540px]:block']">
                                 <div class="grid grid-cols-7 gap-0.5 text-center text-[11px] font-medium s-text-muted mb-1">
                                     <span v-for="d in ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']" :key="d">{{ d }}</span>
                                 </div>
@@ -74,16 +86,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="usablePresets.length" class="flex flex-wrap gap-1.5 mt-2 pt-2 border-t s-border-theme" role="group" aria-label="Date presets">
-                            <button
-                                v-for="p in usablePresets"
-                                :key="p.label"
-                                type="button"
-                                class="s-focus-ring px-2 py-1 text-xs rounded-md"
-                                :class="activePreset === p.label ? 's-bg-accent-subtle s-text-accent' : 's-bg-surface-raised s-text-secondary s-preset-hover'"
-                                :aria-pressed="activePreset === p.label"
-                                @click="applyPreset(p)"
-                            >{{ p.label }}</button>
+                            </div>
                         </div>
                     </div>
                 </Transition>
@@ -98,7 +101,7 @@
 import { ref, computed, nextTick, onMounted, onBeforeUnmount, useId, watch } from 'vue'
 import { firstValidationError } from '../../utils/validation'
 import { FIELD_HEIGHTS, isFieldSize } from '../../utils/fieldSize'
-import { normalizePreset, resolvePresets } from '../../utils/datePresets'
+import { formatWithTokens, isInDisabledRanges, normalizeOption, parseWithTokens, resolveOptions } from '../../utils/dateOptions'
 import { useFieldSize } from '../../composables/formContext'
 
 defineOptions({ name: 'SDatePicker' })
@@ -112,8 +115,10 @@ const props = defineProps({
     range: { type: Boolean, default: false },
     min: { type: String, default: '' },
     max: { type: String, default: '' },
-    /** [{ label, value } | { label, range: [from, to] }] */
-    presets: { type: Array, default: () => [] },
+    /** Shortcut override: [{ label, value } | { label, range: [from, to] }] as YYYY-MM-DD. No options unless defined. */
+    options: { type: Array, default: null },
+    /** Deprecated alias of `options`. Kept so existing `presets` usage keeps working. */
+    presets: { type: Array, default: undefined },
     error: { type: [String, Array], default: '' },
     hint: { type: String, default: '' },
     required: { type: Boolean, default: false },
@@ -124,8 +129,14 @@ const props = defineProps({
     name: { type: String, default: '' },
     /** Deprecated no-op (roots are margin-free per the layout-neutrality rule). Kept so existing `inline` usage keeps working. */
     inline: { type: Boolean, default: false },
-    /** Output format for the trigger text. Supports YYYY, MM, DD tokens. */
+    /** Display format for the trigger text. Supports YYYY, MM, DD tokens. */
     format: { type: String, default: 'YYYY-MM-DD' },
+    /** Emitted value format (same tokens). Display stays on `format`. */
+    valueFormat: { type: String, default: 'YYYY-MM-DD' },
+    /** Disable rule: (date: Date) => true disables that day. */
+    disabledDate: { type: Function, default: null },
+    /** Disable rule: [[from, to]] as YYYY-MM-DD disables those ranges. */
+    disabledRanges: { type: Array, default: () => [] },
     /**
      * Visible month columns. Defaults to 2 in range mode, 1 otherwise —
      * the dashboard-style two-up calendar. Stacks vertically on narrow screens.
@@ -136,8 +147,8 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'change'])
 
 const errorMessage = computed(() => firstValidationError(props.error))
-const activePreset = ref('')
-const usablePresets = computed(() => resolvePresets(props.presets, props.range))
+const activeOption = ref('')
+const usableOptions = computed(() => resolveOptions(props.options ?? props.presets ?? [], props.range))
 
 /** Shared height scale so triggers line up with inputs and selects. */
 const fieldSize = useFieldSize(computed(() => props.size))
@@ -146,6 +157,9 @@ const SIZE_CLASS = {
     sm: 'px-2.5 text-xs',
     md: 'px-3 text-sm',
     lg: 'px-3.5 text-base',
+    xl: 'px-4 text-base',
+    '2xl': 'px-5 text-lg',
+    '3xl': 'px-6 text-xl',
 }
 const controlStyle = computed(() => ({ '--s-field-h': FIELD_HEIGHTS[fieldSize.value] }))
 const fieldId = useId()
@@ -183,20 +197,36 @@ function formatDate(d) {
     return `${y}-${m}-${day}`
 }
 
+function parseValue(value) {
+    return parseWithTokens(value, props.valueFormat) ?? parseDate(value)
+}
+
+/** Model values (in `valueFormat`) back to canonical ISO for compares. */
+function toIso(value) {
+    const d = parseValue(value)
+    return d ? formatDate(d) : ''
+}
+
 function formatDisplay(value) {
-    const d = parseDate(value)
+    const d = parseValue(value)
     if (!d) {
         return ''
     }
-    return props.format
-        .replace('YYYY', String(d.getFullYear()))
-        .replace('MM', String(d.getMonth() + 1).padStart(2, '0'))
-        .replace('DD', String(d.getDate()).padStart(2, '0'))
+    return formatWithTokens(d, props.format)
+}
+
+/** Convert internal ISO to the emitted `valueFormat`. */
+function toValue(iso) {
+    const d = parseDate(iso)
+    return d ? formatWithTokens(d, props.valueFormat) : iso
 }
 
 function currentValue() {
-    return props.range ? (props.modelValue?.[0] ?? '') : props.modelValue
+    return props.range ? toIso(props.modelValue?.[0] ?? '') : toIso(props.modelValue)
 }
+
+/** Model values back to canonical ISO for internal compares. */
+const isoRange = computed(() => (props.range ? (props.modelValue ?? []).map((v) => toIso(v)) : []))
 
 const displayText = computed(() => {
     if (props.range) {
@@ -216,43 +246,52 @@ function monthStart(offset) {
 }
 
 const visibleRangeLabel = computed(() => {
-    const first = monthStart(0).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
+    const first = monthStart(0)
+    const firstLabel = first.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
     if (resolvedColumns.value < 2) {
-        return first
+        return firstLabel
     }
-    const last = monthStart(resolvedColumns.value - 1).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })
-    return `${first} – ${last}`
+    const last = monthStart(resolvedColumns.value - 1)
+    if (last.getFullYear() === first.getFullYear()) {
+        const lastMonth = last.toLocaleDateString(undefined, { month: 'long' })
+        const firstMonth = first.toLocaleDateString(undefined, { month: 'long' })
+        return `${firstMonth} – ${lastMonth} ${last.getFullYear()}`
+    }
+    return `${firstLabel} – ${last.toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}`
 })
 
-function inBounds(d) {
+function isDisabledDay(d) {
     if (props.min && d < startOfDay(parseDate(props.min))) {
-        return false
+        return true
     }
     if (props.max && d > startOfDay(parseDate(props.max))) {
-        return false
+        return true
     }
-    return true
+    if (typeof props.disabledDate === 'function' && props.disabledDate(new Date(d))) {
+        return true
+    }
+    return isInDisabledRanges(formatDate(d), props.disabledRanges)
 }
 
 function isSelected(d) {
     const iso = formatDate(d)
     if (props.range) {
-        const [from, to] = props.modelValue ?? []
+        const [from, to] = isoRange.value
         if (from && to) {
             return iso >= from && iso <= to
         }
         return iso === from
     }
-    return iso === props.modelValue
+    return iso === toIso(props.modelValue)
 }
 
 function isEndpoint(d) {
     const iso = formatDate(d)
     if (props.range) {
-        const [from, to] = props.modelValue ?? []
+        const [from, to] = isoRange.value
         return iso === from || iso === to
     }
-    return iso === props.modelValue
+    return iso === toIso(props.modelValue)
 }
 
 /** Ghost range between the picked start and the hovered day. */
@@ -260,7 +299,7 @@ function inHoverRange(d) {
     if (!props.range) {
         return false
     }
-    const [from, to] = props.modelValue ?? []
+    const [from, to] = isoRange.value
     if (!from || to || !hoverDate.value) {
         return false
     }
@@ -279,7 +318,7 @@ function monthCells(year, month) {
         const date = new Date(start)
         date.setDate(start.getDate() + i)
         const otherMonth = date.getMonth() !== month
-        const disabled = otherMonth || !inBounds(date)
+        const disabled = otherMonth || isDisabledDay(date)
         return {
             key: formatDate(date),
             date,
@@ -300,7 +339,6 @@ const months = computed(() =>
     Array.from({ length: resolvedColumns.value }, (_, offset) => {
         const start = monthStart(offset)
         return {
-            label: start.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }),
             cells: monthCells(start.getFullYear(), start.getMonth()),
         }
     }),
@@ -311,41 +349,42 @@ function shiftMonth(delta) {
 }
 
 function commit(value) {
-    activePreset.value = ''
+    activeOption.value = ''
     emit('update:modelValue', value)
     emit('change', value)
 }
 
 function pick(date) {
-    if (!inBounds(date)) {
+    if (isDisabledDay(date)) {
         return
     }
     const iso = formatDate(date)
     if (!props.range) {
-        commit(iso)
+        commit(toValue(iso))
         open.value = false
         return
     }
-    const [from, to] = props.modelValue ?? []
+    const [from, to] = (props.modelValue ?? []).map((v) => toIso(v))
     if (!from || (from && to)) {
-        commit([iso, ''])
+        commit([toValue(iso), ''])
     } else if (iso < from) {
-        commit([iso, from])
+        commit([toValue(iso), toValue(from)])
         open.value = false
     } else {
-        commit([from, iso])
+        commit([toValue(from), toValue(iso)])
         open.value = false
     }
 }
 
-function applyPreset(p) {
-    const value = normalizePreset(p, props.range)
+function applyOption(p) {
+    const value = normalizeOption(p, props.range)
     if (value === null) {
         return
     }
-    activePreset.value = p.label
-    emit('update:modelValue', Array.isArray(value) ? [value[0], value[1]] : value)
-    emit('change', Array.isArray(value) ? [value[0], value[1]] : value)
+    activeOption.value = p.label
+    const out = Array.isArray(value) ? [toValue(value[0]), toValue(value[1])] : toValue(value)
+    emit('update:modelValue', out)
+    emit('change', out)
     open.value = false
 }
 

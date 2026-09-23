@@ -4,13 +4,43 @@
     "category": "Layout",
     "description": "Call-to-action banner with eyebrow, title and action row.",
     "props": [
-        { "name": "eyebrow", "type": "string", "default": "''", "description": "Small pill above the title." },
-        { "name": "title", "type": "string", "default": "required", "description": "Headline." },
-        { "name": "description", "type": "string", "default": "''", "description": "Supporting line." },
-        { "name": "size", "type": "md | lg", "default": "md", "description": "Headline scale." },
-        { "name": "tone", "type": "surface | accent", "default": "surface", "description": "Background treatment." }
+        {
+            "name": "eyebrow",
+            "type": "string",
+            "default": "''",
+            "description": "Small pill above the title."
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "default": "required",
+            "description": "Headline."
+        },
+        {
+            "name": "description",
+            "type": "string",
+            "default": "''",
+            "description": "Supporting line."
+        },
+        {
+            "name": "size",
+            "type": "xs | sm | md | lg | xl | 2xl | 3xl",
+            "default": "md",
+            "description": "Headline scale."
+        },
+        {
+            "name": "tone",
+            "type": "surface | accent",
+            "default": "surface",
+            "description": "Background treatment."
+        }
     ],
     "events": [],
-    "slots": [{ "name": "default", "description": "Action buttons." }],
+    "slots": [
+        {
+            "name": "default",
+            "description": "Action buttons."
+        }
+    ],
     "example": "<s-cta eyebrow=\"Get started\" title=\"Stop wrestling form rows.\" description=\"Inputs and buttons share one height.\">\n  <s-button>Open live demo</s-button>\n</s-cta>"
 }

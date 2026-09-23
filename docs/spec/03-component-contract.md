@@ -39,10 +39,13 @@ Each `src/components/<dir>/` **MUST** contain exactly:
 - Selection state **MUST** work uncontrolled (Accordion/Carousel/Lightbox
   pattern); binary controls stay `v-model`-driven.
   Enforced by `tests/uncontrolled.spec.ts`.
-- Curated option lists (date presets, shortcuts) share one shape
+- Curated option lists (date shortcuts) share one shape
   (`{ label, value } | { label, range: [from, to] }`, resolved in
-  `src/utils/datePresets.ts`), validate before applying, and never throw on
-  malformed entries — a bad preset is ignored, not emitted.
+  `src/utils/dateOptions.ts`), validate before applying, and never throw on
+  malformed entries — a bad option is ignored, not emitted.
+- One component per job: `s-date-picker range` covers ranges (two calendars
+  on desktop, one stacked on mobile). `s-date-range-picker` was merged away —
+  no second implementation, no alias.
 
 ## Layout neutrality (godly rule)
 
@@ -75,6 +78,9 @@ the shared scale — so a mixed row lines up by construction. Enforced by
 - Focus follows `01`: `s-focus-ring` on `:focus-visible` for buttons/menus,
   border+halo for fields, wrapper ring via `:focus-within` for composites.
 - Tables render a `<caption>` for screen readers when a caption is given.
+- List keys must stay unique even for duplicate values: key repeating data
+  (links, labels) alone — suffix the index. Trails routinely repeat a
+  section link, and duplicate keys warn in production.
 - Never shadow JS globals with imports (the Lucide `Map` icon broke
   `new Map()` in production — alias it).
 - Single root element per component inside `<Transition>`.

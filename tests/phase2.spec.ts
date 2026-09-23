@@ -199,6 +199,39 @@ describe('SUpload', () => {
         document.body.innerHTML = ''
     })
 
+    it('emits timeout and error when the request stalls', async () => {
+        let xhr = null
+        class StalledXhr {
+            upload = {}
+            timeout = 0
+            constructor() {
+                xhr = this
+            }
+            open() {}
+            setRequestHeader() {}
+            send() {}
+        }
+        const original = global.XMLHttpRequest
+        global.XMLHttpRequest = StalledXhr as unknown as typeof XMLHttpRequest
+
+        const wrapper = mountUpload({ timeout: 50 })
+        const input = wrapper.find('input[type="file"]')
+        const file = new File(['x'], 'big.png')
+        Object.defineProperty(input.element, 'files', { value: [file], configurable: true })
+        await input.trigger('change')
+
+        expect(xhr.timeout).toBe(50)
+        xhr.ontimeout()
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('timeout')?.[0]?.[0]).toEqual(file)
+        expect(wrapper.emitted('error')).toHaveLength(1)
+        expect(wrapper.text()).toContain('big.png')
+
+        global.XMLHttpRequest = original
+        wrapper.unmount()
+        document.body.innerHTML = ''
+    })
+
     it('blocks interaction when disabled', () => {
         const wrapper = mountUpload({ disabled: true })
         expect(wrapper.find('[role="button"]').attributes('aria-disabled')).toBe('true')

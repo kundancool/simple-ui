@@ -28,7 +28,6 @@ import SCopy from './components/copy/SCopy.vue'
 import SDataTable from './components/data-table/SDataTable.vue'
 import SDataTableColumn from './components/data-table-column/SDataTableColumn.vue'
 import SDatePicker from './components/date-picker/SDatePicker.vue'
-import SDateRangePicker from './components/date-range-picker/SDateRangePicker.vue'
 import SDialog from './components/dialog/SDialog.vue'
 import SDoughnutChart from './components/doughnut-chart/SDoughnutChart.vue'
 import SDropdownMenu from './components/dropdown-menu/SDropdownMenu.vue'
@@ -100,7 +99,6 @@ export {
     SDataTable,
     SDataTableColumn,
     SDatePicker,
-    SDateRangePicker,
     SDialog,
     SDoughnutChart,
     SDropdownMenu,

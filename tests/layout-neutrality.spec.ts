@@ -74,7 +74,7 @@ describe('layout neutrality', () => {
             '../src/components/select/SSelect.vue',
             '../src/components/checkbox/SCheckbox.vue',
             '../src/components/date-picker/SDatePicker.vue',
-            '../src/components/date-range-picker/SDateRangePicker.vue',
+            
             '../src/components/multi-select/SMultiSelect.vue',
             '../src/components/number-input/SNumberInput.vue',
             '../src/components/upload/SUpload.vue',

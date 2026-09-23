@@ -167,11 +167,17 @@ const PADDING = {
     sm: 'px-2.5 py-0 text-xs',
     md: 'px-3 py-0 text-sm',
     lg: 'px-3.5 py-0 text-base',
+    xl: 'px-4 py-0 text-base',
+    '2xl': 'px-5 py-0 text-lg',
+    '3xl': 'px-6 py-0 text-xl',
 }
+
+/** Textareas keep multi-line padding plus the size text step. */
+const TEXT_SIZE = { xs: 'text-xs', sm: 'text-xs', md: 'text-sm', lg: 'text-base' }
 
 const fieldClass = computed(() => [
     's-input w-full rounded-md',
-    props.type === 'textarea' ? 'py-2' : PADDING[fieldSize.value],
+    props.type === 'textarea' ? ['px-3 py-2', TEXT_SIZE[fieldSize.value]] : PADDING[fieldSize.value],
 ])
 
 const controlStyle = computed(() => {

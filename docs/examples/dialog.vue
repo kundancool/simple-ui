@@ -1,10 +1,10 @@
 <template>
     <s-button @click="open = true">Open dialog</s-button>
     <s-dialog v-model="open" title="Confirm action" width="sm">
-        <p class="text-sm s-text-secondary">Check out Aarav Sharma from Item 204?</p>
+        <p class="text-sm s-text-secondary">Delete order ORD-002 and its payments? This cannot be undone.</p>
         <template #footer>
             <s-button variant="secondary" @click="open = false">Cancel</s-button>
-            <s-button @click="open = false">Check out</s-button>
+            <s-button @click="open = false">Delete</s-button>
         </template>
     </s-dialog>
 </template>

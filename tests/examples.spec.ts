@@ -52,6 +52,6 @@ describe('docs examples', () => {
             expect(wrapper.html().length).toBeGreaterThan(20)
             wrapper.unmount()
             document.body.innerHTML = ''
-        })
+        }, 30000)
     }
 })

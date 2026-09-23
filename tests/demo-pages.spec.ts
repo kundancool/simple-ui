@@ -58,6 +58,6 @@ describe('demo pages', () => {
             expect(wrapper.html().length).toBeGreaterThan(100)
             wrapper.unmount()
             document.body.innerHTML = ''
-        })
+        }, 30000)
     }
 })

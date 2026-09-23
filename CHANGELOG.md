@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.4.0
+
+- **One date component (breaking).** `s-date-range-picker` is merged into
+  `s-date-picker range` (two calendars on desktop, one stacked on mobile;
+  single month + nav buttons on small screens, options sidebar desktop-only).
+  The trigger is a readonly text input with native form participation.
+  Shortcut `presets` become `options` (`presets` still works as a deprecated
+  alias), with no options unless the consumer defines them. New `valueFormat`
+  (emitted shape, `format` stays visual), `disabledDate` / `disabledRanges`
+  rules, and one centered calendar heading.
+- **Full t-shirt sizes.** Every `size` prop accepts
+  `xs | sm | md | lg | xl | 2xl | 3xl` from the shared scale
+  (`src/utils/fieldSize.ts`), including `IconRender` which now mirrors
+  `SIcon` glyphs exactly.
+- **Uncontrolled selection everywhere.** Rating, segmented, tabs and steps
+  move without a `v-model` listener (carousel pattern); tabs/steps default
+  to their first item.
+- **Upload robustness.** Forwards consumer `class`/`style`, aborts stalled
+  requests via a `timeout` prop (emits `timeout` + `error`), and aborts
+  in-flight requests on unmount.
+- **Docs showcase.** Every component page shows one titled section per
+  variation, each with description, live demo and code.
+- **Fixes.** Textarea padding and size steps; Firefox select focus ring;
+  palette input focus and duplicate keys; breadcrumb duplicate keys; docs
+  shell themed text so icons follow dark mode; circle buttons warn without
+  an accessible name; carousel stable keys; optional stat-card icon/label
+  and icon name; meta gaps closed (input/select/date events, slots, sizes)
+  and the phantom `data-table-column.class` doc removed.
+
 ## 0.3.0
 
 - **Layout neutrality (breaking).** Form controls no longer ship a default

@@ -6,7 +6,7 @@
         aria-valuemax="100"
         :aria-label="ariaLabel || undefined"
         class="s-progress w-full rounded-full overflow-hidden s-bg-surface-raised"
-        :class="size === 'sm' ? 'h-1.5' : 'h-2'"
+        :class="barHeight"
     >
         <div
             class="h-full rounded-full"
@@ -18,6 +18,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SProgress' })
 
@@ -25,13 +26,18 @@ const props = defineProps({
     /** 0–100, clamped. */
     value: { type: Number, default: 0 },
     tone: { type: String, default: 'accent', validator: (v) => ['accent', 'success', 'warning', 'danger', 'info'].includes(v) },
-    size: { type: String, default: 'md', validator: (v) => ['sm', 'md'].includes(v) },
+    size: { type: String, default: 'md', validator: isFieldSize },
     /** Transition ms for value changes. */
     duration: { type: Number, default: 300 },
     ariaLabel: { type: String, default: '' },
 })
 
 const clamped = computed(() => Math.max(0, Math.min(100, props.value)))
+
+const barHeight = computed(() => {
+    const map = { xs: 'h-1', sm: 'h-1.5', md: 'h-2', lg: 'h-2.5', xl: 'h-3', '2xl': 'h-4', '3xl': 'h-5' }
+    return map[props.size] ?? 'h-2'
+})
 
 const toneClass = computed(() => {
     const map = {

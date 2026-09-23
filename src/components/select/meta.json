@@ -77,6 +77,24 @@
             "description": "Skeleton options."
         },
         {
+            "name": "size",
+            "type": "xs | sm | md | lg | xl | 2xl | 3xl",
+            "default": "undefined",
+            "description": "Control size; inherits from the form item."
+        },
+        {
+            "name": "emptyText",
+            "type": "string",
+            "default": "'No matches'",
+            "description": "Empty dropdown text."
+        },
+        {
+            "name": "hint",
+            "type": "string",
+            "default": "''",
+            "description": "Helper text under the control."
+        },
+        {
             "name": "inline",
             "type": "boolean",
             "default": "false",
@@ -91,6 +109,14 @@
         {
             "name": "change",
             "description": "Emitted with the new value."
+        },
+        {
+            "name": "clear",
+            "description": "Emitted when the value is cleared."
+        },
+        {
+            "name": "visible-change",
+            "description": "Emitted with visibility when the dropdown opens/closes."
         }
     ],
     "slots": [],

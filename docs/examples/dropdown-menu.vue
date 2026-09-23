@@ -1,9 +1,6 @@
 <template>
-    <div class="flex flex-wrap items-center gap-2">
-        <s-dropdown-menu :items="items" @select="picked = $event.label" />
-        <s-dropdown-menu label="Row actions" trigger="icon-square" :items="items" @select="picked = $event.label" />
-        <span class="text-sm s-text-muted">Picked: {{ picked || '—' }}</span>
-    </div>
+    <s-dropdown-menu :items="items" @select="picked = $event.label" />
+    <p class="text-sm s-text-muted mt-2">Picked: {{ picked || '—' }}</p>
 </template>
 
 <script setup>

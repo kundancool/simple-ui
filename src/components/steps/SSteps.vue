@@ -8,7 +8,7 @@
                     :aria-current="index === activeIndex ? 'step' : undefined"
                     class="s-focus-ring flex-1 min-w-0 flex flex-col items-center gap-1.5 rounded"
                     :class="index <= activeIndex ? 'cursor-pointer' : 'cursor-default'"
-                    @click="$emit('update:modelValue', step.key)"
+                    @click="go(step.key)"
                 >
                     <div
                         class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors"
@@ -32,25 +32,38 @@
                 />
             </template>
         </nav>
-        <slot :name="modelValue" />
+        <slot :name="activeKey" />
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 defineOptions({ name: 'SSteps' })
 
 const props = defineProps({
-    modelValue: { type: String, required: true },
+    modelValue: { type: String, default: null },
     /** [{ key, label }] */
     steps: { type: Array, required: true },
 })
 
-defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 
+function go(key) {
+    inner.value = key
+    emit('update:modelValue', key)
+}
+
+const inner = ref(null)
+watch(
+    () => props.modelValue,
+    (value) => {
+        inner.value = value
+    },
+)
+const activeKey = computed(() => inner.value ?? props.modelValue ?? props.steps[0]?.key)
 const activeIndex = computed(() => {
-    const at = props.steps.findIndex((s) => s.key === props.modelValue)
+    const at = props.steps.findIndex((s) => s.key === activeKey.value)
     return at === -1 ? 0 : at
 })
 

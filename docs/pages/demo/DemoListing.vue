@@ -5,7 +5,7 @@
         <s-card>
             <s-filter class="mb-4" v-model="query" placeholder="Search customer, order no…" @search="resetPage">
                 <s-select v-model="status" :options="statusOptions" option-label="label" option-value="value" placeholder="All statuses" clearable inline class="w-44" />
-                <s-date-range-picker v-model="range" :show-presets="false" class="w-64" />
+                <s-date-picker v-model="range" range class="w-64" />
             </s-filter>
             <s-data-table :data="pageRows" :loading="loading" empty-text="No orders match these filters">
                 <s-data-table-column prop="no" label="Order" width="110px" />
@@ -36,7 +36,7 @@ import { SPageHeader } from '@kundancool/simple-ui'
 import { SCard } from '@kundancool/simple-ui'
 import { SFilter } from '@kundancool/simple-ui'
 import { SSelect } from '@kundancool/simple-ui'
-import { SDateRangePicker } from '@kundancool/simple-ui'
+import { SDatePicker } from '@kundancool/simple-ui'
 import { SDataTable } from '@kundancool/simple-ui'
 import { SDataTableColumn } from '@kundancool/simple-ui'
 import { STag } from '@kundancool/simple-ui'

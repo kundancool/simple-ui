@@ -1,4 +1,4 @@
-import { describe, expect, it, afterEach } from 'vitest'
+import { describe, expect, it, afterEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import SSearchPalette from '../src/components/search-palette/SSearchPalette.vue'
@@ -8,6 +8,22 @@ const items = [
     { label: 'Data Table', hint: 'Data', to: '#/components/data-table' },
     { label: 'Dialog', hint: 'Feedback', to: '#/components/dialog' },
 ]
+
+    it('tolerates duplicate links without duplicate-key warnings', async () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+        const dupes = [
+            { label: 'Docs', to: '#/docs' },
+            { label: 'Guides', to: '#/docs' },
+        ]
+        const wrapper = mount(SSearchPalette, { props: { items: dupes, modelValue: true }, attachTo: document.body })
+        await nextTick()
+        expect(document.body.querySelectorAll('[role="option"]')).toHaveLength(2)
+        await wrapper.setProps({ items: [...dupes, { label: 'More', to: '#/docs' }] })
+        expect(warn).not.toHaveBeenCalledWith(expect.stringContaining('Duplicate keys'))
+        warn.mockRestore()
+        wrapper.unmount()
+        document.body.innerHTML = ''
+    })
 
 function panelInput(): HTMLInputElement {
     const el = document.body.querySelector('.s-spotlight-panel input')

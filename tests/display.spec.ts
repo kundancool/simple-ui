@@ -9,6 +9,7 @@ import SRating from '../src/components/rating/SRating.vue'
 import STimeline from '../src/components/timeline/STimeline.vue'
 import SDescriptions from '../src/components/descriptions/SDescriptions.vue'
 import SSegmented from '../src/components/segmented/SSegmented.vue'
+import SStatCard from '../src/components/stat-card/SStatCard.vue'
 
 describe('new display components', () => {
     it('SAvatar derives initials', () => {
@@ -73,5 +74,11 @@ describe('new display components', () => {
         })
         await wrapper.findAll('button')[1].trigger('click')
         expect(wrapper.emitted('update:modelValue')?.[0]).toEqual(['y'])
+    })
+
+    it('SStatCard renders without an icon', () => {
+        const wrapper = mount(SStatCard, { props: { value: '128', label: 'Total orders' } })
+        expect(wrapper.text()).toContain('128')
+        expect(wrapper.find('.w-9').exists()).toBe(false)
     })
 })

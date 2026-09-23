@@ -15,20 +15,20 @@
                 type="button"
                 role="tab"
                 :title="tab.label"
-                :aria-selected="modelValue === tab.key"
-                :tabindex="modelValue === tab.key ? 0 : -1"
+                :aria-selected="activeKey === tab.key"
+                :tabindex="activeKey === tab.key ? 0 : -1"
                 class="s-focus-ring flex items-center gap-1.5 md:gap-2 px-2.5 md:px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors"
-                :class="modelValue === tab.key
+                :class="activeKey === tab.key
                     ? 's-tabs-active'
                     : 'border-transparent s-text-secondary'"
-                @click="$emit('update:modelValue', tab.key)"
+                @click="activate(tab.key)"
             >
                 <component :is="tab.icon" v-if="tab.icon" class="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                 <span class="text-xs md:text-sm">{{ tab.label }}</span>
                 <span
                     v-if="tab.count != null"
                     class="px-1.5 py-0.5 rounded-full text-xs font-medium transition-colors"
-                    :class="modelValue === tab.key ? 's-bg-accent-subtle s-text-accent' : 's-bg-surface-raised s-text-muted'"
+                    :class="activeKey === tab.key ? 's-bg-accent-subtle s-text-accent' : 's-bg-surface-raised s-text-muted'"
                 >{{ tab.count }}</span>
             </button>
         </nav>
@@ -40,12 +40,12 @@
  * WAI-ARIA tablist: one tab stop for the strip, arrows move within it.
  * Selection follows focus — every tab swaps an already-loaded panel.
  */
-import { ref, useId, nextTick } from 'vue'
+import { computed, ref, useId, watch, nextTick } from 'vue'
 
 defineOptions({ name: 'STabs' })
 
 const props = defineProps({
-    modelValue: { type: String, required: true },
+    modelValue: { type: String, default: null },
     /** [{ key, label, icon?, count? }] */
     tabs: { type: Array, required: true },
     ariaLabel: { type: String, default: '' },
@@ -53,17 +53,27 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
+const inner = ref(null)
+watch(
+    () => props.modelValue,
+    (value) => {
+        inner.value = value
+    },
+)
+const activeKey = computed(() => inner.value ?? props.modelValue ?? props.tabs[0]?.key)
+
 const tabsId = useId()
 const listRef = ref(null)
 
 function activate(key) {
+    inner.value = key
     emit('update:modelValue', key)
     nextTick(() => listRef.value?.querySelector(`#${CSS.escape(`${tabsId}-tab-${key}`)}`)?.focus())
 }
 
 function onKeydown(event) {
     const keys = props.tabs.map((t) => t.key)
-    const at = keys.indexOf(props.modelValue)
+    const at = keys.indexOf(activeKey.value)
     if (at === -1) {
         return
     }

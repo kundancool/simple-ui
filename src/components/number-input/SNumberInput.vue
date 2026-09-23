@@ -83,7 +83,7 @@ const errorMessage = computed(() => firstValidationError(props.error))
 
 /** Shared height scale so the stepper lines up with inputs and selects. */
 const fieldSize = useFieldSize(computed(() => props.size))
-const TEXT_CLASS = { xs: 'text-xs', sm: 'text-xs', md: 'text-sm', lg: 'text-base' }
+const TEXT_CLASS = { xs: 'text-xs', sm: 'text-xs', md: 'text-sm', lg: 'text-base', xl: 'text-base', '2xl': 'text-lg', '3xl': 'text-xl' }
 const controlStyle = computed(() => ({ '--s-field-h': FIELD_HEIGHTS[fieldSize.value] }))
 const fieldId = useId()
 const messageId = `${fieldId}-message`

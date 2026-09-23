@@ -49,9 +49,12 @@ as `s-input` (native submission, label association, placeholder, focus).
 | Size | Height | Use |
 |---|---|---|
 | `xs` | 28px | Dense rows |
-| `sm` | 32px | Compact rows (pagination uses `h-8`) |
+| `sm` | 32px | Compact rows |
 | `md` | 36px (`--s-control-h`) | Default: inputs, selects, date triggers, md buttons, steppers |
 | `lg` | 40px | Emphasis |
+| `xl` | 44px | Large forms |
+| `2xl` | 48px | Display forms |
+| `3xl` | 56px | Maximum |
 
 - Implemented via `--s-field-h` on the control (falls back to
   `--s-control-h`). The scale lives in one shared module — never a
@@ -158,6 +161,9 @@ carries the same 1px border (transparent on fills) so sizes match under any
 - Pagination collapses to prev/next + `n / m`; tables scroll horizontally —
   columns are never hidden.
 - Dialogs are `w-[90%]` with capped max-widths; one size up on `md`.
+- Calendar panels show one month on small screens: the options sidebar and
+  extra months render `hidden` below `min-[540px]`, so mobile users page with
+  the prev/next buttons and pick ranges across months.
 
 ## Enforcement
 

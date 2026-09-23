@@ -6,7 +6,9 @@ spec, implement to it, then run the gates in `06-testing.md`.
 
 ## Precedence
 
-1. `docs/spec/*.md` is normative. When-Ray other docs disagree, the spec wins.
+1. `.specify/memory/constitution.md` is supreme. When anything below
+   disagrees, the constitution wins and the spec must be updated.
+2. `docs/spec/*.md` is normative detail. When other docs disagree, the spec wins.
 2. `DESIGN.md` is the friendly design mirror — `01-design-principles.md` is canonical.
 3. `CONTRIBUTING.md` is the contributor entry point — `04-component-workflow.md` is canonical.
 4. `README.md` is the consumer entry point — it must stay short and link here.

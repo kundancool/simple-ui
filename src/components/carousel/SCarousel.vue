@@ -14,7 +14,7 @@
             @touchstart.passive="onTouchStart"
             @touchend.passive="onTouchEnd"
         >
-            <div v-for="(slide, index) in slides" :key="index" class="w-full h-full flex-shrink-0" :aria-hidden="index !== at">
+            <div v-for="(slide, index) in slides" :key="slide.key ?? index" class="w-full h-full flex-shrink-0" :aria-hidden="index !== at">
                 <component :is="slide" />
             </div>
         </div>
@@ -39,8 +39,8 @@
             </button>
             <div v-if="dots" class="absolute bottom-2.5 inset-x-0 flex justify-center gap-1.5" role="tablist" aria-label="Slides">
                 <button
-                    v-for="(_, index) in slides"
-                    :key="index"
+                    v-for="(slide, index) in slides"
+                    :key="slide.key ?? index"
                     type="button"
                     role="tab"
                     :aria-selected="index === at"

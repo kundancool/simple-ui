@@ -2,7 +2,7 @@
     <s-filter class="mb-4" v-model="query" placeholder="Search orders..." @search="applied = $event">
         <s-select v-model="status" :options="statuses" option-label="label" option-value="value" class="w-40" />
     </s-filter>
-    <p class="text-sm s-text-muted">Applied query: “{{ applied || '—' }}” · Status: {{ status || 'all' }}</p>
+    <p class="mt-2 text-sm s-text-muted">Applied query: “{{ applied || '—' }}” · Status: {{ status || 'all' }}</p>
 </template>
 
 <script setup>

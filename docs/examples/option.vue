@@ -5,7 +5,7 @@
         <s-option label="Blocked" value="blocked" />
         <s-option label="Archived" value="archived" disabled />
     </s-select>
-    <p class="text-sm s-text-muted">Status: {{ status || '—' }}</p>
+    <p class="mt-2 text-sm s-text-muted">Status: {{ status || '—' }}</p>
 </template>
 
 <script setup>

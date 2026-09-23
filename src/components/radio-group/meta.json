@@ -4,18 +4,64 @@
     "category": "Form",
     "description": "Owns the selected value, size, name and disabled state for its radios, and reports errors.",
     "props": [
-        { "name": "modelValue", "type": "string | number | boolean", "default": "null", "description": "Selected value (v-model)." },
-        { "name": "disabled", "type": "boolean", "default": "false", "description": "Disables every option." },
-        { "name": "size", "type": "xs | sm | md | lg", "default": "undefined", "description": "Option size; inherits from the form item." },
-        { "name": "name", "type": "string", "default": "''", "description": "Native radio name." },
-        { "name": "inline", "type": "boolean", "default": "false", "description": "Row instead of column." },
-        { "name": "error", "type": "string | Array", "default": "''", "description": "Error message(s)." },
-        { "name": "ariaLabel", "type": "string", "default": "''", "description": "Accessible group name." }
+        {
+            "name": "modelValue",
+            "type": "string | number | boolean",
+            "default": "null",
+            "description": "Selected value (v-model)."
+        },
+        {
+            "name": "disabled",
+            "type": "boolean",
+            "default": "false",
+            "description": "Disables every option."
+        },
+        {
+            "name": "size",
+            "type": "xs | sm | md | lg | xl | 2xl | 3xl",
+            "default": "undefined",
+            "description": "Option size; inherits from the form item."
+        },
+        {
+            "name": "name",
+            "type": "string",
+            "default": "''",
+            "description": "Native radio name."
+        },
+        {
+            "name": "inline",
+            "type": "boolean",
+            "default": "false",
+            "description": "Row instead of column."
+        },
+        {
+            "name": "error",
+            "type": "string | Array",
+            "default": "''",
+            "description": "Error message(s)."
+        },
+        {
+            "name": "ariaLabel",
+            "type": "string",
+            "default": "''",
+            "description": "Accessible group name."
+        }
     ],
     "events": [
-        { "name": "update:modelValue", "description": "v-model update." },
-        { "name": "change", "description": "Emitted with the new value." }
+        {
+            "name": "update:modelValue",
+            "description": "v-model update."
+        },
+        {
+            "name": "change",
+            "description": "Emitted with the new value."
+        }
     ],
-    "slots": [{ "name": "default", "description": "The Radio options." }],
+    "slots": [
+        {
+            "name": "default",
+            "description": "The Radio options."
+        }
+    ],
     "example": "<s-radio-group v-model=\"channel\" inline :error=\"errors.channel\">\n  <s-radio value=\"direct\">Direct</s-radio>\n  <s-radio value=\"marketplace\">Marketplace</s-radio>\n</s-radio-group>"
 }

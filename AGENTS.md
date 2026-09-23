@@ -1,7 +1,9 @@
 # AGENTS.md — Simple UI
 
-Spec-first repo. Read `docs/spec/README.md`, then the smallest spec covering
-the task, before touching code.
+Spec-first repo. `.specify/memory/constitution.md` is supreme — read it,
+then `docs/spec/README.md`, then the smallest spec covering the task,
+before touching code. Feature work flows
+`/speckit.specify` → `/speckit.plan` → `/speckit.tasks` → `/speckit.implement`.
 
 - Component work → `docs/spec/03-component-contract.md` + `04-component-workflow.md`
 - Look/motion/a11y → `01-design-principles.md`; tokens → `02-tokens-theming.md`

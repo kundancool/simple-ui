@@ -54,7 +54,7 @@ const billing = ref('Monthly')
 
 const plans = [
     { name: 'Starter', monthly: 0, yearly: 0, blurb: 'For a single workspace finding its feet.', features: ['1 workspace', '50 orders / month', 'Email support'], footnote: 'Free forever' },
-    { name: 'Growth', monthly: 1499, yearly: 1249, blurb: 'For growing portfolios that live in reports.', features: ['Up to 10 workspaces', 'Unlimited orders', 'Channel manager sync', 'Priority support'], footnote: 'Cancel anytime', popular: true },
+    { name: 'Growth', monthly: 1499, yearly: 1249, blurb: 'For growing portfolios that live in reports.', features: ['Up to 10 workspaces', 'Unlimited orders', 'Marketplace sync', 'Priority support'], footnote: 'Cancel anytime', popular: true },
     { name: 'Scale', monthly: 4999, yearly: 4169, blurb: 'For chains with custom needs.', features: ['Unlimited workspaces', 'API access', 'Dedicated manager', 'SLA + onboarding'], footnote: 'Annual billing available' },
 ]
 

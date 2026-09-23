@@ -33,7 +33,7 @@ const now = Date.now()
 const events = ref([
     { id: 1, kind: 'Order', tone: 'success', text: 'ORD-104 confirmed for Meera Iyer', actor: 'Direct', at: now - 1000 * 60 * 4 },
     { id: 2, kind: 'Payment', tone: 'success', text: '₹6,100 received via virtual card', actor: 'Marketplace', at: now - 1000 * 60 * 26 },
-    { id: 3, kind: 'Alert', tone: 'warning', text: 'Item 204 conflicting for tonight', actor: 'System', at: now - 1000 * 60 * 58 },
+    { id: 3, kind: 'Alert', tone: 'warning', text: 'ORD-204 payment needs review', actor: 'System', at: now - 1000 * 60 * 58 },
     { id: 4, kind: 'User', tone: 'info', text: 'Priya Nair updated pricing plan “Launch”', actor: 'Priya Nair', at: now - 1000 * 60 * 60 * 3 },
     { id: 5, kind: 'Sync', tone: 'danger', text: 'Reseller sync failed — retrying', actor: 'System', at: now - 1000 * 60 * 60 * 7 },
     { id: 6, kind: 'Review', tone: 'info', text: 'New 5★ review from Kabir Singh', actor: 'Partner', at: now - 1000 * 60 * 60 * 26 },

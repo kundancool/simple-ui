@@ -8,10 +8,10 @@
             v-for="(option, index) in options"
             :key="option.value"
             type="button"
-            :aria-pressed="option.value === modelValue"
+            :aria-pressed="option.value === current"
             class="s-focus-ring px-3.5 h-8 rounded-full text-sm font-medium transition-colors whitespace-nowrap"
-            :class="option.value === modelValue ? 's-bg-accent s-text-on-accent' : 's-text-secondary s-segment-idle'"
-            @click="$emit('update:modelValue', option.value); $emit('change', option.value)"
+            :class="option.value === current ? 's-bg-accent s-text-on-accent' : 's-text-secondary s-segment-idle'"
+            @click="select(option.value)"
             @keydown="onKeydown($event, index)"
         >
             {{ option.label }}
@@ -20,6 +20,8 @@
 </template>
 
 <script setup>
+import { computed, ref, watch } from 'vue'
+
 defineOptions({ name: 'SSegmented' })
 
 const props = defineProps({
@@ -30,6 +32,21 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'change'])
+
+const inner = ref(null)
+watch(
+    () => props.modelValue,
+    (value) => {
+        inner.value = value
+    },
+)
+const current = computed(() => inner.value ?? props.modelValue)
+
+function select(value) {
+    inner.value = value
+    emit('update:modelValue', value)
+    emit('change', value)
+}
 
 function onKeydown(event, index) {
     const moves = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 1, ArrowUp: -1 }
@@ -49,9 +66,8 @@ function onKeydown(event, index) {
     }
     const option = props.options[next]
     event.currentTarget?.parentElement?.children[next]?.focus()
-    if (option && option.value !== props.modelValue) {
-        emit('update:modelValue', option.value)
-        emit('change', option.value)
+    if (option && option.value !== current.value) {
+        select(option.value)
     }
 }
 </script>

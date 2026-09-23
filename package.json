@@ -1,7 +1,7 @@
 {
     "$schema": "https://www.schemastore.org/package.json",
     "name": "@kundancool/simple-ui",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "Simple UI — lightweight Vue 3 component library with S-prefixed components (s-input, s-button, s-dialog…) that coexist with Element Plus.",
     "type": "module",
     "license": "MIT",

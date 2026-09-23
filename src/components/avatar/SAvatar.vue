@@ -14,6 +14,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SAvatar' })
 
@@ -24,7 +25,7 @@ const props = defineProps({
     src: { type: String, default: '' },
     /** Icon component override. */
     icon: { type: [Object, Function], default: null },
-    size: { type: String, default: 'md', validator: (v) => ['xs', 'sm', 'md', 'lg', 'xl'].includes(v) },
+    size: { type: String, default: 'md', validator: isFieldSize },
     /** Tint pair key. */
     tone: { type: String, default: 'blue', validator: (v) => ['blue', 'green', 'yellow', 'purple', 'orange'].includes(v) },
 })
@@ -44,6 +45,8 @@ const sizeClass = computed(() => {
         md: 'w-9 h-9 text-xs',
         lg: 'w-12 h-12 text-sm',
         xl: 'w-16 h-16 text-lg',
+        '2xl': 'w-20 h-20 text-xl',
+        '3xl': 'w-24 h-24 text-2xl',
     }
     return map[props.size]
 })

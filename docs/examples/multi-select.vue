@@ -1,6 +1,6 @@
 <template>
-    <s-multi-select v-model="ids" label="Item types" :options="options" />
-    <p class="text-sm s-text-muted">Selected: {{ ids.join(', ') || '—' }}</p>
+    <s-multi-select v-model="ids" label="Categories" :options="options" />
+    <p class="mt-2 text-sm s-text-muted">Selected: {{ ids.join(', ') || '—' }}</p>
 </template>
 
 <script setup>

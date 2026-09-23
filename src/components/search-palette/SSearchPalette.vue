@@ -41,7 +41,7 @@
                     :class="width"
                     :style="{ boxShadow: 'var(--s-shadow-lg)' }"
                 >
-                    <div class="flex items-center gap-3 px-4 h-11 border-b s-border-theme">
+                    <div class="s-palette-bar flex items-center gap-3 px-4 h-11 border-b s-border-theme">
                         <svg class="w-5 h-5 s-text-muted flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
@@ -142,7 +142,7 @@ const filtered = computed(() => {
 })
 
 function itemKey(item, index) {
-    return item.id ?? item.to ?? item.label ?? index
+    return `${item.id ?? item.to ?? item.label ?? 'item'}-${index}`
 }
 
 function open() {
@@ -204,10 +204,10 @@ defineExpose({ open, close })
 .s-palette-input:focus {
     outline: none;
 }
-.s-palette-input:focus-visible {
-    outline: none;
-    box-shadow: inset 0 0 0 2px var(--s-accent-border);
-    border-radius: 6px;
+/* Single indicator for mouse and keyboard focus alike: the bar underlines
+   in accent while the input stays chrome-free. */
+.s-palette-bar:focus-within {
+    box-shadow: inset 0 -2px 0 0 var(--s-accent-text);
 }
 .s-spotlight-trigger:hover {
     border-color: var(--s-accent-border);

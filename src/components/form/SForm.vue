@@ -13,6 +13,7 @@
 <script setup>
 import { ref, toRef } from 'vue'
 import { provideFormContext } from '../../composables/formContext'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'SForm' })
 
@@ -22,7 +23,7 @@ const props = defineProps({
     /** Label gutter width when `labelPosition="left"` (any CSS length). */
     labelWidth: { type: String, default: 'auto' },
     /** Default size for every control in the form. */
-    size: { type: String, default: undefined, validator: (v) => v === undefined || ['xs', 'sm', 'md', 'lg'].includes(v) },
+    size: { type: String, default: undefined, validator: isFieldSize },
     /** Disables every control and blocks interaction. */
     disabled: { type: Boolean, default: false },
 })

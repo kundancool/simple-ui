@@ -4,20 +4,68 @@
     "category": "Form",
     "description": "One form row: label, control, error/success/helper messaging. Provides its id and size to the nested control.",
     "props": [
-        { "name": "label", "type": "string", "default": "''", "description": "Row label, wired to the control's id." },
-        { "name": "error", "type": "string | Array | boolean", "default": "''", "description": "Error message (first wins). `true` shows errorMessage." },
-        { "name": "required", "type": "boolean", "default": "false", "description": "Shows the required marker." },
-        { "name": "size", "type": "xs | sm | md | lg", "default": "undefined", "description": "Overrides the form size for this row." },
-        { "name": "success", "type": "boolean", "default": "false", "description": "Shows a success message instead of the helper." },
-        { "name": "successMessage", "type": "string", "default": "Looks good", "description": "Text for the success state." },
-        { "name": "errorMessage", "type": "string", "default": "This field is invalid", "description": "Text used when error is `true`." }
+        {
+            "name": "label",
+            "type": "string",
+            "default": "''",
+            "description": "Row label, wired to the control's id."
+        },
+        {
+            "name": "error",
+            "type": "string | Array | boolean",
+            "default": "''",
+            "description": "Error message (first wins). `true` shows errorMessage."
+        },
+        {
+            "name": "required",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows the required marker."
+        },
+        {
+            "name": "size",
+            "type": "xs | sm | md | lg | xl | 2xl | 3xl",
+            "default": "undefined",
+            "description": "Overrides the form size for this row."
+        },
+        {
+            "name": "success",
+            "type": "boolean",
+            "default": "false",
+            "description": "Shows a success message instead of the helper."
+        },
+        {
+            "name": "successMessage",
+            "type": "string",
+            "default": "Looks good",
+            "description": "Text for the success state."
+        },
+        {
+            "name": "errorMessage",
+            "type": "string",
+            "default": "This field is invalid",
+            "description": "Text used when error is `true`."
+        }
     ],
     "events": [],
     "slots": [
-        { "name": "default", "description": "The control." },
-        { "name": "error", "params": "{ message }", "description": "Custom error rendering." },
-        { "name": "success", "description": "Custom success rendering." },
-        { "name": "helper", "description": "Hint shown when there is no error or success." }
+        {
+            "name": "default",
+            "description": "The control."
+        },
+        {
+            "name": "error",
+            "params": "{ message }",
+            "description": "Custom error rendering."
+        },
+        {
+            "name": "success",
+            "description": "Custom success rendering."
+        },
+        {
+            "name": "helper",
+            "description": "Hint shown when there is no error or success."
+        }
     ],
     "example": "<s-form-item label=\"Email\" required :error=\"errors.email\">\n  <s-input v-model=\"form.email\" type=\"email\" autocomplete=\"email\" />\n</s-form-item>"
 }

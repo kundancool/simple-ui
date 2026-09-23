@@ -56,15 +56,15 @@ import { SButton } from '@kundancool/simple-ui'
 import { SAvatar } from '@kundancool/simple-ui'
 
 const threads = ref([
-    { id: 1, from: 'Aarav Sharma', subject: 'Late checkout request', preview: 'Could we check out at 2pm on Sunday?', unread: true, messages: [
-        { id: 1, who: 'AS', text: 'Hi! Could we check out at 2pm on Sunday?', mine: false },
-        { id: 2, who: 'FD', text: 'Of course — late checkout is on us.', mine: true },
+    { id: 1, from: 'Aarav Sharma', subject: 'Delivery reschedule', preview: 'Could we move delivery to Sunday?', unread: true, messages: [
+        { id: 1, who: 'AS', text: 'Hi! Could we move delivery to Sunday?', mine: false },
+        { id: 2, who: 'SU', text: 'Of course — Sunday delivery is on us.', mine: true },
     ] },
     { id: 2, from: 'Diya Patel', subject: 'Invoice for ORD-102', preview: 'Please share the tax invoice.', unread: false, messages: [
         { id: 1, who: 'DP', text: 'Please share the tax invoice for our order.', mine: false },
     ] },
-    { id: 3, from: 'Kabir Singh', subject: 'Airport pickup', preview: 'Flight lands at 11:40pm…', unread: true, messages: [
-        { id: 1, who: 'KS', text: 'Flight lands at 11:40pm — will pickup be there?', mine: false },
+    { id: 3, from: 'Kabir Singh', subject: 'Refund for ORD-104', preview: 'Amount credited in 3–5 days…', unread: true, messages: [
+        { id: 1, who: 'KS', text: 'The refund for ORD-104 — when will it reflect?', mine: false },
     ] },
 ])
 const active = ref(threads.value[0])
@@ -85,7 +85,7 @@ function send() {
     if (!draft.value.trim()) {
         return
     }
-    active.value.messages.push({ id: Date.now(), who: 'FD', text: draft.value.trim(), mine: true })
+    active.value.messages.push({ id: Date.now(), who: 'SU', text: draft.value.trim(), mine: true })
     draft.value = ''
 }
 

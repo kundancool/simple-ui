@@ -46,7 +46,6 @@ const COMPONENTS = [
     'SDataTable',
     'SDataTableColumn',
     'SDatePicker',
-    'SDateRangePicker',
     'SDialog',
     'SDoughnutChart',
     'SDropdownMenu',

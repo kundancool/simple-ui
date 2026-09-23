@@ -7,7 +7,7 @@ import { computed, inject, provide, ref, type ComputedRef, type Ref } from 'vue'
  * scale without repeating the prop, and `scrollToFirstError()` can bring the
  * first invalid field into view after a server round-trip.
  */
-export type FormSize = 'xs' | 'sm' | 'md' | 'lg'
+export type FormSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 export type LabelPosition = 'top' | 'left'
 
 export interface FormItemHandle {

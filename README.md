@@ -2,7 +2,7 @@
 
 Lightweight Vue 3 component library for dashboards and admin apps.
 
-- 69 components: form, data display, feedback, navigation, layout, landing/blog kit, charts
+- 68 components: form, data display, feedback, navigation, layout, landing/blog kit, charts
 - Theme engine: `--s-*` tokens, light/dark palettes (persisted), runtime overrides
 - Per-component ESM + CSS, subpath exports, `SimpleUIResolver` for on-demand loading
 - 41 demo pages, docs SERVICES with live demos, generated registry, `llms.txt`, MCP server for AI agents

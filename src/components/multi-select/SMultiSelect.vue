@@ -140,6 +140,9 @@ const SIZE_CLASS = {
     sm: 'px-2.5 text-xs',
     md: 'px-3 text-sm',
     lg: 'px-3.5 text-base',
+    xl: 'px-4 text-base',
+    '2xl': 'px-5 text-lg',
+    '3xl': 'px-6 text-xl',
 }
 const controlStyle = computed(() => ({ '--s-field-h': FIELD_HEIGHTS[fieldSize.value] }))
 const fieldId = useId()

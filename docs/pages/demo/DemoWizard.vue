@@ -4,7 +4,7 @@
             <s-steps v-model="step" :steps="[{ key: 'schedule', label: 'Schedule' }, { key: 'product', label: 'Product' }, { key: 'customer', label: 'Customer' }, { key: 'done', label: 'Done' }]">
                 <template #schedule>
                     <div class="grid sm:grid-cols-2 gap-x-4 mt-4">
-                        <s-date-range-picker v-model="schedule" label="Date range" />
+                        <s-date-picker v-model="schedule" range label="Date range" :options="scheduleOptions" />
                         <s-number-input v-model="quantity" label="Quantity" :min="1" :max="6" />
                     </div>
                 </template>
@@ -47,7 +47,7 @@ import { ref, computed } from 'vue'
 import DemoSource from '../../DemoSource.vue'
 import DemoStage from '../../DemoStage.vue'
 import { SSteps } from '@kundancool/simple-ui'
-import { SDateRangePicker } from '@kundancool/simple-ui'
+import { SDatePicker } from '@kundancool/simple-ui'
 import { SNumberInput } from '@kundancool/simple-ui'
 import { SInput } from '@kundancool/simple-ui'
 import { SButton } from '@kundancool/simple-ui'
@@ -56,6 +56,10 @@ import { SAlert } from '@kundancool/simple-ui'
 const steps = ['schedule', 'product', 'customer', 'done']
 const step = ref('schedule')
 const schedule = ref([])
+const scheduleOptions = [
+    { label: 'Yesterday', range: ['2026-09-21', '2026-09-21'] },
+    { label: 'Last 7 days', range: ['2026-09-15', '2026-09-21'] },
+]
 const quantity = ref(2)
 const product = ref('Basic')
 const name = ref('')

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import SAccordion from '../src/components/accordion/SAccordion.vue'
@@ -40,6 +40,18 @@ describe('scrutiny fixes', () => {
         const links = wrapper.findAll('a')
         expect(links).toHaveLength(1)
         expect(wrapper.text()).toContain('B')
+    })
+
+    it('SBreadcrumb tolerates duplicate links without duplicate-key warnings', async () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+        const wrapper = mount(SBreadcrumb, {
+            props: { items: [{ label: 'Components', to: '#/docs' }, { label: 'Basic', to: '#/docs' }, { label: 'Button' }] },
+        })
+        // force a patch so Vue reconciles keyed rows
+        await wrapper.setProps({ items: [{ label: 'Components', to: '#/docs' }, { label: 'Basic', to: '#/docs' }, { label: 'Button!' }] })
+        expect(warn).not.toHaveBeenCalledWith(expect.stringContaining('Duplicate keys'))
+        warn.mockRestore()
+        wrapper.unmount()
     })
 
     it('SProgress honors duration', () => {

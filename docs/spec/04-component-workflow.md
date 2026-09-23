@@ -8,8 +8,9 @@ Each step is enforced — a missed step fails loudly instead of shipping silentl
 2. **Name it so Vue resolves it** (`03` naming rules).
 3. **Export it** from `src/components.ts` (alphabetical).
 4. **Add it to `src/resolver.ts`** `COMPONENTS` (alphabetical).
-5. **Add a docs example** at `docs/examples/<dir>.vue` importing from
-   `@kundancool/simple-ui` (the built package — never `../../src`).
+5. **Add docs examples** at `docs/examples/<dir>.vue` (basic usage) plus
+   one `<dir>.<variation>.vue` per visual dimension (`05`), all importing
+   from `@kundancool/simple-ui` (the built package — never `../../src`).
 6. **Add behavior tests** in `tests/`: mount it, click it, assert emits and
    visible state. Uncontrolled selection state must work.
 7. **Prove layout neutrality**: the root carries no outer margin

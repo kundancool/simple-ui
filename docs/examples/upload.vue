@@ -6,7 +6,7 @@
         @change="picked = $event.length"
         @success="uploaded = true"
     />
-    <p class="text-sm s-text-muted">Files picked: {{ picked }}</p>
+    <p class="mt-2 text-sm s-text-muted">Files picked: {{ picked }}</p>
 </template>
 
 <script setup>

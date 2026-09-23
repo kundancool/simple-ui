@@ -10,6 +10,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { isFieldSize } from '../../utils/fieldSize'
 
 defineOptions({ name: 'STag' })
 
@@ -27,14 +28,14 @@ const props = defineProps({
     size: {
         type: String,
         default: 'md',
-        validator: (v) => ['sm', 'md'].includes(v),
+        validator: isFieldSize,
     },
     /** Custom hex color — bypasses the type/variant presets. */
     color: { type: String, default: null },
 })
 
 const sizeClasses = computed(() => {
-    const sizes = { sm: 'px-1.5 py-0.5 text-[10px]', md: 'px-2 py-1 text-xs' }
+    const sizes = { xs: 'px-1 py-px text-[10px]', sm: 'px-1.5 py-0.5 text-[10px]', md: 'px-2 py-1 text-xs', lg: 'px-2.5 py-1 text-sm', xl: 'px-3 py-1.5 text-sm', '2xl': 'px-3.5 py-1.5 text-base', '3xl': 'px-4 py-2 text-base' }
     return sizes[props.size]
 })
 

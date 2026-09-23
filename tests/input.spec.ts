@@ -62,6 +62,13 @@ describe('SInput events and attrs', () => {
         expect(wrapper.text()).toContain('3/10')
     })
 
+    it('gives textareas full padding so text never sticks to the border', () => {
+        const classes = mount(SInput, { props: { type: 'textarea' } }).find('textarea').classes()
+        expect(classes).toContain('px-3')
+        expect(classes).toContain('py-2')
+        expect(classes).toContain('text-sm')
+    })
+
     it('honours the size scale and inline mode', () => {
         expect(mount(SInput, { props: { size: 'lg' } }).find('input').attributes('style')).toContain('--s-field-h: 40px')
         expect(mount(SInput, { props: { inline: true } }).classes()).not.toContain('mb-4')

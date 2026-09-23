@@ -1,8 +1,6 @@
 <template>
-    <div class="space-y-3 max-w-sm">
+    <div class="max-w-sm">
         <s-progress :value="68" tone="success" />
-        <s-progress :value="35" tone="warning" size="sm" />
-        <s-progress :value="92" />
     </div>
 </template>
 

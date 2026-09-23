@@ -39,12 +39,6 @@
             "type": "left | center | right",
             "default": "null",
             "description": "Header alignment."
-        },
-        {
-            "name": "class",
-            "type": "string",
-            "default": "''",
-            "description": "Extra classes on header and cells."
         }
     ],
     "events": [],
